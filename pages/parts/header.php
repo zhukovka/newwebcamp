@@ -11,8 +11,8 @@
     <?php echo '<meta name="description" content="'.htmlspecialchars(PageInfo::getDescription()).'"/>' ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/basic.css" type="text/css" media="screen">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=PT+Sans|Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <script src="/js/libs/jquery-1.9.1.min.js"></script>
     <script src="/js/libs/modernizr-2.5.3.js"></script>

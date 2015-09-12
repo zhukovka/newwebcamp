@@ -8,8 +8,19 @@ class Parts {
 
     }
 
+    static function renderSlider()
+    {
+        self::renderPart("slider");
+    }
+
     private static function renderPart($part) {
         include(Parts::partsPrefix.$part.".php");
+    }
+
+    static function renderStartPage()
+    {
+        Parts::renderHeader();
+        Parts::renderMenu();
     }
 
     static function renderHeader() {
@@ -20,28 +31,25 @@ class Parts {
         self::renderPart("menu");
     }
 
-    static function renderFooter() {
-        self::renderPart("footer");
+    static function renderEndPage()
+    {
+        Parts::renderFooter();
+        Parts::renderSignUpForm();
+        Parts::renderPlugins();
     }
 
-    static function renderPlugins() {
-        self::renderPart("googleanalytic");
-        self::renderPart("siteheart");
-        self::renderPart("yandex");
+    static function renderFooter() {
+        self::renderPart("footer");
     }
 
     static function renderSignUpForm() {
         self::renderPart("signupform");
     }
 
-    static function renderStartPage() {
-        Parts::renderHeader();
-        Parts::renderMenu();
-    }
-
-    static function renderEndPage() {
-        Parts::renderFooter();
-        Parts::renderSignUpForm();
-        Parts::renderPlugins();
+    static function renderPlugins()
+    {
+        self::renderPart("googleanalytic");
+//        self::renderPart("siteheart");
+        self::renderPart("yandex");
     }
 }

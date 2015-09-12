@@ -5,9 +5,8 @@ include_once("pages/code/parts.php");
 function getPathElements() {
     $elements = explode('/',$_SERVER['REQUEST_URI']);
     $ret = array();
-
     foreach($elements as $el) {
-        if($el) array_push($ret, $el);
+        if ($el) array_push($ret, $el);
     }
     return $ret;
 }

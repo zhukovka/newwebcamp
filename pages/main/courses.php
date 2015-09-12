@@ -6,7 +6,7 @@ function renderCoursePane($course) {
          '</a>'."\n";
 }
 PageInfo::setTitle("Webcamp — курсы программирования в Киеве");
-PageInfo::setMenuItem("Курсы");
+PageInfo::setMenuItem("Курсы программирования и цены");
 Parts::renderStartPage();
 ?>
     <div class="courses_content">

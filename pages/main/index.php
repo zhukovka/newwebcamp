@@ -3,7 +3,28 @@ PageInfo::setTitle("Курсы WEB программирования для на�
 PageInfo::setMenuItem("Домашняя");
 PageInfo::setExtraHeader('<script type="text/javascript" src="http://vk.com/js/api/openapi.js?88"></script>');
 Parts::renderStartPage();
+Parts::renderSlider();
 ?>
+    <!--    <div class="slider">-->
+    <!--        <div class="slider__content">-->
+    <!--            <ul class="slides">-->
+    <!--                <li class="slide slide_1">-->
+    <!--                    <div class="grid">-->
+    <!--                        <div class="slide__content grid__left w-30">-->
+    <!--                            <h3>Практика в IT</h3>-->
+    <!---->
+    <!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat id ipsum iure-->
+    <!--                                laudantium, nihil obcaecati possimus ratione sapiente sed voluptas!</p>-->
+    <!--                            <a href="" class="btn--warning">Подробнее</a>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+    <!--        <div class="slider__controls">-->
+    <!---->
+    <!--        </div>-->
+    <!--    </div>-->
     <div class="ind_slider">
         <a href="/schedule">
             <div class="slide_1">
@@ -11,15 +32,15 @@ Parts::renderStartPage();
         </a>
     </div>
     <div class="ind_content">
-        <div class="ind_vk_widget_wrapper">
-            <!-- VK Widget -->
-            <div id="vk_groups"></div>
-            <script type="text/javascript">
-                VK.Widgets.Group("vk_groups", {mode: 0, width: "445", height: "271"}, 67272364);
-            </script>
-            <a href="https://plus.google.com/113001619859286217656" rel="publisher">Google+</a>
-
-        </div>
+    <!--        <div class="ind_vk_widget_wrapper">-->
+    <!--            <!-- VK Widget -->-->
+    <!--            <div id="vk_groups"></div>-->
+    <!--            <script type="text/javascript">-->
+    <!--                VK.Widgets.Group("vk_groups", {mode: 0, width: "445", height: "271"}, 67272364);-->
+    <!--            </script>-->
+    <!--            <a href="https://plus.google.com/113001619859286217656" rel="publisher">Google+</a>-->
+    <!---->
+    <!--        </div>-->
         <div class="ind_feedback_wrapper">
             <h6 class="ind_graduate_review_header">
                 <div class="ind_graduate_reviews_tumbler">
@@ -59,23 +80,23 @@ Parts::renderStartPage();
                 $(".ind_graduate_review_header .down").click(function() { loader(false);})
             });
         </script>
-        <div id="facebook-widget">
-            <div class="fb-like-box" data-href="https://www.facebook.com/webcamp.kiev" data-width="445" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/uk_UA/all.js#xfbml=1";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-            </script>  
-            
-        </div>    
+    <!--        <div id="facebook-widget">-->
+    <!--            <div class="fb-like-box" data-href="https://www.facebook.com/webcamp.kiev" data-width="445" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>-->
+    <!--            <div id="fb-root"></div>-->
+    <!--            <script>(function(d, s, id) {-->
+    <!--                    var js, fjs = d.getElementsByTagName(s)[0];-->
+    <!--                    if (d.getElementById(id)) return;-->
+    <!--                    js = d.createElement(s); js.id = id;-->
+    <!--                    js.src = "//connect.facebook.net/uk_UA/all.js#xfbml=1";-->
+    <!--                    fjs.parentNode.insertBefore(js, fjs);-->
+    <!--                }(document, 'script', 'facebook-jssdk'));-->
+    <!--            </script>  -->
+    <!--            -->
+    <!--        </div>    -->
         <!-- Place this tag in your head or just before your close body tag. -->
-<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+    <!--<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>-->
 
 <!-- Place this tag where you want the widget to render. -->
-<div class="g-page" data-width="450" data-href="//plus.google.com/u/0/113001619859286217656" data-layout="landscape" data-rel="publisher"></div>
-    </div>
+    <!--<div class="g-page" data-width="450" data-href="//plus.google.com/u/0/113001619859286217656" data-layout="landscape" data-rel="publisher"></div>-->
+    <!--    </div>-->
 <?php Parts::renderEndPage(); ?>
