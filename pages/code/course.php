@@ -3,17 +3,20 @@ class Course {
     public $alias;
     public $name;
     public $shortDescription;
+    public $description;
+    public $start;
 
-    public function getNearest() {
-        return Schedules::getNearest($this->alias);
-    }
-
-    public static function fromPost() {
+    public static function fromPost()
+    {
         $ret = new Course();
         $ret->alias = $_POST["alias"];
         $ret->name = $_POST["name"];
         $ret->shortDescription = $_POST["shortDescription"];
         return $ret;
+    }
+
+    public function getNearest() {
+        return Schedules::getNearest($this->alias);
     }
 }
 
@@ -46,11 +49,12 @@ class Courses {
         return $ret;
     }
 
-    static function setOrder($order) {
-        self::$order = $order;
+    static function getOrder()
+    {
+        return self::$order;
     }
 
-    static function getOrder() {
-        return self::$order;
+    static function setOrder($order) {
+        self::$order = $order;
     }
 }

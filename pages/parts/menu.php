@@ -7,7 +7,7 @@ function renderMenuItem($name, $class, $href) {
     <div class="header__top">
         <div class="grid pos-r">
             <div class="grid__left w-30">
-                <a class="header__logo" href="/"><img src="img/logo.svg" alt=""/></a>
+                <a class="header__logo" href="/"><img src="img/icons/logo.svg" alt=""/></a>
             </div>
 
 

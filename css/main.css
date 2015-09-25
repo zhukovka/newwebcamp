@@ -215,6 +215,24 @@
   margin-left: 50px;
 }
 
+.gradient {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&amp;0.65+0,0+100;Neutral+Density */
+  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.65)), color-stop(100%, transparent));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+  /* IE6-9 */
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -680,6 +698,18 @@ button {
 .btn--warning, .btn-more {
   background-color: #e7571e;
 }
+.btn--default:hover {
+  background-color: transparent;
+}
+.btn--success:hover {
+  background-color: transparent;
+}
+.btn--error:hover {
+  background-color: transparent;
+}
+.btn--warning:hover, .btn-more:hover {
+  background-color: transparent;
+}
 .btn-inverse--default {
   color: #63c1c3;
   border: 1px solid #63c1c3;
@@ -764,6 +794,29 @@ button {
 }
 .btn-enroll:hover:after {
   border-left-color: #e7571e;
+}
+
+.slide {
+  display: block;
+  color: #ebecec;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 390px;
+}
+.slide .gradient {
+  height: 100%;
+}
+.slide_1 {
+  background-image: url("/img/banners/slider1.jpg");
+}
+.slide_2 {
+  background-image: url("/img/banners/slider2.jpg");
+}
+.slide_3 {
+  background-image: url("/img/banners/slider3.jpg");
+}
+.slide__content {
+  margin: 30px 0;
 }
 
 /*# sourceMappingURL=main.css.map */
