@@ -43,19 +43,14 @@
             </nav>
             <nav class="header__nav--bottom">
                 <ul class="nav-list">
-                    {% for user in users %}
-                        <li>{{ user.username|e }}</li>
+                    {% for item in menu %}
+
+                        <li class="mnl_{{ item.alias }} {% if item.alias == active %}
+                        nav-list__item--active
+                        {% endif %}nav-list__item">
+                            <a href="/{{ item.alias }}">{{ item.name }}</a>
+                        </li>
                     {% endfor %}
-                    {#<!--                <?php //renderMenuItem("Курсы программирования и цены", "mnl_home", "/") ?>-->#}
-                    {#<?php renderMenuItem("Курсы программирования и цены", "mnl_courses nav-list__item", "/courses") ?>#}
-                    {#<?php renderMenuItem("Расписание", "mnl_schedule nav-list__item", "/schedule") ?>#}
-                    {#<!--                --><?php //renderMenuItem("Обучение", "mnl_courses", "/courses") ?>#}
-                    {#<?php renderMenuItem("Новости", "mnl_promotions nav-list__item", "/promotions") ?>#}
-                    {#<?php renderMenuItem("Контакты", "mnl_contacts nav-list__item", "/contacts") ?>#}
-                    {#<?php renderMenuItem("О нас", "mnl_about_us nav-list__item", "/aboutus") ?>#}
-                    {#<!--                --><?php //renderMenuItem("Акции", "mnl_promotions", "/promotions") ?>#}
-                    {#<!--                --><?php //renderMenuItem("Преподаватели", "mnl_teachers", "/teachers") ?>#}
-                    {#<!--                --><?php //renderMenuItem("Отзывы", "mnl_studentfeedback", "/studentfeedback") ?>#}
                 </ul>
 
             </nav>

@@ -7,16 +7,19 @@
     {#</style>#}
 {#{% endblock %}#}
 {% block content %}
+    {{ include('slider.html.twig') }}
     {{ title }}
+
+    {% for item in closest %}
+        {{ item.day }}
+        {{ item.month }}
+    {% endfor %}
+
+
     <h1>Index</h1>
     <p class="important">
         Welcome to my awesome homepage.
         Hello {{ name }}!
     </p>
-    <ul>
-
-        {% for slide in slides %}
-            <li>{{ slide.slidename }}</li>
-        {% endfor %}
-    </ul>
+    {#{{ closest }}#}
 {% endblock %}

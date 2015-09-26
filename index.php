@@ -6,16 +6,15 @@ require_once ROOT . 'vendor/autoload.php';
 try {
     require_once ROOT . 'configs/pdo.php';
     DB::connect();
-//    include_once("pages/code/definitions.php");
-//    include_once("pages/code/parts.php");
+    $menu = DB::getMenu();
+    DB::fetchCourses();
 } catch (PDOException $e) {
     echo 'Error: ' . $e->getMessage();
 }
-
-//$menuItems = array
 $loader = new Twig_Loader_Filesystem(ROOT . 'templates');
 $twig = new Twig_Environment($loader);
 $twig->addGlobal('title', 'Webcamp');
+$twig->addGlobal('menu', $menu);
 //$twig = new Twig_Environment($loader, array(
 //    'cache' => ROOT . 'compilation_cache',
 //));
@@ -24,7 +23,6 @@ $routes = array(
     'index' => 'Home'
 );
 
-//echo $twig->render('index.html.twig', array('name' => 'Fabien'));
 
 function getPathElements() {
     $elements = explode('/',$_SERVER['REQUEST_URI']);
@@ -53,7 +51,6 @@ function renderPage($page) {
     $class = $GLOBALS['routes'][$page];
     include("pages/$class.php");
     call_user_func("$class::index");
-//    echo $GLOBALS['twig']->render($page . '.html.twig', array('active' => $page));
     exit();
 }
 
@@ -64,7 +61,7 @@ function compare($str1, $str2) {
 $elements = getPathElements();
 if(count($elements) == 0) renderPage("index");
 elseif (count($elements) == 1 && array_key_exists($elements[0], $routes)) {
-    renderPage($routes[$elements[0]]);
+    renderPage($elements[0]);
 
 //    if(compare($elements[0], "courses")) renderPage("courses");
 //    elseif(compare($elements[0], "aboutus")) renderPage("aboutus");

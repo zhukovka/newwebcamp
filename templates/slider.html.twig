@@ -1,0 +1,36 @@
+<div class="slider">
+    <div class="slider__content">
+        <ul class="slides">
+            {% for item in slides %}
+                <li class="slide" style="background-image: url({{ item.img }})">
+                    <div class="gradient">
+                        <div class="grid">
+                            <div class="slide__content grid__left w-30">
+                                <h3>{{ item.title }}</h3>
+
+                                <p>{{ item.description }}</p>
+                                <a href="/{{ item.alias }}" class="btn-more">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="slider__controls grid">
+        <ul class="slide-controls">
+            {% for item in slides %}
+                <li class="slide-controls__item" style="width: {{ 100 / loop.length }}%">
+                    <a class="slide-control {% if loop.first %}active{% endif %}" href="/{{ item.alias }}">
+                        <span class="slide-control__icon">
+                            {{ item.icon_img|raw }}
+                        </span>
+                        <span class="slide-control__name">
+                            {{ item.name }}
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

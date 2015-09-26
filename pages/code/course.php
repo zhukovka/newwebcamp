@@ -29,6 +29,11 @@ class Courses {
 
     }
 
+    static function addCourses($courses)
+    {
+        self::$courses = $courses;
+    }
+
     static function addCourse($course) {
         self::$courses[$course->alias] = $course;
     }
