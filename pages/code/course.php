@@ -2,9 +2,10 @@
 class Course {
     public $alias;
     public $name;
-    public $shortDescription;
+//    public $shortDescription;
     public $description;
-    public $start;
+
+//    public $start;
 
     public static function fromPost()
     {

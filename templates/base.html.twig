@@ -1,28 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Courses">
 <head>
     {% block head %}
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{{ title }}</title>
+        <base href="{% block base %}{% endblock %}">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="shortcut icon" href="/img/favicon.ico">
+        <link rel="stylesheet" href="/css/foundation.min.css"/>
         <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen">
         <link href='http://fonts.googleapis.com/css?family=PT+Sans|Roboto&subset=latin,cyrillic' rel='stylesheet'
               type='text/css'>
-        <script src="/js/libs/jquery-1.9.1.min.js"></script>
-        <script src="/js/libs/modernizr-2.5.3.js"></script>
-        <script src="/js/libs/prefixfree.min.js"></script>
-        <script src="/js/libs/validate.js"></script>
-        <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+        <script src="/bower_components/lodash/lodash.js"></script>
+        <script src="/js/libs/xml2json.js"></script>
+        <script src="/js/moment_ru.js"></script>
+        <script src="/js/libs/moment-recur.js"></script>
+        <script src="/js/angular_ru.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
+        <script src="/js/courses-ng/utils.js"></script>
+        <script src="/js/courses-ng/calendar.js"></script>
+        <script src="/js/courses-ng/clock.js"></script>
+        <script src="/js/courses-ng/timeline.js"></script>
+        {#<script src="/js/courses-ng/enroll.js"></script>#}
+        <script src="/js/courses-ng/app.js"></script>
+        {% block js %}{% endblock %}
+        {#<script src="/js/libs/jquery-1.9.1.min.js"></script>#}
+        {#<script src="/js/libs/modernizr-2.5.3.js"></script>#}
+        {#<script src="/js/libs/prefixfree.min.js"></script>#}
+        {#<script src="/js/libs/validate.js"></script>#}
+        {#<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>#}
     {% endblock %}
 </head>
-<body>
+<body ng-controller="WebcampCtrl">
 <header class="header">
     <div class="header__top">
         <div class="grid pos-r">
             <div class="grid__left w-30">
-                <a class="header__logo" href="/"><img src="img/icons/logo.svg" alt=""/></a>
+                <a class="header__logo" href="/"><img src="/img/icons/logo.svg" alt=""/></a>
             </div>
 
 
@@ -59,11 +76,53 @@
     </div>
 </header>
 <div id="content">{% block content %}{% endblock %}</div>
-<div id="footer">
-    {% block footer %}
-        &copy; Copyright 2013 - {{ "now"|date('Y', timezone="Europe/Paris") }} by <a
-            href="/">{{ title }}</a>.
-    {% endblock %}
-</div>
+<footer>
+    <div class="footer">
+        <div class="row">
+            <div class="medium-2 columns footer__links">
+                <p>Обучение</p>
+                <ul class="list-nostyle">
+                    <li><a href="">Акции и скидки</a></li>
+                    <li><a href="">Бесплатный пробный урок</a></li>
+                </ul>
+            </div>
+            <div class="medium-2 columns footer__links">
+                <p>Компаниям</p>
+                <ul class="list-nostyle">
+                    <li><a href="">Отзывы</a></li>
+                </ul>
+            </div>
+            <div class="medium-2 columns footer__links">
+                <p>Студентам</p>
+                <ul class="list-nostyle">
+                    <li><a href="">Специальности</a></li>
+                </ul>
+            </div>
+            <div class="medium-2 columns footer__links">
+                <p>Специальности</p>
+                <ul class="list-nostyle">
+                    <li><a href="">разработчик</a></li>
+                </ul>
+            </div>
+            <div class="medium-4 columns footer__social text-right">
+                <p>Мы в соцсетях</p>
+                <ul class="list-inline">
+                    <li><a href="" class="icon-facebook text-xl"></a></li>
+                    <li><a href="" class="icon-linkedin text-xl ml-10"></a></li>
+                    <li><a href="" class="icon-youtube text-xl ml-10"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        {% block footer %}
+            &copy; Copyright 2013 - {{ "now"|date('Y', timezone="Europe/Paris") }} by <a
+                href="/">{{ title }}</a>.
+        {% endblock %}
+    </div>
+</footer>
+<enroll-modal ng-show="showModal">
+
+</enroll-modal>
 </body>
 </html>

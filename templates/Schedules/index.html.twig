@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="page">
+        <div class="page__header course">
+            <div class="row">
+                <div class="medium-3 columns end">
+                    <h1 class="page__title">{{ menuItem.name }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-20">
+            <div class="page__info">
+                <p>
+                    <span class="page__info--l icon-license icons--warning"></span>
+                    <span class="page__info--ml text--success">Сертификаты по завершению обучения</span>
+                    <a href="/certificates" class="page__info--last text--warning">Узнать больше</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur cum dolorum ea est
+                excepturi, fugit magnam nam obcaecati provident quam quasi quibusdam, quis quo ratione sequi similique
+                tempora unde.</p>
+        </div>
+        <div class="row mb-50">
+            {% verbatim %}
+            <div class="courses" ng-controller="SchedulesController">
+                <div class="courses__h">
+                    <h3 class="page__h3">
+                        <span class="icon-code"></span> Треннинги и курсы программирования
+                    </h3>
+                    <label class="courses__search"> <input type="text" ng-model="searchText"></label>
+                </div>
+                <table class="page__table">
+                    <thead>
+                    <tr>
+                        <th width="30%"
+                            ng-click="order('course_name')">
+                            <span ng-class="{'sort--reverse':reverse, 'sort':predicate=='course_name'}">Название курса</span>
+                        </th>
+                        <th width="15%"></th>
+                        <th width="15%" ng-click="order('begin')"><span
+                                    ng-class="{'sort--reverse':reverse, 'sort':predicate=='begin'}">Дата начала</span>
+                        </th>
+                        <th width="15%" ng-click="order('durationHours')"><span
+                                    ng-class="{'sort--reverse':reverse, 'sort':predicate=='durationHours'}">Время</span>
+                        </th>
+                        <th width="15%" ng-click="order('lessonCount')"><span
+                                    ng-class="{'sort--reverse':reverse, 'sort':predicate=='lessonCount'}">Длительность</span>
+                        </th>
+                        <th width="10%" ng-click="order('price')"><span
+                                    ng-class="{'sort--reverse':reverse, 'sort':predicate=='price'}">Цена</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat-start="(key, scheduleGroup) in groupedSchedules">
+                        <td><span class="text-capitalize text-s highlight highlight--info">{{ key }}</span></td>
+                        <td colspan="5"></td>
+                    </tr>
+
+                    <tr ng-repeat="schedule in scheduleGroup | filter:searchText |
+                        orderBy:predicate:reverse">
+                        <td><a href="/courses/{{ schedule.course_alias }}"
+                               class="course__name">{{ schedule.course_name }} {{ schedule.modifier }}</a></td>
+                        <td><a href="#" class="course__enroll">Записаться</a></td>
+                        <td>
+                            {{ schedule.begin | date:'shortDate' }}
+                        </td>
+                        <td>{{ schedule.begin | date:'HH:mm' }}
+                            -{{ schedule.getEndTime() | date:'HH:mm' }}</td>
+                        <td>{{ schedule.lessonCount }} уроков</td>
+                        <td><span class="course__price">{{ schedule.price }}</span>грн.</td>
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endverbatim %}
+        </div>
+    </div>
+{% endblock %}

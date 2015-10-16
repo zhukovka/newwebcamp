@@ -8,18 +8,178 @@
 {#{% endblock %}#}
 {% block content %}
     {{ include('slider.html.twig') }}
-    {{ title }}
+    <div class="panel--success mb-50">
+        <div class="divider grid" id="closest">
+            <div class="divider__text--right">
+                <h2>Эти группы стартуют в ближайшее время</h2>
 
-    {% for item in closest %}
-        {{ item.day }}
-        {{ item.month }}
-    {% endfor %}
+                <p>Успейте записаться на интересующий Вас курс</p>
+            </div>
+            <div class="divider__more">
+                <a href="/schedule" class="btn--warning btn--follow btn--lg">
+                    <span class="follow">Подробнее</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-50" ng-controller="SchedulesController">
+        {% verbatim %}
+
+        <div class="medium-6 columns closest" ng-class="{'end': $last}" ng-repeat="schedule in closest">
+            <div class="row">
+                <div class="small-3 columns closest__date">
+                    <p class="closest__day">
+                        {{ schedule.begin | date:'d' }}
+                    </p>
+
+                    <p class="closest__month">
+                        {{ schedule.begin | date:'MMMM' }}
+                    </p>
+                </div>
+                <div class="small-9 columns">
+                    <div class="closest__course">
+                        <h3 class="closest__name">
+                            <a href="/courses/{{ schedule.course_alias }}">
+                                {{ schedule.course_name }}
+                            </a>
+                        </h3>
+
+                        <p class="closest__time">
+                            {{ schedule.begin | date:'HH:mm' }}
+                            -{{ schedule.getEndTime() | date:'HH:mm' }}
+                            | {{ schedule.lessonCount }}
+                            уроков</p>
+
+                        <p class="closest__price">{{ schedule.price }} грн</p>
+                        <a href="#" class="btn--warning closest__enroll">Записаться</a>
+                    </div>
+                </div>
+            </div>
 
 
-    <h1>Index</h1>
-    <p class="important">
-        Welcome to my awesome homepage.
-        Hello {{ name }}!
-    </p>
-    {#{{ closest }}#}
+        </div>
+        {% endverbatim %}
+        {#{% for item in closest %}#}
+        {#{% endfor %}#}
+    </div>
+
+    <div class="tracks">
+        <div class="row divider">
+            <div class="divider__text--center">
+                <h2>Специальности</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto aspernatur excepturi ipsam
+                    libero natus nobis pariatur placeat quas quidem voluptates!</p>
+            </div>
+        </div>
+        <div class="row track">
+
+            {% for key, track in tracks %}
+                <div class="medium-{{ 12 / (loop.length % 12) }} columns mb-20">
+
+                    <div class="track__item">
+                        <h3>{{ key }}</h3>
+                        <img src="/img/icons/course-icons_{{ key }}.svg" alt=""/>
+
+                        <div class="track-courses">
+                            <ul class="track-courses__list">
+                                {% for item in track %}
+                                    <li>
+                                        <a href="/courses/{{ item.course }}">
+                                            {{ item.course }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="panel--success mb-50">
+        <div class="divider row">
+            <div class="divider__text layout-table">
+                <div class="layout-table__cell-70 layout-table__cell--middle">
+                    <h2>Новости WebCamp</h2>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus facilis ipsa placeat quas,
+                        ratione
+                        recusandae!</p>
+                </div>
+                <div class="layout-table__cell-30 layout-table__cell--middle text-right">
+                    <a href="/news" class="btn--warning btn--follow btn--lg">
+                        <span class="follow">Все новости</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row latest-news">
+
+        {% for i in 0..2 %}
+            <div class="medium-4 columns latest-news__item">
+                <p> {{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab culpa eligendi enim eos, exercitationem
+                    incidunt laboriosam magnam modi odio optio provident quae quod ratione recusandae saepe sit tempora
+                    veniam vero!'[:80] }} <a href="#"
+                                             class="latest-news__more icon-dots-three-horizontal icons--warning"></a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="awards">
+        <div class="divider row">
+            <div class="divider__text layout-table">
+                <div class="layout-table__cell-70 layout-table__cell--middle">
+                    <h2>Наши награды</h2>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequatur eligendi iure
+                        neque reiciendis soluta.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda doloribus incidunt modi
+                        molestias praesentium totam!</p>
+                </div>
+                <div class="layout-table__cell-30 layout-table__cell--middle">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <div class="row divider">
+            <div class="divider__text--center mb-20">
+                <h2 class="text--success">Отзывы наших студентов</h2>
+            </div>
+
+            <div class="review clearfix">
+                <div class="medium-3 columns">щщлщ</div>
+                <div class="medium-9 columns">
+                    <p class="review__name">Имя Фамилия</p>
+
+                    <p class="review__content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
+                        assumenda
+                        dolorum eum exercitationem fugiat harum iusto labore modi nemo nobis!</p>
+                </div>
+            </div>
+            <div class="divider__more">
+                <a href="/reviews" class="btn--warning btn--follow btn--lg">
+                    <span class="follow">Все отзывы</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row divider employers">
+        <div class="divider__text--center mb-30">
+            <h2 class="text--success">Компании в которых работают наши студенты</h2>
+        </div>
+        <div class="employers__logos">
+            <img src="/img/employers/com_01.png" alt=""/>
+            <img class="ml-15" src="/img/employers/com_02.png" alt=""/>
+            <img class="ml-15" src="/img/employers/com_03.png" alt=""/>
+            <img class="ml-15" src="/img/employers/com_04.png" alt=""/>
+        </div>
+    </div>
 {% endblock %}

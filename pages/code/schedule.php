@@ -1,39 +1,72 @@
 <?php
 include_once("pages/code/valueobjects.php");
 setlocale(LC_TIME, "ru_RU");
+
+//define("DAYS", array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'));
 class Schedule {
 //    public $id;
-    public $day;
-//    public $durationHours;
+    public $course_name;
+    public $course_alias;
+    public $modifier;
+//    public $month;
+    public $days;
+    public $price;
+    public $lessonCount;
+//    public $begin;
+//    public $weekDaysNames;
+//    public $time;
 //    public $timeFrom;
 //    public $timeTo;
-//    public $weekDays;
+    public $durationHours;
+    public $courseDuration;
+    private $weekDays;
+    private $start;
+//    private $daysNames = array('понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье');
 //    public $left;
-//    public $price;
 //    public $active;
 //    private $course;
-    public $begin;
 
     function __construct()
     {
-        $this->active = true;
-        $this->begin = DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
-        $time = $this->begin->getTimestamp();
-        $this->day = $this->begin->format('d');
-        $this->month = strftime("%B", $time);
-    }
-
-    static function cmp_obj($a, $b)
-    {
-        $al = ($a->begin);
-        $bl = ($b->begin);
-        if ($al == $bl) {
-            return 0;
+//        $this->active = true;
+        if (!empty($this->start)) {
+            $time = DateTime::createFromFormat('Y-m-d H:i:s', $this->start);
+            $this->begin = $time->getTimestamp() * 1000;
         }
-
-        return ($al > $bl) ? +1 : -1;
-
+        $this->days = explode(',', $this->days);
+//            array_map(function ($day) {
+//            return $day - 1;
+//        }, explode(',', $this->weekDays));
+        $this->lessonCount = round($this->courseDuration / count($this->days));
+        $this->durationHours = (int)$this->durationHours;
+//        $this->day = $this->begin->format('d');
+//        $this->month = strftime("%B", $this->time);
+//        $this->timeFrom = strftime("%R", $this->time);
+//        $this->timeTo = strftime("%R", $this->time + $this->durationHours * 3600);
+        $this->setInfo();
     }
+
+
+    private function setInfo()
+    {
+        $days = explode(',', $this->weekDays);
+        $times = count($days);
+//        $this->weekDaysNames = array_map(function ($day) {
+//            return $this->daysNames[$day - 1];
+//        }, $days);
+    }
+
+//    static function cmp_obj($a, $b)
+//    {
+//        $al = ($a->begin);
+//        $bl = ($b->begin);
+//        if ($al == $bl) {
+//            return 0;
+//        }
+//
+//        return ($al > $bl) ? +1 : -1;
+//
+//    }
 
     public function getDurationWeeks()
     {
@@ -85,7 +118,7 @@ class Schedules {
         }, ARRAY_FILTER_USE_BOTH);
     }
 
-    public static function getClosest(int $limit = null)
+    public static function getClosest($limit = null)
     {
         return array_slice(self::$closest, 0, $limit);
     }

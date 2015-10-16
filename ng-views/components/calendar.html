@@ -1,0 +1,62 @@
+<div class="calendar__frame">
+    <div class="calendar__wrap">
+        <div class="calendar__box">
+            <div class="calendar__date-display">
+                <a href="#" class="icon-chevron-left calendar__nav--prev" ng-click="goOneMonth(-1)" role="button"
+                   title="Previous month"></a>
+                <span class="calendar__month-display">{{ months[date.month]}}</span>
+                <span class="calendar__year-display">{{ date.year}}</span>
+                <a href="#" class="icon-chevron-right calendar__nav--next" ng-click="goOneMonth(1)" role="button"
+                   title="Next month"></a>
+            </div>
+            <div class="calendar__calendar-container">
+                <!--<div class="calendar__header">-->
+                <!--{{date}}-->
+                <!--<div class="calendar__month">{{ today | date:'MMMM'}}</div>-->
+                <!--<select class="calendar__select&#45;&#45;year browser-default" ng-model="date.year"-->
+                <!--title="Select a year" ng-options="year for year in years">-->
+                <!--</select>-->
+
+                <!--<div class="></div>-->
+                <!--<div class=">-->
+                <!--</div>-->
+                <!--</div>-->
+                <table class="calendar__table" id="birthdate_table" role="grid" aria-controls="birthdate"
+                       aria-readonly="true">
+                    <thead>
+                    <tr class="calendar__table--borderedrow">
+                        <th class="calendar__weekday" scope="col" ng-repeat="(key, day) in daysMap" title="{{key}}">
+                            {{day|limitTo:1}}
+                        </th>
+                        <!--<th class="calendar__weekday" scope="col" title="Tuesday">T</th>-->
+                        <!--<th class="calendar__weekday" scope="col" title="Wednesday">W</th>-->
+                        <!--<th class="calendar__weekday" scope="col" title="Thursday">T</th>-->
+                        <!--<th class="calendar__weekday" scope="col" title="Friday">F</th>-->
+                        <!--<th class="calendar__weekday" scope="col" title="Saturday">S</th>-->
+                        <!--<th class="calendar__weekday" scope="col" title="Sunday">S</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="week in calendarView">
+                        <td ng-repeat="day in week track by $index" ng-click="showDay(day)" class="calendar__day"
+                                >
+                            <span ng-class="isTheDay(day)">{{day | date:'d'}}</span>
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!--<div class="calendar__footer">-->
+            <!--<button class="btn-flat calendar__today" type="button" data-pick="1444165200000"-->
+            <!--aria-controls="birthdate">Today-->
+            <!--</button>-->
+            <!--<button class="btn-flat calendar__clear" type="button" data-clear="1" aria-controls="birthdate">Clear-->
+            <!--</button>-->
+            <!--<button class="btn-flat calendar__close" type="button" data-close="true" aria-controls="birthdate">Close-->
+            <!--</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
