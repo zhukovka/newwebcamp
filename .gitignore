@@ -2,3 +2,4 @@
 .Gruntfile
 sass
 node_modules
+compilation_cache
