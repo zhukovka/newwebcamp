@@ -1,0 +1,241 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="page aboutus">
+        <div class="page__header course">
+            <div class="row">
+                <div class="medium-3 columns end">
+                    <h1 class="page__title">Знакомтесь, WebCamp</h1>
+                </div>
+            </div>
+        </div>
+        {% verbatim %}
+        <div class="instructors" ng-controller="InstructorsController">
+            <div class="divider__text--center mb-20">
+                <h2 class="text--success">Наши преподаватели</h2>
+            </div>
+            <div class="row" ng-repeat="instructor in instructors">
+                <div class="medium-12 columns">
+                    <ul class="list-table instructor">
+                        <li class="w-20 list-table__item--top">
+                            <div class="instructor__photo">
+                                <img src="/img/instructors/{{ instructor.alias }}.jpg" alt=""/>
+                            </div>
+                        </li>
+                        <li class="w-70 p-5">
+                            <p class="">
+                                <a class="instructor__name" target="_blank" href="{{ instructor.profile }}">
+                                    {{ instructor.name }}
+                                    <span class="icon-linkedin instructor__linkedin"></span></a>
+                            </p>
+
+                            <p class="instructor__bio">{{ instructor.bio }}</p>
+                        </li>
+                        <li class="instructor__courses">
+                            <ul class="instructor__courselist">
+                                <li ng-repeat="course in instructor.courses | split:', '">
+                                    <a href="/courses/{{ course }}">
+                                        <img ng-src="/img/icons/course-icons_{{ course }}.svg" alt=""/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="reviews" id="reviews" ng-controller="ReviewsController">
+            <div class="row divider">
+                <div class="divider__text--center mb-20">
+                    <h2 class="text--success">Отзывы наших студентов</h2>
+                </div>
+
+                <div class="clearfix">
+
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="100000200373297">
+                            </div>
+
+                            <p class="reviewer__name">Vitalik Potieriaiev</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Мне кажется, вы не найдете настолько заинтересованных людей в вашем обучении, как
+                                организаторов Webсamp. Курс, который я прошел, подготовлен для студентов как с
+                                минимальными
+                                знаниями и пониманиями веб-программирования, так и студентов, которые успели
+                                "насамообучаться". Большим плюсом вижу сам рабочий процесс с преподавателем, который
+                                является успешным и опытным программистом. На многих курсах вам предложат неплохого
+                                лектора
+                                который отчеканит все от "А до Я", но который так и не работал разработчиком. Здесь же
+                                преподаватель является опытным практиком. Абсолютно доволен и уверен в своем вложении -
+                                цена/качество вопроса не может не радовать даже самых больших скептиков, каким являлся и
+                                я.
+                                Планирую пойти на "Продвинутый". Сейчас закрываю вопрос о трудоустройстве. Благодарен
+                                организаторам и преподавателю.</p>
+                        </div>
+
+
+                    </div>
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="1160122656">
+                            </div>
+
+                            <p class="reviewer__name">Игорь Прядуненко</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Всем привет! Проходил PHP Базовый, остался полностью доволен. После прохождения оных,
+                                даже
+                                взял продвинутый. Начну с того, что у ребят постоянно проходят какие-то акции, где можно
+                                получить очень неплохую скидку. Это при том, что и так стоимость курсов абсолютно
+                                адекватная. Вел Базовый курс у меня Кирилл (и продвинутый тоже продолжает), активно
+                                работающий team-lead. Дело свое знает, и объясняет очень доходчиво. Много практики, что
+                                не
+                                может не радовать. И вообще, позитивный человек. Администрация тоже очень отзывчивая.
+                                Если
+                                возникают какие-то проблемы, то идет на встречу с Вами. В общем, если сильно не
+                                разглагольствовать, то всем советую.</p></div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="1326390718"></div>
+
+                            <p class="reviewer__name">Dima Korotovskikh</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Меня зовут Дмитрий. Занимаюсь управлением информационной безопасностью в
+                                финансово-банковском
+                                секторе. На курс пришел для получения новых знаний в области ИТ (а точнее - для
+                                освежения
+                                базовых навыков по программированию, полученных ещё в университете ), с последующей
+                                возможной сменой деятельности в пользу "девелопмнета". По поводу общей организации
+                                курса:
+                                замечаний нет. Все условия для нормального обучения соблюдены. Чувствовал себя абсолютно
+                                комфортно на занятии. По поводу программы курса, преподавания и т.д.: уровень
+                                преподавателя
+                                (Кирилла) вполне достаточный для обучения студентов с минимальными знаниям в области ИТ
+                                (для
+                                тех, кто думает, что не потянет изучение, потому что не имеет образования в области ИТ,
+                                могу
+                                уверить, что занятия в классе, а также обязательное закрепление материала дома - залог
+                                успешного понимания материала). Уровень изложения материала курса, в принципе, вполне
+                                доходчивый для понимания (но, все же хочу отметить, что азы в области ИТ необходимы).
+                                Так
+                                как курс базовый, основная идея была познакомиться с PHP, его основными элементами и
+                                общей
+                                логикой. Я считаю, что задача была выполнена успешно. Из предложений по улучшению:
+                                обязательные домашние задания (для возможности ещё раз закрепить знания урока) с
+                                последующей
+                                проверкой и разбором на следующем занятии. Хочу отдельно поблагодарить Кирилла, Михаила
+                                и
+                                Ивана за предоставленную возможность "пройти" с комфортом данный курс. В дальнейших моих
+                                планах также прослушать продвинутый курс PHP.</p></div>
+                    </div>
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="100000732876665">
+                            </div>
+
+                            <p class="reviewer__name">Иван Парасюк</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Пошел на курсы изначально ничего не зная в этой сфере. Решил набраться ума и пошел на
+                                курс
+                                "PHP basics". Знаете у меня это хорошо получилось. Спасибо Кириллу за то, что доходчиво
+                                все
+                                объяснял и помогал. Также нельзя не отметить лояльность цены на курсы. Доволен как кот
+                                :) </p></div>
+                    </div>
+                </div>
+                <div class="divider__more">
+                    <a href="" ng-click="showReviews()" class="btn--warning btn--follow btn--lg">
+                        <span class="follow" ng-hide="reviewsShown">Показать еще отзывы</span>
+                        <span class="follow" ng-show="reviewsShown">Спятать отзывы</span>
+                    </a>
+                </div>
+                <div class="reviews--more clearfix" ng-show="reviewsShown">
+                    <div class="medium-4 columns reviewer" ng-repeat="review in reviews" ng-if="review.review_text">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="{{ review.reviewer.id }}"></div>
+
+                            <p class="reviewer__name">{{ review.reviewer.name }}</p>
+
+                            <ul class="reviewer__rating--{{ review.rating }}">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>{{ review.review_text }}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endverbatim %}
+
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+{% endblock %}
+{#<div class="reviewer__more">#}
+                        {#<span class="icon-dots-three-horizontal"></span>#}
+                        {#</div>#}
+{#FB.init({
+    appId: '890216487659774',
+  });
+  FB.api(
+                "/217557725110551/ratings?access_token=CAAMppa2FKP4BAGQucHlc2RpYnNbRM06l5W3hHwhLMTNZAaSgdhqZBryzcZAvm9s7VcVD7ZA4tvRsqNGSPQEgbVQdht7m8jKRB6pVavuDWgnW0qtZAsVocw9tWIsi1l4dMgtLenWmDSK4NSJoCYv5DF67ZCbWPhUGJVELo7tzbCf1A2JmzWHhLllLdZBR7fQQVIZD",
+                function (response) {
+                  if (response && !response.error) {
+                        var reviews = new Reviews(response.data);
+                        var reviewsView = new ReviewsView({collection:reviews});
+                        self.changeView(reviewsView);
+                  }
+                  else{
+                    console.dir(response.error);
+                  }
+                });#}

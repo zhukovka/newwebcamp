@@ -5,7 +5,7 @@ angular.module('Timeline', [])
     .service('Timeline', [function () {
 
     }])
-    .directive('timeline', ['$compile', function ($compile) {
+    .directive('timeline', ['$rootScope', '$compile', '$timeout', function ($rootScope, $compile, $timeout) {
         return {
             restrict: 'E',
             templateUrl: '/ng-views/components/timeline.html',
@@ -20,8 +20,8 @@ angular.module('Timeline', [])
                     stroke = '#797e83',
                     strokeW = 1,
                     fill = 'none',
-                    r = 5,
-                    x = 5,
+                    r = 6,
+                    x = 7,
                     y = 10,
                     lw = (width - points * r * 2) / (points - 1) | 0,
                     circles = [],
@@ -30,7 +30,9 @@ angular.module('Timeline', [])
                 for (var i = 0; i < points; i++) {
                     var cx = x + (lw + r * 2) * i,
                         x1 = cx + r,
-                        x2 = x1 + lw;
+                        x2 = x1 + lw,
+                        circleClass = (i !== 0) ? 'timeline__circle' : 'timeline__circle--active';
+
                     var circle = {
                             _cx: cx,
                             _cy: y,
@@ -38,7 +40,7 @@ angular.module('Timeline', [])
                             _stroke: stroke,
                             '_stroke-width': strokeW,
                             _fill: fill,
-                            _class: 'timeline__circle',
+                            _class: circleClass,
                             _index: i
                         },
                         line = {
@@ -63,12 +65,24 @@ angular.module('Timeline', [])
                         line: lines
                     }
                 );
+                var index = 0;
+
+                function circleClick(el) {
+                    svg.find('circle').removeClass('timeline__circle--active').addClass('timeline__circle');
+                    el.setAttribute('class', 'timeline__circle--active');
+                };
                 svg.on('click', function (e) {
                     if (e.target.nodeName == "circle") {
-                        var index = e.target.getAttribute('index'),
-                            courseDay = scope.activeSchedule.coursedays[index];
-                        console.log(courseDay);
+                        index = e.target.getAttribute('index');
+                        circleClick(e.target);
+                        $timeout(function () {
+                            scope.getDayLesson(+index);
+                        });
+                        $rootScope.$broadcast('circleClick', index);
                     }
+                });
+                $rootScope.$on('dayClick', function (e, index) {
+                    circleClick(svg.find('circle')[index]);
                 });
                 svg.html(xmlDocStr);
                 $compile(angular.element(svg))(scope);

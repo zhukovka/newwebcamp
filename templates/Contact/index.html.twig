@@ -1,0 +1,116 @@
+{% extends "base.html.twig" %}
+{% block js %}
+    <script type="text/javascript">
+
+        var map;
+        function initMap() {
+            var office = {lat: 50.440672, lng: 30.526025};
+            var customMapType = new google.maps.StyledMapType([
+                {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {"color": "#f0f1f1"}
+                    ]
+                }, {
+                    "featureType": "poi.park",
+                    "stylers": [
+                        {"hue": "#ff0000"},
+                        {"visibility": "off"}
+                    ]
+                }, {
+                    "featureType": "poi.medical",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {"visibility": "off"}
+                    ]
+                }, {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {"color": "#F0BA61"}
+                    ]
+                }
+            ], {
+                name: 'Webcamp map'
+            });
+            var customMapTypeId = 'custom_style';
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: office,
+                scrollwheel: false,
+                zoom: 16,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.SATELLITE, customMapTypeId]
+                }
+            });
+            map.mapTypes.set(customMapTypeId, customMapType);
+            map.setMapTypeId(customMapTypeId);
+            var image = '/img/icons/icon.svg';
+            var logoMarker = new google.maps.Marker({
+                position: office,
+                map: map,
+                icon: image
+            });
+            var marker = new google.maps.Marker({
+                position: office,
+                map: map,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 3,
+                    strokeColor: '#e7571e'
+                }
+            });
+
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU_GWiND8_ovfAp_HeqIRPpKt85qPPpew&callback=initMap&language=ru">
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="page contacts">
+        <div class="page__header course">
+            <div class="row">
+                <div class="medium-3 columns end">
+                    <h1 class="page__title">Свяжитесь с нами</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-50">
+            <div class="medium-6 columns">
+                <h3 class="page__h3"><span class="icon-flypaper contacts__icons"></span>Напишите</h3>
+                <ul class="list-nostyle">
+                    <li>email: <span class="text-dark">info@webcamp.com.ua</span></li>
+                    <li>skype: <span class="text-dark">webcamp.welcome</span></li>
+                    <li>hangouts: <span class="text-dark">darvina10@gmail.com</span></li>
+                </ul>
+            </div>
+            <div class="medium-6 columns">
+                <h3 class="page__h3"><span class="icon-iphone contacts__icons"></span>Позвоните</h3>
+                <ul class="list-nostyle">
+                    <li>+38<span class="text-dark">(063)478-41-07 Юлия</span></li>
+                    <li>+38<span class="text-dark">(063)707-85-13 Андрей</span></li>
+                    <li>+38<span class="text-dark">(097)255-51-06 Елена</span></li>
+                    <li>
+                        <small>все номера доступны в Viber</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center">
+            <h3 class="page__h3"><span class="icon-place contacts__icons"></span>Приходите</h3>
+
+            <p class="text-dark">г.Киев, ул. Дарвина, 10, оф.13 <br/>
+                <a class="map__link" target="_blank"
+                   href="https://www.google.com/maps/d/u/0/viewer?mid=z1x4DSKne78E.k1HeVJp9_uk0">посмотреть маршрут на
+                    карте</a></p>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+
+{% endblock %}

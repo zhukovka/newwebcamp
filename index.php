@@ -2,6 +2,7 @@
 define("ROOT", __DIR__ . "/");
 
 require_once ROOT . 'vendor/autoload.php';
+use flight\Engine;
 
 try {
     require_once ROOT . 'configs/pdo.php';
@@ -9,6 +10,7 @@ try {
     $menu = DB::getMenu();
 } catch (PDOException $e) {
     echo 'Error: ' . $e->getMessage();
+    file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
 }
 $loader = new Twig_Loader_Filesystem(ROOT . 'templates');
 $twig = new Twig_Environment($loader);
@@ -18,78 +20,74 @@ $twig->addGlobal('menu', $menu);
 //$twig = new Twig_Environment($loader, array(
 //    'cache' => ROOT . 'compilation_cache',
 //));
+$app = new Engine();
+Flight::set('twig', $twig);
+$app->map('notFound', function () {
+    // Display custom 404 page
+    echo 'oppa-pa 404';
+});
+$app->route('/', function () {
+    include_once("pages/code/slide.php");
+    $slides = DB::getAll('SELECT * FROM slider ORDER BY position', 'Slide');
+    $tracks = DB::getGroup('SELECT tracks.name as track, course.name as course FROM tracks LEFT JOIN course ON course.track = tracks.id');
+    echo Flight::get('twig')->render('index.html.twig',
+        array('active' => 'home',
+            'slides' => $slides,
+            'tracks' => $tracks)
+    );
+});
+$app->route('/schedule', function () {
+    require_once(ROOT . 'pages/ScheduleController.php');
+    ScheduleController::index();
+});
+$app->route('/study', function () {
+    echo Flight::get('twig')->render('Study/index.html.twig',
+        array('active' => 'study')
+    );
+});
+$app->route('/contacts', function () {
+    echo Flight::get('twig')->render('Contact/index.html.twig',
+        array('active' => 'contacts')
+    );
+});
+$app->route('/aboutus', function () {
+    echo Flight::get('twig')->render('About/index.html.twig',
+        array('active' => 'aboutus')
+    );
+});
 
-$routes = array(
-    'index' => 'Home',
-    'test' => 'TestController',
-    'courses' => 'CoursesController',
-    'schedule' => 'ScheduleController'
-);
+$app->route('/courses(/@alias)', function () {
+    require_once(ROOT . 'pages/CoursesController.php');
+    CoursesController::index();
+});
+$app->route('/api/instructors', function () {
+    require_once(ROOT . 'pages/CoursesController.php');
+    Flight::json(CoursesController::instructors());
+});
 
+$app->route('/api/schedule', function () {
+    require_once(ROOT . 'pages/ScheduleController.php');
+    ScheduleController::all();
+});
+$app->route('/api/schedule/@courseId', function ($courseId) {
+    require_once(ROOT . 'pages/ScheduleController.php');
+    ScheduleController::schedule($courseId);
+});
+$app->route('/api/courses', function () {
+    require_once(ROOT . 'pages/CoursesController.php');
+    CoursesController::all();
+});
+$app->route('/api/courses/@alias', function ($alias) {
+    require_once(ROOT . 'pages/CoursesController.php');
+    CoursesController::courses($alias);
+});
+$app->route('/api/lessons/@courseId', function ($courseId) {
+    require_once(ROOT . 'pages/CoursesController.php');
+    Flight::json(CoursesController::lessons($courseId));
+});
+$app->route('POST /enroll', function () {
+    require_once(ROOT . 'pages/CoursesController.php');
+    CoursesController::enroll();
+});
 
-function getPathElements() {
-//    var_dump($_SERVER['REQUEST_METHOD']);
-    $elements = explode('/',$_SERVER['REQUEST_URI']);
-    $ret = array();
-    foreach($elements as $el) {
-        if ($el) array_push($ret, $el);
-    }
-    return $ret;
-}
-function redirect($page) {
-    header('Location: http://'.$_SERVER['SERVER_NAME'].($page != null ? '/'.$page : '')) ;
-    exit();
-}
-
-function goToErrorPage() {
-    redirect(null);
-}
-
-function movedPermanently($page) {
-    header("HTTP/1.1 301 Moved Permanently");
-    header('Location: http://'.$_SERVER['SERVER_NAME'].'/'.$page);
-    exit();
-}
-
-function renderPage($page) {
-    $class = $GLOBALS['routes'][$page];
-    require_once("pages/$class.php");
-    call_user_func("$class::index");
-    exit();
-}
-
-function compare($str1, $str2) {
-    return strcmp($str1, $str2) == 0;
-}
-
-function route($matches)
-{
-    if (!empty($matches)) {
-        $first = $matches['first'];
-        $second = $matches['second'];
-        $class = $GLOBALS['routes'][$first];
-        require_once("pages/$class.php");
-        if (empty($second)) {
-            call_user_func("$class::all");
-            exit();
-        }
-        call_user_func("$class::$first", $second);
-    }
-    exit();
-}
-
-$elements = getPathElements();
-if(count($elements) == 0) renderPage("index");
-elseif (count($elements) == 1 && array_key_exists($elements[0], $routes)) {
-    renderPage($elements[0]);
-} elseif (preg_match('/(^\/api\/)(?P<first>courses|schedule)\/{0,1}(?P<second>\w*)/', $_SERVER['REQUEST_URI'], $matches)) {
-    if (array_key_exists($matches['first'], $routes)) {
-        route($matches);
-    }
-} elseif (preg_match('/(?P<first>courses|schedule)\/(?P<second>\w*)/', $_SERVER['REQUEST_URI'], $matches)) {
-    if (array_key_exists($matches['first'], $routes)) {
-        renderPage($matches['first']);
-//        echo $twig->render('Courses/index.html.twig');
-    }
-}
-goToErrorPage();
+$app->start();

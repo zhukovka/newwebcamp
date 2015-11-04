@@ -4,9 +4,13 @@ class Course {
     public $name;
 //    public $shortDescription;
     public $description;
+    public $results;
 
 //    public $start;
-
+    private function  __construct()
+    {
+        $this->results = explode("\n", $this->results);
+    }
     public static function fromPost()
     {
         $ret = new Course();

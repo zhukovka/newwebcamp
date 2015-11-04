@@ -62,7 +62,7 @@
 
                     <tr ng-repeat="schedule in scheduleGroup | filter:searchText |
                         orderBy:predicate:reverse">
-                        <td><a href="/courses/{{ schedule.course_alias }}"
+                        <td><a href="/courses/{{ schedule.course_alias }}?active={{ schedule.modifier }}"
                                class="course__name">{{ schedule.course_name }} {{ schedule.modifier }}</a></td>
                         <td><a href="#" class="course__enroll">Записаться</a></td>
                         <td>

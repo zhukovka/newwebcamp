@@ -15,7 +15,9 @@
         </p>
     </div>
 </div>
-<div class="row">
+
+
+<div class="row mb-20">
 
     <div class="medium-6 columns">
         <div class="row">
@@ -53,14 +55,14 @@
 
                     <p class="closest__time">
                         {{ closest.begin | date:'HH:mm' }}
-                        -{{ closest.getEndTime() | date:'HH:mm' }}
+                        -{{ closest.endDate | date:'HH:mm' }}
                         | {{closest.lessonCount }}
                         уроков</p>
 
                     <p class="">{{ closest.price }} грн</p>
 
                     <ul class="list-table">
-                        <li><a href="#" class="btn--warning" ng-click="enroll(course)">Записаться</a></li>
+                        <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
                         <li class="text-right"><a href="#course-schedules">Другие даты и время</a></li>
                     </ul>
                 </div>
@@ -74,39 +76,31 @@
 </div>
 <div class="courseinfo__description">
     <div class="row">
-        <p>{{course.name}}</p>
+        <div class="medium-12 columns" ng-bind-html="course.description">
+        </div>
 
-        <p>{{course.description}}</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab alias asperiores at commodi distinctio dolor
-            dolore earum enim expedita explicabo id ipsum, laudantium magni nihil officia perspiciatis possimus, quae
-            quaerat quam quas quod saepe soluta sunt tenetur unde vero voluptatum? Aliquam fuga fugiat impedit
-            necessitatibus neque rem totam voluptate?x</p>
     </div>
 </div>
-<div class="row courseinfo__lessons">
-    <div class="medium-6 columns">
-        <div class="courseinfo__lesson">
+<div class="courseinfo__results">
+    <div class="row">
+        <p class="lead">По окончании курса вы сможете:</p>
 
+        <div class="medium-6 medium-centered columns">
+            <ul class="results-list">
+                <li ng-repeat="result in course.results"><span class="icon-checkmark-circle"></span><span
+                        class="results-list__item">{{result}}</span></li>
+            </ul>
         </div>
     </div>
-    <div class="medium-6 columns"></div>
 </div>
-<!--<p>Учебный курс включает:</p>
-<ul class="list&#45;&#45;warning page__list">
-    <li><span class="page__list&#45;&#45;bodycolor">1</span></li>
-    <li><span class="page__list&#45;&#45;bodycolor">2</span></li>
-    <li><span class="page__list&#45;&#45;bodycolor">3</span></li>
-    <li><span class="page__list&#45;&#45;bodycolor">4</span></li>ng-repeat-start=""
-</ul>-->
-
-<div class="row">
+<div class="row courseinfo__organizer">
     <div class="medium-9 columns pad-l0">
         <div id="course-schedules">
             <ul class="list-inline courseinfo__modifiers">
                 <li class="courseinfo__modifier"
                     ng-class="{'courseinfo__modifier--{{schedule.modifier_name}}':isActiveTab(schedule.modifier_name)}"
-                    ng-repeat="schedule in schedules">
+                    ng-repeat="schedule in schedules"
+                    ng-if="schedule.begin">
                     <a href="#" ng-click="activateSchedule(schedule)">{{schedule.modifier_name | modifier}}</a>
                 </li>
             </ul>
@@ -146,11 +140,27 @@
                         {{schedule.lessonCount}} уроков
                     </p>
 
-                    <div class="lessons__content"></div>
+                    <div class="lessons__content">
+                        <p class="lesson-date">
+                            <span class="lesson-date__daymonth">{{dayLesson.day|date:'d MMMM'}}</span>,
+                            <span>{{dayLesson.day|date:'yyyy'}}</span>
+                        </p>
+
+                        <p class="lesson-date__weekday">{{dayLesson.day|date:'EEEE'}}, <span class="lesson-table__num">{{dayLesson.num}} урок</span>
+                        </p>
+                        <table class="lesson-table">
+                            <tr ng-repeat="item in dayLesson.items">
+                                <td class="lesson-table__time"><span
+                                        ng-class="{'lesson-table__time--first':$first}">{{schedule.addToBegin("hours",$index)|date:'HH:mm'}}</span>
+                                </td>
+                                <td>
+                                    {{item.num}}. {{item.description}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
     <div class="medium-3 columns courseinfo" ng-controller="CourseCalendarCtrl">
@@ -164,13 +174,20 @@
         </div>
 
     </div>
-    <!--<div class="medium-5 columns">-->
-    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, voluptatem.</p>-->
+    <a href="#" class="btn--warning btn--bottom" ng-click="enroll()">Записаться</a>
+</div>
 
-    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, voluptatem.</p>-->
+<div class="row syllabus">
+    <p class="lead">Программа курса</p>
 
-    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, voluptatem.</p>-->
-
-    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, voluptatem.</p>-->
-    <!--</div>-->
+    <div class="medium-6 columns">
+        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2">
+            {{lesson.description}}
+        </p>
+    </div>
+    <div class="medium-6 columns">
+        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2">
+            {{lesson.description}}
+        </p>
+    </div>
 </div>

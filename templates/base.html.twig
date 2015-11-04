@@ -20,13 +20,14 @@
         <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-resource/angular-resource.js"></script>
         <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
+        <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="/js/courses-ng/utils.js"></script>
         <script src="/js/courses-ng/calendar.js"></script>
         <script src="/js/courses-ng/clock.js"></script>
         <script src="/js/courses-ng/timeline.js"></script>
-        {#<script src="/js/courses-ng/enroll.js"></script>#}
+        <script src="/js/courses-ng/enroll.js"></script>
         <script src="/js/courses-ng/app.js"></script>
-        {% block js %}{% endblock %}
+
         {#<script src="/js/libs/jquery-1.9.1.min.js"></script>#}
         {#<script src="/js/libs/modernizr-2.5.3.js"></script>#}
         {#<script src="/js/libs/prefixfree.min.js"></script>#}
@@ -124,5 +125,6 @@
 <enroll-modal ng-show="showModal">
 
 </enroll-modal>
+{% block js %}{% endblock %}
 </body>
 </html>

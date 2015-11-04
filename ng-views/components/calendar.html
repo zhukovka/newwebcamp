@@ -38,10 +38,9 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="week in calendarView">
-                        <td ng-repeat="day in week track by $index" ng-click="showDay(day)" class="calendar__day"
-                                >
-                            <span ng-class="isTheDay(day)">{{day | date:'d'}}</span>
-
+                        <td ng-repeat="day in week track by $index" ng-click="showDay(day)"
+                            class="calendar__day">
+                            <span ng-class="theDayClasses(day)">{{day | date:'d'}}</span>
                         </td>
                     </tr>
 

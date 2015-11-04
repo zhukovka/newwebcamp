@@ -15,16 +15,22 @@
         </p>
     </div>
 </div>
-
 <div class="row">
-    <p>Учебный курс включает:</p>
-    <ul class="list--warning page__list">
-        <li><span class="page__list--bodycolor">1</span></li>
-        <li><span class="page__list--bodycolor">2</span></li>
-        <li><span class="page__list--bodycolor">3</span></li>
-        <li><span class="page__list--bodycolor">4</span></li>
-    </ul>
+    <div class="medium-12 columns">
+        <p>IT - наиболее быстро развивающаяся индустрия в мире, а работник сферы IT - настоящий космополит, не
+            привязанный ни к месту, ни к стране.</p>
+
+        <p>В огромном разнообразии профессий сферы вы можете выбрать для себя ту, которая подходит вашему характеру и
+            складу ума.</p>
+
+        <p>Реализовать себя здесь может каждый, так, разработка back-end подойдет любителям точных наук, а front-end -
+            для людей творческих.</p>
+
+        <p>Если вы технарь - мы предлагаем для вас Java или php, а если - гуманитарий, выбирайте html, css и
+            javascript.</p>
+    </div>
 </div>
+
 <div class="row mb-50">
     <div class="courses" ng-controller="CoursesController">
         <div class="courses__h">
@@ -55,7 +61,7 @@
             <tbody>
             <tr ng-repeat="course in courses | filter:searchText | orderBy:predicate:reverse">
 
-                <td><a href="/courses/{{ course.alias }}"
+                <td><a href="/courses/{{ course.alias }}?active={{ course.modifier }}"
                        class="course__name">{{ course.name }} {{ course.modifier }}</a></td>
                 <td>{{ course.track }}</td>
                 <td>

@@ -28,17 +28,13 @@ class DB
 
     public static function getArray($query)
     {
-//        var_dump($query);
         $res = self::$con->query($query);
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function fetchSchedule()
     {
-//        include_once(ROOT . "pages/code/course.php");
         include_once(ROOT . "pages/code/schedule.php");
-//        $res = self::$con->query('SELECT * FROM course');
-//        Courses::addCourses($res->fetchAll(PDO::FETCH_CLASS, 'Course'));
         $res = self::$con->query('SELECT shedule.start, shedule.modifier, course.name as course_name,
                                           course.duration as courseDuration,
                                           courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays
@@ -71,7 +67,17 @@ class DB
         return $res->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_ASSOC);
     }
 
-
+    public static function postOne($query, $data)
+    {
+        try {
+            $res = self::$con->prepare($query);
+            $res->execute($data);
+        } catch (PDOException $e) {
+            file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
+            header('HTTP/1.1 500 Internal Server Error');
+            echo $e->getMessage();
+        }
+    }
 }
 
 
