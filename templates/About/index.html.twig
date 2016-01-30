@@ -16,13 +16,13 @@
             <div class="row" ng-repeat="instructor in instructors">
                 <div class="medium-12 columns">
                     <ul class="list-table instructor">
-                        <li class="w-20 list-table__item--top">
+                        <li class="w_m-20 list-table__item--top">
                             <div class="instructor__photo">
                                 <img src="/img/instructors/{{ instructor.alias }}.jpg" alt=""/>
                             </div>
                         </li>
-                        <li class="w-70 p-5">
-                            <p class="">
+                        <li class="w_m-70 p-5">
+                            <p class="text_s-center">
                                 <a class="instructor__name" target="_blank" href="{{ instructor.profile }}">
                                     {{ instructor.name }}
                                     <span class="icon-linkedin instructor__linkedin"></span></a>
@@ -30,7 +30,7 @@
 
                             <p class="instructor__bio">{{ instructor.bio }}</p>
                         </li>
-                        <li class="instructor__courses">
+                        <li class="instructor__courses hide-for-small-only">
                             <ul class="instructor__courselist">
                                 <li ng-repeat="course in instructor.courses | split:', '">
                                     <a href="/courses/{{ course }}">
@@ -43,74 +43,12 @@
                 </div>
             </div>
         </div>
-        <div class="reviews" id="reviews" ng-controller="ReviewsController">
+        <div class="reviews" data-reviews id="reviews" ng-controller="ReviewsController">
             <div class="row divider">
                 <div class="divider__text--center mb-20">
                     <h2 class="text--success">Отзывы наших студентов</h2>
                 </div>
 
-                <div class="clearfix">
-
-                    <div class="medium-6 columns reviewer">
-
-                        <div class="reviewer__inner">
-                            <div class="reviewer__pic" img-fetch="100000200373297">
-                            </div>
-
-                            <p class="reviewer__name">Vitalik Potieriaiev</p>
-
-                            <ul class="reviewer__rating--5">
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                            </ul>
-                            <p>Мне кажется, вы не найдете настолько заинтересованных людей в вашем обучении, как
-                                организаторов Webсamp. Курс, который я прошел, подготовлен для студентов как с
-                                минимальными
-                                знаниями и пониманиями веб-программирования, так и студентов, которые успели
-                                "насамообучаться". Большим плюсом вижу сам рабочий процесс с преподавателем, который
-                                является успешным и опытным программистом. На многих курсах вам предложат неплохого
-                                лектора
-                                который отчеканит все от "А до Я", но который так и не работал разработчиком. Здесь же
-                                преподаватель является опытным практиком. Абсолютно доволен и уверен в своем вложении -
-                                цена/качество вопроса не может не радовать даже самых больших скептиков, каким являлся и
-                                я.
-                                Планирую пойти на "Продвинутый". Сейчас закрываю вопрос о трудоустройстве. Благодарен
-                                организаторам и преподавателю.</p>
-                        </div>
-
-
-                    </div>
-                    <div class="medium-6 columns reviewer">
-
-                        <div class="reviewer__inner">
-                            <div class="reviewer__pic" img-fetch="1160122656">
-                            </div>
-
-                            <p class="reviewer__name">Игорь Прядуненко</p>
-
-                            <ul class="reviewer__rating--5">
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                                <li><span class="icon-star"></span></li>
-                            </ul>
-                            <p>Всем привет! Проходил PHP Базовый, остался полностью доволен. После прохождения оных,
-                                даже
-                                взял продвинутый. Начну с того, что у ребят постоянно проходят какие-то акции, где можно
-                                получить очень неплохую скидку. Это при том, что и так стоимость курсов абсолютно
-                                адекватная. Вел Базовый курс у меня Кирилл (и продвинутый тоже продолжает), активно
-                                работающий team-lead. Дело свое знает, и объясняет очень доходчиво. Много практики, что
-                                не
-                                может не радовать. И вообще, позитивный человек. Администрация тоже очень отзывчивая.
-                                Если
-                                возникают какие-то проблемы, то идет на встречу с Вами. В общем, если сильно не
-                                разглагольствовать, то всем советую.</p></div>
-                    </div>
-                </div>
                 <div class="clearfix">
                     <div class="medium-6 columns reviewer">
 
@@ -153,6 +91,68 @@
                                 и
                                 Ивана за предоставленную возможность "пройти" с комфортом данный курс. В дальнейших моих
                                 планах также прослушать продвинутый курс PHP.</p></div>
+                    </div>
+
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="1160122656">
+                            </div>
+
+                            <p class="reviewer__name">Игорь Прядуненко</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Всем привет! Проходил PHP Базовый, остался полностью доволен. После прохождения оных,
+                                даже
+                                взял продвинутый. Начну с того, что у ребят постоянно проходят какие-то акции, где можно
+                                получить очень неплохую скидку. Это при том, что и так стоимость курсов абсолютно
+                                адекватная. Вел Базовый курс у меня Кирилл (и продвинутый тоже продолжает), активно
+                                работающий team-lead. Дело свое знает, и объясняет очень доходчиво. Много практики, что
+                                не
+                                может не радовать. И вообще, позитивный человек. Администрация тоже очень отзывчивая.
+                                Если
+                                возникают какие-то проблемы, то идет на встречу с Вами. В общем, если сильно не
+                                разглагольствовать, то всем советую.</p></div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="medium-6 columns reviewer">
+
+                        <div class="reviewer__inner">
+                            <div class="reviewer__pic" img-fetch="100000200373297">
+                            </div>
+
+                            <p class="reviewer__name">Vitalik Potieriaiev</p>
+
+                            <ul class="reviewer__rating--5">
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                                <li><span class="icon-star"></span></li>
+                            </ul>
+                            <p>Мне кажется, вы не найдете настолько заинтересованных людей в вашем обучении, как
+                                организаторов Webсamp. Курс, который я прошел, подготовлен для студентов как с
+                                минимальными
+                                знаниями и пониманиями веб-программирования, так и студентов, которые успели
+                                "насамообучаться". Большим плюсом вижу сам рабочий процесс с преподавателем, который
+                                является успешным и опытным программистом. На многих курсах вам предложат неплохого
+                                лектора
+                                который отчеканит все от "А до Я", но который так и не работал разработчиком. Здесь же
+                                преподаватель является опытным практиком. Абсолютно доволен и уверен в своем вложении -
+                                цена/качество вопроса не может не радовать даже самых больших скептиков, каким являлся и
+                                я.
+                                Планирую пойти на "Продвинутый". Сейчас закрываю вопрос о трудоустройстве. Благодарен
+                                организаторам и преподавателю.</p>
+                        </div>
+
+
                     </div>
                     <div class="medium-6 columns reviewer">
 

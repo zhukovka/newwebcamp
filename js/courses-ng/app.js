@@ -36,7 +36,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             modifier_id: 0,
             course_id: 0,
         };
-        console.log($scope);
+
     }])
     .controller('MainCoursesController', ['$scope', 'Course', function ($scope, Course) {
         $scope.menuitem;
@@ -49,6 +49,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             $scope.activeSchedule = schedule;
             $scope.activeTab = $scope.activeSchedule.modifier_name;
             $scope.enrollSchedule.modifier_id = $scope.activeSchedule.modifier_id;
+            console.log($scope);
             $scope.getDayLesson(0);
             $scope.$broadcast('activateSchedule');
         };
@@ -60,13 +61,15 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             return $scope.course.duration / schedule.durationHours | 0;
         };
         $scope.getDayLesson = function (dayNum) {
-            var count = $scope.activeSchedule.durationHours,
-                start = count * dayNum;
-            angular.extend($scope.dayLesson, {
-                day: $scope.activeSchedule.coursedays[dayNum],
-                items: $scope.course.lessons.slice(start, start + count),
-                num: dayNum + 1
-            });
+            if ($scope.activeSchedule.coursedays) {
+                var count = $scope.activeSchedule.durationHours,
+                    start = count * dayNum;
+                angular.extend($scope.dayLesson, {
+                    day: $scope.activeSchedule.coursedays[dayNum],
+                    items: $scope.course.lessons.slice(start, start + count),
+                    num: dayNum + 1
+                });
+            }
         };
         Course.get({alias: $routeParams.alias}, function (course) {
             //$scope.course = course;
@@ -74,6 +77,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 angular.extend($scope.course, course);
             Schedule.schedule({id: course.id}, function (schedules) {
                 if (schedules) {
+
                     //$scope.schedules
                     var schdls = _.sortBy(schedules, function (schedule) {
                         schedule.course_name = course.name;
@@ -83,7 +87,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                     });
                     angular.extend($scope.schedules, schdls);
                     if ($routeParams.active) {
-                        $scope.closest = _.findWhere(schedules, {modifier_name: $routeParams.active});
+                        $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
                     } else {
                         $scope.closest = $scope.schedules[0];
                     }
@@ -133,13 +137,20 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             $rootScope.$broadcast('dayClick', courseDayIndex);
         };
         $scope.$on('activateSchedule', function () {
-            var firstDay = $scope.activeSchedule.coursedays[0];
-            $scope.setTime(firstDay.getHours(), firstDay.getMinutes());
-            $scope.goToMonth(firstDay.getFullYear(), firstDay.getMonth());
+            if ($scope.activeSchedule.coursedays) {
+                var firstDay = $scope.activeSchedule.coursedays[0];
+                if ($scope.activeSchedule.begin) {
+                    $scope.setTime(firstDay.getHours(), firstDay.getMinutes());
+                    $scope.goToMonth(firstDay.getFullYear(), firstDay.getMonth());
+                }
+            }
         });
         $rootScope.$on('circleClick', function (e, index) {
+
             var courseDay = $scope.activeSchedule.coursedays[index];
-            $scope.goToMonth(courseDay.getFullYear(), courseDay.getMonth());
+            if ($scope.activeSchedule.begin) {
+                $scope.goToMonth(courseDay.getFullYear(), courseDay.getMonth());
+            }
         });
 
     }])
@@ -214,11 +225,13 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             }
         });
         Schedule.prototype.setCourseDays = function (lessons) {
-            if (this.begin) {
-                this.coursedays = Calendar.getRepeatedDaysIntervals(this.begin, this.days, lessons);
-                var courseEnd = this.coursedays[this.coursedays.length - 1];
-                this.endDate = new Date(courseEnd).setHours(courseEnd.getHours() + this.durationHours);
+
+            if (!this.begin) {
+                this.begin = new Date(moment(this.modifier_default_hour, "HH").add(2, 'months').day(this.days[0]));
             }
+            this.coursedays = Calendar.getRepeatedDaysIntervals(this.begin, this.days, lessons);
+            var courseEnd = this.coursedays[this.coursedays.length - 1];
+            this.endDate = new Date(courseEnd).setHours(courseEnd.getHours() + this.durationHours);
         };
         Schedule.prototype.getEndTime = function () {
             return this.begin + Calendar.hoursToMs(this.durationHours);
@@ -229,11 +242,11 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             if (startDate) {
                 return Calendar.addToDate(new Date(startDate), add);
             }
-            return false;
+            return qty;
         };
 
         Schedule.prototype.isCourseDay = function (day) {
-            if (this.coursedays && angular.isDate(day)) {
+            if (this.begin && angular.isDate(day)) {
                 return _.find(this.coursedays, function (cday) {
                     return Calendar.isTheDay(day, cday);
                 });
@@ -241,7 +254,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             return false;
         };
         Schedule.prototype.courseDayIndex = function (day) {
-            if (this.coursedays && angular.isDate(day)) {
+            if (this.begin && angular.isDate(day)) {
                 return _.findIndex(this.coursedays, function (cday) {
                     return Calendar.isTheDay(day, cday);
                 });
@@ -321,13 +334,118 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
         }
     }])
+    .directive('mainSlider', ['$window', '$interval', function ($window, $interval) {
+        return {
+            restrict: 'A',
+            link: function (scope, el) {
+                var slidesContainer = angular.element(el[0].querySelector('.slides'));
+                var slidesItems = angular.element(slidesContainer[0].querySelectorAll('.slide'));
+                var controlsContainer = angular.element(el[0].querySelector('.slide-controls'));
+                var controlsItems = angular.element(controlsContainer[0].querySelectorAll('.slide-controls__item'));
+
+                var activeSlide = angular.element(slidesContainer[0].querySelector('.slide.active'));
+
+                var activeControl = angular.element(controlsContainer[0].querySelector('.slide-controls__item.active'));
+                var activeIndex = +activeControl.attr('data-index');
+                var itemsCount = controlsItems.length;
+                var width = parseFloat(controlsItems.css('width'));
+                angular.element($window).on('resize', setWidth);
+
+                var interval = null;
+                var cancelled = false;
+                var ms = 3000;
+
+                slidesItems.on('mouseenter', function (e) {
+                    stopInterval();
+                });
+                slidesItems.on('mouseleave', function (e) {
+                    launchInterval(ms);
+                });
+
+                controlsItems.on('mouseenter', function (e) {
+                    stopInterval();
+
+                    var hoverIndex = +this.getAttribute('data-index');
+                    changeActiveSlide(hoverIndex);
+                    changeActiveControl(hoverIndex);
+                    activeIndex = hoverIndex;
+                });
+                controlsItems.on('mouseleave', function (e) {
+                    launchInterval(ms);
+                });
+
+                function activateNext() {
+                    var nextIndex = (activeIndex + 1) % itemsCount;
+                    changeActiveSlide(nextIndex);
+                    changeActiveControl(nextIndex);
+                    activeIndex = nextIndex;
+                }
+
+                function changeActiveSlide(i) {
+                    activeSlide.removeClass('active');
+                    activeSlide = slidesItems.eq(i).addClass('active');
+                }
+
+                function changeActiveControl(i) {
+                    activeControl.removeClass('active');
+                    activeControl = controlsItems.eq(i).addClass('active');
+                }
+
+                function setUpInterval() {
+                    var wWidth = $window.innerWidth;
+                    if (wWidth >= 640 && (!interval || cancelled)) {
+                        launchInterval(ms);
+                    } else if (wWidth < 640 && interval && !cancelled) {
+                        stopInterval();
+                    }
+                }
+
+                function launchInterval(ms, count) {
+                    cancelled = false;
+                    interval = $interval(activateNext, ms, count);
+                }
+
+                function stopInterval() {
+                    cancelled = $interval.cancel(interval);
+                }
+
+                function setWidth() {
+                    var wWidth = $window.innerWidth;
+                    var _width = parseFloat(controlsItems.css('width'));
+                    if (wWidth < 800 && _width == width) {
+                        removeLastControlsItem();
+                        _width = 100 / (itemsCount);
+                        controlsItems.css('width', _width + '%');
+                    } else if (wWidth > 800 && _width != width) {
+                        _width = width;
+                        controlsItems.css('width', _width + '%');
+                        addLastControlsItem()
+                    }
+                    setUpInterval();
+                }
+
+                function removeLastControlsItem() {
+                    itemsCount -= 1;
+                    controlsItems.eq(itemsCount).remove();
+                }
+
+                function addLastControlsItem() {
+                    controlsContainer.append(controlsItems.eq(itemsCount));
+                    itemsCount += 1;
+                }
+
+                setWidth();
+
+            }
+        }
+    }])
     .directive('slideSlider', [function () {
         return {
             restrict: 'C',
             link: function (scope, el) {
                 var left = angular.element(el[0].querySelector('.slide-slider__left')),
                     right = angular.element(el[0].querySelector('.slide-slider__right')),
-                    imgs = el.find('img'),
+                    imgs = angular.element(el[0].querySelectorAll(".slide-slider__content--img")),
                     counter = 0;
 
                 left.on('click', function () {
@@ -341,5 +459,33 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                     imgs.eq(counter).css('z-index', counter + 1);
                 });
             }
+        }
+    }])
+    .directive('reviews', [function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el) {
+                var reviewItems = angular.element(el[0].querySelectorAll('.reviewer'));
+                var activeItem = null;
+                reviewItems.on('click', function () {
+                    reviewItems.removeClass('active');
+                    var item = angular.element(this);
+                    if (activeItem == this) {
+                        item.removeClass('active');
+                    } else {
+                        item.addClass('active');
+                        activeItem = this;
+                    }
+                });
+            }
+        }
+    }])
+    .directive('navToggler', [function () {
+        return function (scope, el, atts) {
+            var target = angular.element(document.querySelector(atts.navToggler));
+            console.log('nav-toggler', el, target);
+            el.on('click', function () {
+                target.toggleClass('active');
+            });
         }
     }]);

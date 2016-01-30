@@ -8,6 +8,7 @@ class Slide
 
     public function __construct()
     {
+
         $this->icon_img = file_get_contents("img/slider/icons/$this->icon.svg");
         $this->img = "img/slider/images/$this->icon.jpg";
     }

@@ -3,4 +3,6 @@
 sass
 node_modules
 compilation_cache
+bower_components
 vendor
+.sass-cache

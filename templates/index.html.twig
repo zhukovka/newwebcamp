@@ -11,7 +11,7 @@
     <div class="panel--success mb-50">
         <div class="divider grid" id="closest">
             <div class="divider__text--right">
-                <h2>Эти группы стартуют в ближайшее время</h2>
+                <h2><span class="highlight--white">Эти группы стартуют в ближайшее время</span></h2>
 
                 <p>Успейте записаться на интересующий Вас курс</p>
             </div>
@@ -80,7 +80,7 @@
 
                     <div class="track__item">
                         <h3>{{ key }}</h3>
-                        <img src="/img/icons/course-icons_{{ key }}.svg" alt=""/>
+                        <img src="img/icons/course-icons_{{ key }}.svg" alt=""/>
 
                         <div class="track-courses">
                             <ul class="track-courses__list">
@@ -100,16 +100,16 @@
         </div>
     </div>
     <div class="panel--success mb-50">
-        <div class="divider row">
+        <div class="divider row grid">
             <div class="divider__text layout-table">
-                <div class="layout-table__cell-70 layout-table__cell--middle">
+                <div class="layout-table__cell w_m-60 w_l-70 layout-table__cell--middle">
                     <h2>Новости WebCamp</h2>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus facilis ipsa placeat quas,
                         ratione
                         recusandae!</p>
                 </div>
-                <div class="layout-table__cell-30 layout-table__cell--middle text-right">
+                <div class="layout-table__cell w_m-40 w_l-30 layout-table__cell--middle text-right">
                     <a href="/news" class="btn--warning btn--follow btn--lg">
                         <span class="follow">Все новости</span>
                     </a>
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="row latest-news">
+    <div class="grid row latest-news">
 
         {% for i in 0..2 %}
             <div class="medium-4 columns latest-news__item">
@@ -131,7 +131,7 @@
     </div>
 
     <div class="awards">
-        <div class="divider row">
+        <div class="divider grid row">
             <div class="divider__text layout-table">
                 <div class="layout-table__cell-70 layout-table__cell--middle">
                     <h2>Наши награды</h2>
@@ -149,7 +149,7 @@
         </div>
     </div>
     <div class="reviews">
-        <div class="row divider">
+        <div class="row grid divider">
             <div class="divider__text--center mb-20">
                 <h2 class="text--success">Отзывы наших студентов</h2>
             </div>
@@ -176,10 +176,10 @@
             <h2 class="text--success">Компании в которых работают наши студенты</h2>
         </div>
         <div class="employers__logos">
-            <img src="/img/employers/com_01.png" alt=""/>
-            <img class="ml-15" src="/img/employers/com_02.png" alt=""/>
-            <img class="ml-15" src="/img/employers/com_03.png" alt=""/>
-            <img class="ml-15" src="/img/employers/com_04.png" alt=""/>
+            <img src="img/employers/com_01.png" alt=""/>
+            <img class="ml-15" src="img/employers/com_02.png" alt=""/>
+            <img class="ml-15" src="img/employers/com_03.png" alt=""/>
+            <img class="ml-15" src="img/employers/com_04.png" alt=""/>
         </div>
     </div>
 {% endblock %}

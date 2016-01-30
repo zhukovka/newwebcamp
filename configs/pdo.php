@@ -51,7 +51,8 @@ class DB
     public static function getAll($query, $class)
     {
         $res = self::$con->query($query);
-        return $res->fetchAll(PDO::FETCH_CLASS, $class);
+        $res->setFetchMode(PDO::FETCH_CLASS, $class);
+        return $res->fetchAll();
     }
 
     public static function getOne($query, $class)

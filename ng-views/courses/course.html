@@ -82,8 +82,9 @@
     </div>
 </div>
 <div class="courseinfo__results">
-    <div class="row">
         <p class="lead">По окончании курса вы сможете:</p>
+
+    <div class="row">
 
         <div class="medium-6 medium-centered columns">
             <ul class="results-list">
@@ -93,14 +94,13 @@
         </div>
     </div>
 </div>
-<div class="row courseinfo__organizer">
+<div class="row grid courseinfo__organizer">
     <div class="medium-9 columns pad-l0">
         <div id="course-schedules">
             <ul class="list-inline courseinfo__modifiers">
                 <li class="courseinfo__modifier"
                     ng-class="{'courseinfo__modifier--{{schedule.modifier_name}}':isActiveTab(schedule.modifier_name)}"
-                    ng-repeat="schedule in schedules"
-                    ng-if="schedule.begin">
+                    ng-repeat="schedule in schedules">
                     <a href="#" ng-click="activateSchedule(schedule)">{{schedule.modifier_name | modifier}}</a>
                 </li>
             </ul>
@@ -141,7 +141,7 @@
                     </p>
 
                     <div class="lessons__content">
-                        <p class="lesson-date">
+                        <p class="lesson-date" ng-show="schedule.begin">
                             <span class="lesson-date__daymonth">{{dayLesson.day|date:'d MMMM'}}</span>,
                             <span>{{dayLesson.day|date:'yyyy'}}</span>
                         </p>

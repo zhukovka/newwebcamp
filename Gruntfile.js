@@ -64,7 +64,7 @@ module.exports = function (grunt) {
                     style: 'expanded'
                 },
                 files: {                         // Dictionary of files
-                    'css/main.css': 'sass/main.scss',       // 'destination': 'source'
+                    'css/main.css': 'sass/main.scss'       // 'destination': 'source'
                 }
             }
         },

@@ -6,16 +6,16 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row grid hide-for-small-only">
     <div class="page__info">
-        <p>
+        <p class="clearfix">
             <span class="page__info--l icon-license icons--warning"></span>
             <span class="page__info--ml text--success">Сертификаты по завершению обучения</span>
             <a href="/certificates" class="page__info--last text--warning">Узнать больше</a>
         </p>
     </div>
 </div>
-<div class="row">
+<div class="row grid hide-for-small-only">
     <div class="medium-12 columns">
         <p>IT - наиболее быстро развивающаяся индустрия в мире, а работник сферы IT - настоящий космополит, не
             привязанный ни к месту, ни к стране.</p>
@@ -31,13 +31,13 @@
     </div>
 </div>
 
-<div class="row mb-50">
-    <div class="courses" ng-controller="CoursesController">
+<div class="row mb-50 grid">
+    <div class="courses medium-12 columns" ng-controller="CoursesController">
         <div class="courses__h">
             <h3 class="page__h3">
                 <span class="icon-code"></span> Треннинги и курсы программирования
             </h3>
-            <label class="courses__search"> <input type="text" ng-model="searchText"></label>
+            <label class="courses__search mb-20"> <input type="text" ng-model="searchText"></label>
         </div>
 
         <table class="page__table">
@@ -46,13 +46,13 @@
                 <th width="30%" ng-click="order('name')">
                     <span ng-class="{'sort--reverse':reverse, 'sort':predicate=='name'}">Название курса</span>
                 </th>
-                <th width="20%" ng-click="order('track')"><span
+                <th width="20%" class="hide-navmedia" ng-click="order('track')"><span
                         ng-class="{'sort--reverse':reverse, 'sort':predicate=='track'}">Специальность</span>
                 </th>
-                <th width="20%" ng-click="order('level')"><span
+                <th width="20%" class="hide-for-small-only" ng-click="order('level')"><span
                         ng-class="{'sort--reverse':reverse, 'sort':predicate=='level'}">Уровень сложности</span>
                 </th>
-                <th width="15%" ng-click="order('duration')"><span
+                <th width="15%" class="hide-mobile" ng-click="order('duration')"><span
                         ng-class="{'sort--reverse':reverse, 'sort':predicate=='duration'}">Часы</span></th>
                 <th width="15%" ng-click="order('price')"><span
                         ng-class="{'sort--reverse':reverse, 'sort':predicate=='price'}">Цена</span></th>
@@ -63,15 +63,15 @@
 
                 <td><a href="/courses/{{ course.alias }}?active={{ course.modifier }}"
                        class="course__name">{{ course.name }} {{ course.modifier }}</a></td>
-                <td>{{ course.track }}</td>
-                <td>
+                <td class="hide-navmedia">{{ course.track }}</td>
+                <td class="hide-for-small-only">
                     <ul class="course__level--{{ course.level }}">
                         <li class="course__level--first"></li>
                         <li class="course__level--middle"></li>
                         <li class="course__level--last"></li>
                     </ul>
                 </td>
-                <td>{{ course.duration }}часов</td>
+                <td class="hide-mobile">{{ course.duration }}часов</td>
                 <td><span class="course__price">{{ course.price }}</span>грн.</td>
             </tr>
             </tbody>

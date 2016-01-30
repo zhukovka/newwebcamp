@@ -27,7 +27,7 @@ $app->map('notFound', function () {
     echo 'oppa-pa 404';
 });
 $app->route('/', function () {
-    include_once("pages/code/slide.php");
+    require_once("pages/code/Slide.php");
     $slides = DB::getAll('SELECT * FROM slider ORDER BY position', 'Slide');
     $tracks = DB::getGroup('SELECT tracks.name as track, course.name as course FROM tracks LEFT JOIN course ON course.track = tracks.id');
     echo Flight::get('twig')->render('index.html.twig',

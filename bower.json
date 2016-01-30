@@ -1,0 +1,27 @@
+{
+  "name": "newwebcamp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "zhukovka <helen.zhukova@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zhukovka/newwebcamp",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~4.0.0",
+    "angular-route": "~1.4.9",
+    "angular-resource": "~1.4.9",
+    "angular-lodash": "~0.1.2",
+    "angular-sanitize": "~1.4.9",
+    "moment": "~2.11.1",
+    "foundation-sites": "~6.1.2"
+  }
+}

@@ -8,18 +8,19 @@
         <base href="{% block base %}{% endblock %}">
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="shortcut icon" href="/img/favicon.ico">
-        <link rel="stylesheet" href="/css/foundation.min.css"/>
+        <link rel="stylesheet" href="/bower_components/foundation-sites/dist/foundation.min.css"/>
         <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen">
         <link href='http://fonts.googleapis.com/css?family=PT+Sans|Roboto&subset=latin,cyrillic' rel='stylesheet'
               type='text/css'>
         <script src="/bower_components/lodash/lodash.js"></script>
+        <script src="/bower_components/moment/moment.js"></script>
+        <script src="/bower_components/moment/locale/ru.js"></script>
         <script src="/js/libs/xml2json.js"></script>
-        <script src="/js/moment_ru.js"></script>
-        <script src="/js/libs/moment-recur.js"></script>
-        <script src="/js/angular_ru.js"></script>
+        {#<script src="js/libs/moment-recur.js"></script>#}
+        <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-route/angular-route.js"></script>
         <script src="/bower_components/angular-resource/angular-resource.js"></script>
-        <script src="/bower_components/angular-lodash/angular-lodash.js"></script>
+        {#<script src="bower_components/angular-lodash/angular-lodash.js"></script>#}
         <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="/js/courses-ng/utils.js"></script>
         <script src="/js/courses-ng/calendar.js"></script>
@@ -39,40 +40,11 @@
 <header class="header">
     <div class="header__top">
         <div class="grid pos-r">
-            <div class="grid__left w-30">
-                <a class="header__logo" href="/"><img src="/img/icons/logo.svg" alt=""/></a>
+            <div class="grid__left w_m-20 w_l-30">
+                <a class="header__logo show-for-medium" href="/"><img src="/img/icons/logo.svg" alt=""/></a>
+                <a class="header__logo show-for-small-only" href="/"><img src="/img/icons/icon.svg" alt=""/></a>
             </div>
-
-
-            <nav class="header__nav--top w-70">
-                <div class="grid__left">
-                    <a href="#" rel="#sign_up_form" class="assign_to_course ml-20 btn-enroll">Оформить заявку</a>
-                </div>
-                <div class="grid__right">
-                    <ul class="nav-contacts">
-                        <li class="nav-contacts__phone">
-                            <span class="text-numbers">+38&nbsp;063&nbsp;707&nbsp;85&nbsp;13</span>
-                        </li>
-                        <li class="nav-contacts__skype">
-                            <a href="skype:webcamp.welcome?chat">skype:&nbsp;webcamp.welcome</a></li>
-                    </ul>
-                </div>
-
-            </nav>
-            <nav class="header__nav--bottom">
-                <ul class="nav-list">
-                    {% for item in menu %}
-
-                        <li class="mnl_{{ item.alias }} {% if item.alias == active %}
-                        nav-list__item--active
-                        {% endif %}nav-list__item">
-                            <a href="/{{ item.alias }}">{{ item.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-            </nav>
-
+            {{ include('parts/navigation.html.twig') }}
         </div>
     </div>
 </header>

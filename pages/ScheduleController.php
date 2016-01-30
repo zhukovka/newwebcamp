@@ -45,7 +45,7 @@ class ScheduleController
     {
         include_once(ROOT . "pages/code/schedule.php");
 
-        $schedule = DB::getAll("SELECT shedule.start, modifiers.name as modifier_name, modifiers.id as modifier_id, courseinfo.price, courseinfo.days, courseinfo.duration as durationHours FROM courseinfo
+        $schedule = DB::getAll("SELECT shedule.start, modifiers.name as modifier_name, modifiers.id as modifier_id, modifiers.default_hour as modifier_default_hour, courseinfo.price, courseinfo.days, courseinfo.duration as durationHours FROM courseinfo
 JOIN modifiers ON modifiers.id = courseinfo.modifier
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND shedule.modifier = courseinfo.modifier
 WHERE courseinfo.course_id = {$courseId}", 'Schedule');

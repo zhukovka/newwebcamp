@@ -19,57 +19,6 @@
             </div>
         </div>
 
-        {#<div class="row">#}
-        {#<p>Учебный курс включает:</p>#}
-        {#<ul class="list--warning page__list">#}
-        {#<li><span class="page__list--bodycolor">1</span></li>#}
-        {#<li><span class="page__list--bodycolor">2</span></li>#}
-        {#<li><span class="page__list--bodycolor">3</span></li>#}
-        {#<li><span class="page__list--bodycolor">4</span></li>#}
-        {#</ul>#}
-        {#</div>#}
-        {#<div class="row mb-50">#}
-        {#{% verbatim %}#}
-        {#<div class="courses" ng-controller="CoursesController">#}
-        {#<div class="courses__h">#}
-        {#<h3 class="page__h3">#}
-        {#<span class="icon-code"></span> Треннинги и курсы программирования#}
-        {#</h3>#}
-        {#<label class="courses__search"> <input type="text" ng-model="searchText"></label>#}
-        {#</div>#}
 
-        {#<table class="page__table">#}
-        {#<thead>#}
-        {#<tr>#}
-        {#<th width="30%" class="sort" ng-class="{'sort--reverse':reverse}" ng-click="order('name')">#}
-        {#Название курса#}
-        {#</th>#}
-        {#<th width="20%" ng-click="order('track')">Специальность</th>#}
-        {#<th width="20%" ng-click="order('level')">Уровень сложности</th>#}
-        {#<th width="15%" ng-click="order('duration')">Часы</th>#}
-        {#<th width="15%" ng-click="order('price')">Цена</th>#}
-        {#</tr>#}
-        {#</thead>#}
-        {#<tbody>#}
-        {#<tr ng-repeat="course in courses | filter:searchText | orderBy:predicate:reverse">#}
-
-        {#<td><a href="/courses/{{ course.alias }}"#}
-        {#class="course__name">{{ course.name }} {{ course.modifier }}</a></td>#}
-        {#<td>{{ course.track }}</td>#}
-        {#<td>#}
-        {#<ul class="course__level--{{ course.level }}">#}
-        {#<li class="course__level--first"></li>#}
-        {#<li class="course__level--middle"></li>#}
-        {#<li class="course__level--last"></li>#}
-        {#</ul>#}
-        {#</td>#}
-        {#<td>{{ course.duration }}часов</td>#}
-        {#<td><span class="course__price">{{ course.price }}</span>грн.</td>#}
-        {#</tr>#}
-        {#</tbody>#}
-        {#</table>#}
-        {#</div>#}
-        {#{% endverbatim %}#}
-        {#</div>#}
     </div>
 {% endblock %}

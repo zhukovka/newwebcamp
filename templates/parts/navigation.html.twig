@@ -1,0 +1,33 @@
+<nav class="header__nav--top w_m-80 w_l-70">
+    <div class="grid__left nav-enroll">
+        <a href="#" rel="#sign_up_form" class="assign_to_course ml-20 btn-enroll">Оформить заявку</a>
+    </div>
+    <div class="grid__right">
+        <div class="nav-toggler flex-center" data-nav-toggler="#main-menu">
+            <div class="nav-toggler__icon"></div>
+        </div>
+    </div>
+    <div class="grid__right hide-for-small-only">
+        <ul class="nav-contacts">
+            <li class="nav-contacts__phone">
+                <span class="text-numbers">+38&nbsp;063&nbsp;707&nbsp;85&nbsp;13</span>
+            </li>
+            <li class="nav-contacts__skype">
+                <a href="skype:webcamp.welcome?chat">skype:&nbsp;webcamp.welcome</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<nav class="header__nav--bottom">
+    <ul class="nav-list" id="main-menu">
+        {% for item in menu %}
+
+            <li class="mnl_{{ item.alias }} {% if item.alias == active %}
+                        nav-list__item--active
+                        {% endif %}nav-list__item">
+                <a href="/{{ item.alias }}">{{ item.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</nav>
