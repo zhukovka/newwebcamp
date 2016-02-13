@@ -100,8 +100,8 @@
             <ul class="list-inline courseinfo__modifiers">
                 <li class="courseinfo__modifier"
                     ng-class="{'courseinfo__modifier--{{schedule.modifier_name}}':isActiveTab(schedule.modifier_name)}"
-                    ng-repeat="schedule in schedules">
-                    <a href="#" ng-click="activateSchedule(schedule)">{{schedule.modifier_name | modifier}}</a>
+                    ng-repeat="schedule in schedules" ng-click="activateSchedule(schedule)">
+                    <span>{{schedule.modifier_name | modifier}}</span>
                 </li>
             </ul>
             <div ng-show="isActiveTab(schedule.modifier_name)"

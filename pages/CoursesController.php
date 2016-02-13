@@ -27,9 +27,8 @@ class CoursesController
     public static function all()
     {
         include_once("pages/code/course.php");
-        $courses = DB::getAll('SELECT course.id, course.name, course.alias, course.description, course.duration, course.level, courseinfo.price, modifiers.name as modifier, tracks.name as track FROM course
+        $courses = DB::getAll('SELECT DISTINCT course.id, course.name, course.alias, course.description, course.duration, course.level, courseinfo.price, tracks.name as track FROM course
                                 JOIN courseinfo ON course.id = courseinfo.course_id
-                                JOIN modifiers ON modifiers.id = courseinfo.modifier
                                 JOIN tracks ON tracks.id = course.track
                                 WHERE courseinfo.include = 1
                                 ORDER BY tracks.name', 'Course');
