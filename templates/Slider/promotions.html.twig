@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="row divider" id="promo">
+        <div class="divider__text--center mb-30">
+            <h2 class="text--success">Акции и скидки</h2>
+        </div>
+        <div class="medium-4 columns promo">
+            <p class="promo__icon"><span class="icon-cake"></span></p>
+
+            <p class="promo__name">Пробный урок</p>
+
+            <div class="promo__info">
+                Каждый первый урок любого курса вы можете посетить абсолютно бесплатно.
+            </div>
+        </div>
+        <div class="medium-4 columns promo">
+            <p class="promo__icon"><span class="icon-friends"></span></p>
+
+            <p class="promo__name">Приведи друга</p>
+
+            <div class="promo__info">
+                Приведи на любой из курсов своего товарища или пройдите его вместе с ним и получи <span
+                        class="text--success">10%</span> скидку!
+            </div>
+        </div>
+        <div class="medium-4 columns promo">
+            <p class="promo__icon"><span class="icon-webcamper"></span></p>
+
+            <p class="promo__name">Webcamper</p>
+
+            <div class="promo__info">
+                Нашим студентам действует постоянная скидка <span class="text--success">5%</span> на каждый следующий курс.
+            </div>
+        </div>
+    </div>
+{% endblock %}

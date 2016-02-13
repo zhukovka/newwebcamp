@@ -90,4 +90,38 @@ $app->route('POST /enroll', function () {
     CoursesController::enroll();
 });
 
+/* slider routes block */
+
+$app->route('/career', function(){
+    echo Flight::get('twig')->render('Slider/career.html.twig',
+        array('active' => 'career')
+    );
+});
+
+$app->route('/companies', function(){
+    echo Flight::get('twig')->render('Slider/companies.html.twig',
+        array('active' => 'career')
+    );
+});
+
+$app->route('/practice', function(){
+    echo Flight::get('twig')->render('Slider/practice.html.twig',
+        array('active' => 'career')
+    );
+});
+
+$app->route('/spec', function(){
+    echo Flight::get('twig')->render('Slider/spec.html.twig',
+        array('active' => 'career')
+    );
+});
+
+$app->route('/promotions', function(){
+    echo Flight::get('twig')->render('Slider/promotions.html.twig',
+        array('active' => 'career')
+    );
+});
+
+/* end of slider block */
+
 $app->start();
