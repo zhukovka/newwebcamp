@@ -8,3 +8,4 @@ vendor
 .sass-cache
 .gitignore
 configs
+PDOErrors.txt
