@@ -29,7 +29,7 @@ $app->map('notFound', function () {
 $app->route('/', function () {
     require_once("pages/code/Slide.php");
     $slides = DB::getAll('SELECT * FROM slider ORDER BY position', 'Slide');
-    $tracks = DB::getGroup('SELECT tracks.name as track, course.name as course FROM tracks LEFT JOIN course ON course.track = tracks.id');
+    $tracks = DB::getGroup('SELECT tracks.name as track, course.name as course, course.alias as course_alias FROM tracks LEFT JOIN course ON course.track = tracks.id');
     echo Flight::get('twig')->render('index.html.twig',
         array('active' => 'home',
             'slides' => $slides,

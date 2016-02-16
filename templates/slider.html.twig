@@ -22,14 +22,14 @@
             {% for item in slides %}
                 <li class="slide-controls__item {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}"
                     style="width: {{ 100 / loop.length }}%">
-                    <a class="slide-control" href="#">
+                    <span class="slide-control" href="/{{ item.alias }}">
                         <span class="slide-control__icon">
                             {{ item.icon_img|raw }}
                         </span>
                         <span class="slide-control__name">
                             {{ item.name }}
                         </span>
-                    </a>
+                    </span>
                 </li>
             {% endfor %}
         </ul>

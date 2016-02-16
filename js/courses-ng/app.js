@@ -34,7 +34,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.course = {};
         $scope.enrollSchedule = {
             modifier_id: 0,
-            course_id: 0,
+            course_id: 0
         };
 
     }])
@@ -162,7 +162,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             $scope.closest = Utils.getCloses(schedules, 6);
 
             $scope.groupedSchedules = Utils.groupByMonth(schedules);
-            console.log(schedules, $scope.closest, $scope.groupedSchedules);
+            //console.log(schedules, $scope.closest, $scope.groupedSchedules);
         });
 
 
@@ -334,7 +334,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
         }
     }])
-    .directive('mainSlider', ['$window', '$interval', function ($window, $interval) {
+    .directive('mainSlider', ['$window', '$interval','$timeout', function ($window, $interval, $timeout) {
         return {
             restrict: 'A',
             link: function (scope, el) {
@@ -352,6 +352,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 angular.element($window).on('resize', setWidth);
 
                 var interval = null;
+                var timeout = null;
                 var cancelled = false;
                 var ms = 3000;
 
@@ -362,16 +363,20 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                     launchInterval(ms);
                 });
 
-                controlsItems.on('mouseenter', function (e) {
+                controlsItems.on('click', function (e) {
                     stopInterval();
 
                     var hoverIndex = +this.getAttribute('data-index');
                     changeActiveSlide(hoverIndex);
                     changeActiveControl(hoverIndex);
                     activeIndex = hoverIndex;
-                });
-                controlsItems.on('mouseleave', function (e) {
-                    launchInterval(ms);
+                    if(timeout != null){
+                        $timeout.cancel(timeout);
+                        stopInterval();
+                    }
+                    timeout = $timeout(function(){
+                        launchInterval(ms);
+                    }, 3000);
                 });
 
                 function activateNext() {

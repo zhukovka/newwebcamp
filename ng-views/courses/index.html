@@ -61,7 +61,7 @@
             <tbody>
             <tr ng-repeat="course in courses | filter:searchText | orderBy:predicate:reverse">
 
-                <td><a href="/courses/{{ course.alias }}?active={{ course.modifier }}"
+                <td><a href="/courses/{{ course.alias }}"
                        class="course__name">{{ course.name }} {{ course.modifier }}</a></td>
                 <td class="hide-navmedia">{{ course.track }}</td>
                 <td class="hide-for-small-only">
