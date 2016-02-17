@@ -110,8 +110,8 @@ $app->route('/practice', function(){
     );
 });
 
-$app->route('/spec', function(){
-    echo Flight::get('twig')->render('Slider/spec.html.twig',
+$app->route('/specs', function(){
+    echo Flight::get('twig')->render('Slider/specs.html.twig',
         array('active' => 'career')
     );
 });
