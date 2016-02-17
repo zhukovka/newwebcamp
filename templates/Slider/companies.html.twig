@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block content %}
-    <div class="page aboutus">
+    <div class="page aboutus" xmlns="http://www.w3.org/1999/html">
         <div class="page__header course">
             <div class="row">
                 <div class="medium-3 columns end">
@@ -8,7 +8,46 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row grid hide-for-small-only mb-50">
+            <div class="page__info">
+                <p>
+                    <span class="page__info--l icon-license icons--warning"></span>
+                    <span class="page__info--ml text--success">Сертификаты по завершению обучения</span>
+                    <a href="/certificates" class="page__info--last text--warning">Узнать больше</a>
+                </p>
+            </div>
+        </div>
+        <div class="row grid">
+            <h2 class="text--success columns text-center" id="corp">Корпоративное обучение</h2>
+
+            <div class="medium-12 columns mb-50">
+                <div class="large-9 medium-12 columns">
+
+                    <p class="text-justify">Webcamp - это курсы программирования, основной специализацией которых
+                        является
+                        web- и
+                        java-программирование. Если Вы хотите повысить уровень квалификации IT-специалистов компании, то
+                        мы
+                        предлагаем это сделать с помощью различных клиент-ориентированных программ, которые создает для
+                        Вас
+                        Webcamp. А наши преподаватели, благодаря применению современных технологий, помогут разобраться
+                        во
+                        всех тонкостях предмета.
+                    </p>
+
+                    <p class="text-justify">Webcamp поможет найти решения для компаний и учреждений всех уровней: как
+                        для
+                        компаний,
+                        специализирующихся в сфере IT, так и тех, где IT-специалисты, являются только частью
+                        бизнес-процесса.</p>
+
+                </div>
+                <div class="large-3 columns hide-for-small-only hide-for-medium-only">
+                    <img src="../../img/companies/01.png" alt=""/>
+                </div>
+            </div>
+        </div>
+        <div class="row grid hide-for-small-only mb-50">
             <div class="page__info">
                 <p>
                     <span class="page__info--l icon-license icons--warning"></span>
@@ -18,8 +57,197 @@
             </div>
         </div>
 
+        <div class="row grid">
+            <h2 class="text--success columns text-center" id="advantages">Наши преимущества</h2>
 
-        
+            <div class="medium-12 columns mb-20">
+                <div class="large-3 columns hide-for-small-only hide-for-medium-only">
+                    <img src="../../img/companies/04.png" alt=""/>
+                </div>
 
+                <div class="large-9 medium-12 columns">
+
+                    {#<ul class="no-bullet">#}
+                    <p><span class="icon-book icons--success "></span> Авторские программы, которые адаптируются под
+                        требования заказчика</p>
+
+                    <p><span class="icon-social-skype-outline icons--success "></span> Формы обучения: очная, онлайн</p>
+
+                    <p><span class="icon-place icons--success "></span> Место проведения: по выбору заказчика</p>
+
+                    <p><span class="icon-coins icons--success "></span> Ценовая политика: гибкая система бонусов и
+                        скидок</p>
+
+                    <p><span class="icon-brain icons--success "></span> Преподаватели уровня Senior / Solution Architect
+                    </p>
+                    {#</ul>#}
+                </div>
+            </div>
+        </div>
+        <div class="row grid hide-for-small-only mb-50">
+            <div class="page__info">
+                <p>
+                    <span class="page__info--l icon-license icons--warning"></span>
+                    <span class="page__info--ml text--success">Сертификаты по завершению обучения</span>
+                    <a href="/certificates" class="page__info--last text--warning">Узнать больше</a>
+                </p>
+            </div>
+        </div>
+        <div class="row grid">
+            <h2 class="text--success columns text-center" id="register">Заказать тренинг</h2>
+
+            <div class="medium-12 columns mb-20">
+                <div class="large-9 medium-12 columns">
+                    <p class="text-justify">В зависимости от цели, требований компании, количества студентов и
+                        продолжительности мы предлагаем несколько вариантов обучения:
+                    </p>
+                    <ol>
+                        <li><p>Краткосрочные тренинги продолжительностью от 2 часов. Тема и продолжительность тренинга
+                                зависит
+                                от выбора заказчика.
+                            </p></li>
+                        <li><p>Тренинги повышения квалификации сотрудников, основанных на программах Webcamp. Программа
+                                читается в полном объеме.
+                            </p></li>
+                        <li><p>Тренинги “под заказ”. Программа составляется индивидуально для каждого заказчика а
+                                зависимости
+                                от его пожеланий. Может включать в себя материал их нескольких программ.
+                                Продолжительность
+                                оговаривается с заказчиком.
+                            </p></li>
+                    </ol>
+
+                </div>
+                <div class="large-3 columns hide-for-small-only hide-for-medium-only">
+                    <img src="../../img/companies/05.png" alt=""/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row grid">
+            <form class="enroll-form" action="">
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyName">Компания</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="companyName" placeholder="Название компании"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyContact">Контактное лицо</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="companyContact" placeholder="Контактное лицо"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyAddress">Адрес</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="companyAddress" placeholder="Физический адрес"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyEmail">Контактный e-mail</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="email" id="companyEmail" placeholder="Контактный e-mail"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyPhone">Контактный телефон</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="tel" id="companyPhone" placeholder="Контактный телефон"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyPupilCount">Количество обучающихся</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="companyPupilCount" placeholder="Количество обучающихся"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyTime">Время проведения занятий</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="companyTime" placeholder="Время проведения занятий"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-50">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="companyComment">Комментарий</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <textarea class="" id="companyComment" rows="3" placeholder="Комментарий"></textarea>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row grid mb-50">
+                    <div class="mediun-12 columns text-center">
+                        <button class="btn--warning btn--follow btn--lg align-center">
+                            <span class="follow">Отправить заявку</span>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
 {% endblock %}
