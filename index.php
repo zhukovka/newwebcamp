@@ -136,6 +136,11 @@ $app->route('/news', function(){
         array('active' => 'news')
     );
 });
+$app->route('/certification', function(){
+    echo Flight::get('twig')->render('Certification\index.html.twig',
+        array('active' => 'certification')
+    );
+});
 
 
 $app->start();

@@ -126,14 +126,15 @@
         </div>
 
         <div class="row grid">
-            <form class="enroll-form" action="">
+            <form name="enrollCompany" class="enroll-form" method="post" action="../../pages/CoursesController.php">
+
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyName">Компания</label>
+                            <label class="right inline" for="name">Компания</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="text" id="companyName" placeholder="Название компании"/>
+                            <input class="" type="text" id="name" placeholder="Название компании"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -144,10 +145,10 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyContact">Контактное лицо</label>
+                            <label class="right inline" for="contact">Контактное лицо</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="text" id="companyContact" placeholder="Контактное лицо"/>
+                            <input class="" type="text" id="contact" placeholder="Контактное лицо"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -158,10 +159,10 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyAddress">Адрес</label>
+                            <label class="right inline" for="address">Адрес</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="text" id="companyAddress" placeholder="Физический адрес"/>
+                            <input class="" type="text" id="address" placeholder="Физический адрес"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -172,10 +173,10 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyEmail">Контактный e-mail</label>
+                            <label class="right inline" for="email">Контактный e-mail</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="email" id="companyEmail" placeholder="Контактный e-mail"/>
+                            <input class="" type="email" id="email" placeholder="Контактный e-mail"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -186,10 +187,10 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyPhone">Контактный телефон</label>
+                            <label class="right inline" for="phone">Контактный телефон</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="tel" id="companyPhone" placeholder="Контактный телефон"/>
+                            <input class="" type="tel" id="phone" placeholder="Контактный телефон"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -200,10 +201,13 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyPupilCount">Количество обучающихся</label>
+                            <label class="right inline" for="course_id">Выберете курс</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="text" id="companyPupilCount" placeholder="Количество обучающихся"/>
+                            <select class="" id="course_id">
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -214,10 +218,24 @@
                 <div class="row">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyTime">Время проведения занятий</label>
+                            <label class="right inline" for="pupilCount">Количество обучающихся</label>
                         </div>
                         <div class="medium-7 columns">
-                            <input class="" type="text" id="companyTime" placeholder="Время проведения занятий"/>
+                            <input class="" type="text" id="pupilCount" placeholder="Количество обучающихся"/>
+                        </div>
+                        <div class="medium-3 columns">
+                            <div class="inline">Error message</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <div class="medium-2 columns">
+                            <label class="right inline" for="time">Время проведения занятий</label>
+                        </div>
+                        <div class="medium-7 columns">
+                            <input class="" type="text" id="time" placeholder="Время проведения занятий"/>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -228,10 +246,10 @@
                 <div class="row mb-50">
                     <div class="medium-12 columns">
                         <div class="medium-2 columns">
-                            <label class="right inline" for="companyComment">Комментарий</label>
+                            <label class="right inline" for="comment">Комментарий</label>
                         </div>
                         <div class="medium-7 columns">
-                            <textarea class="" id="companyComment" rows="3" placeholder="Комментарий"></textarea>
+                            <textarea class="" id="comment" rows="3" placeholder="Комментарий"></textarea>
                         </div>
                         <div class="medium-3 columns">
                             <div class="inline">Error message</div>
@@ -240,10 +258,8 @@
                 </div>
 
                 <div class="row grid mb-50">
-                    <div class="mediun-12 columns text-center">
-                        <button class="btn--warning btn--follow btn--lg align-center">
-                            <span class="follow">Отправить заявку</span>
-                        </button>
+                    <div class="medium-4 medium-centered columns">
+                        <input type="submit" value="Отправить заявку" onclick="" formaction="../../pages/CourseController.php" formmethod="post" class="enroll-form__enroll" />
                     </div>
                 </div>
 
