@@ -9,13 +9,13 @@
 class DB
 {
     private static $con;
-    private static $servername = "127.0.0.1";
+    private static $servername = "";
     private static $username = "root";
-    private static $password = "root";
+    private static $password = "";
 
     public static function connect()
     {
-        self::$con = new PDO('mysql:dbname=webcamp;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock;charset=utf8', self::$username, self::$password);
+        self::$con = new PDO('mysql:dbname=wc;host=localhost;charset=utf8', self::$username, self::$password);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
     }

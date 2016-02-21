@@ -6,4 +6,6 @@ compilation_cache
 bower_components
 vendor
 .sass-cache
-build.sh
+.gitignore
+configs
+PDOErrors.txt

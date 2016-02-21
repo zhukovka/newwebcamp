@@ -34,7 +34,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.course = {};
         $scope.enrollSchedule = {
             modifier_id: 0,
-            course_id: 0,
+            course_id: 0
         };
 
     }])

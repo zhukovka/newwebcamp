@@ -1,5 +1,6 @@
 <?php
 
+require_once ROOT . 'configs/pdo.php';
 /**
  * Created by IntelliJ IDEA.
  * User: lenka
@@ -64,10 +65,30 @@ class CoursesController
             'comment' => null,
             'how' => null,
             'course_id' => null,
-            'modifier_id' => null
+            'modifier_id' => null,
+            'hash' => null
         );
-        $query = "INSERT INTO webcamp.students (id, name, email, phone, comment, how, course_id, modifier_id)
-                  VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id);";
+        $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
+                  VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
+        DB::postOne($query, array_merge($data, $_POST));
+    }
+
+    public static function enrollCompany()
+    {
+        $data = array(
+            'id' => null,
+            'name' => null,
+            'contact' => null,
+            'address' => null,
+            'email' => null,
+            'phone' => null,
+            'course_id' => null,
+            'pupilCount' => null,
+            'time' => null,
+            'comment' => null
+        );
+        $query = "INSERT INTO companies (id, name, contact, address, email, phone, course_id, pupilCount, time, comment)
+                  VALUES (:id, :name, :contact, :address, :email, :phone, :course_id, :pupilCount, :time, :comment);";
         DB::postOne($query, array_merge($data, $_POST));
     }
 }
