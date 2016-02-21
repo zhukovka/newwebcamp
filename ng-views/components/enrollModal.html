@@ -3,10 +3,12 @@
 
     </div>
 
-    <div class="enroll-modal__content">
-        <h2 class="enroll__course-title">{{enrollSchedule.course_name}}</h2>
+    <div  class="enroll-modal__content clearfix">
+        <div class="row">
+            <h2 class="enroll__course-title">{{enrollSchedule.course_name}}</h2>
+        </div>
 
-        <form novalidate name="enrollForm" class="enroll-form">
+        <form ng-show="showEnrollForm" novalidate name="enrollForm" class="enroll-form">
             <div class="row">
                 <div class="medium-12 columns">
                     <label>Имя
@@ -14,7 +16,9 @@
                     </label>
 
                     <div ng-show="enrollForm.$submitted || enrollForm.name.$touched">
-                        <div ng-show="enrollForm.name.$error.required">Tell us your name.</div>
+                        <div ng-show="enrollForm.name.$error.required">
+                            <span>Введите имя пожалуйста.</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -25,11 +29,13 @@
                                class="enroll-form__phone"
                                name="phone" required/>
 
-                        <div ng-show="enrollForm.$submitted || enrollForm.phone.$touched">
-                            <div ng-show="enrollForm.phone.$error.required">Tell us your phone.</div>
-                            <!--<span ng-show="enrollForm.email.$error.number">This is not a valid number.</span>-->
-                        </div>
                     </label>
+
+                    <div ng-show="enrollForm.$submitted || enrollForm.phone.$touched">
+                        <div ng-show="enrollForm.phone.$error.required">
+                            <span>Введите номер телефона пожалуйста.</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="medium-6 columns">
                     <label>Email
@@ -38,8 +44,8 @@
                     </label>
 
                     <div ng-show="enrollForm.$submitted || enrollForm.email.$touched">
-                        <span ng-show="enrollForm.email.$error.required">Tell us your email.</span>
-                        <span ng-show="enrollForm.email.$error.email">This is not a valid email.</span>
+                        <span ng-show="enrollForm.email.$error.required">Введите пожалуйста email.</span>
+                        <span ng-show="enrollForm.email.$error.email">Это не корректный email.</span>
                     </div>
                 </div>
             </div>
@@ -71,9 +77,25 @@
             <div class="row">
                 <div class="medium-4 medium-centered columns">
 
-                    <input type="submit" value="Записаться" ng-click="postEnroll(student)" class="enroll-form__enroll"/>
+                    <input type="submit" value="Записаться" ng-click="postEnroll(student, enrollForm)" class="enroll-form__enroll"/>
                 </div>
             </div>
         </form>
+        <div ng-show="enrollSuccess">
+            <h3>{{student.name}}, cпасибо, что записались на наш курс {{enrollSchedule.course_name}}</h3>
+            <p class="lead">
+                На ваш email отправлено письмо с подтверждением о регистрации.
+            </p>
+        </div>
+        <div ng-show="enrollError">
+            <p class="lead">
+                Очень жаль, произошла ошибка на сервере :'(
+            </p>
+        </div>
+        <div ng-show="sqlError">
+            <p class="lead">
+                Вы уже записались на курс {{enrollSchedule.course_name}}.
+            </p>
+        </div>
     </div>
 </div>

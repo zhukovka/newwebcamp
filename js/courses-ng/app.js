@@ -26,9 +26,11 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.showModal = false;
         $scope.enroll = function (course) {
             $scope.showModal = true;
+
         };
         $scope.hideModal = function () {
             $scope.showModal = false;
+            $scope.$broadcast('closeModal');
         };
         $scope.schedules = {};
         $scope.course = {};
@@ -36,6 +38,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             modifier_id: 0,
             course_id: 0
         };
+
 
     }])
     .controller('MainCoursesController', ['$scope', 'Course', function ($scope, Course) {
