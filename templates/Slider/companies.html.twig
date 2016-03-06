@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block content %}
-    <div class="page aboutus" xmlns="http://www.w3.org/1999/html">
+    <div class="page aboutus" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
         <div class="page__header course">
             <div class="row">
                 <div class="medium-3 columns end">
@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div class="row grid hide-for-small-only mb-50">
+        <div class="row grid hide-for-small-only mb-20">
             <div class="page__info">
                 <p>
                     <span class="page__info--l icon-license icons--warning"></span>
@@ -24,21 +24,17 @@
                 <div class="large-9 medium-12 columns">
 
                     <p class="text-justify">Webcamp - это курсы программирования, основной специализацией которых
-                        является
-                        web- и
-                        java-программирование. Если Вы хотите повысить уровень квалификации IT-специалистов компании, то
-                        мы
-                        предлагаем это сделать с помощью различных клиент-ориентированных программ, которые создает для
-                        Вас
-                        Webcamp. А наши преподаватели, благодаря применению современных технологий, помогут разобраться
-                        во
-                        всех тонкостях предмета.
+                        является web-программирование. Если Вы хотите повысить уровень квалификации IT-специалистов
+                        компании, то мы предлагаем это сделать с помощью различных клиент-ориентированных программ,
+                        которые создает для
+                        Вас Webcamp. А наши преподаватели, благодаря применению современных технологий, помогут
+                        разобраться
+                        во всех тонкостях предмета.
                     </p>
 
                     <p class="text-justify">Webcamp поможет найти решения для компаний и учреждений всех уровней: как
-                        для
-                        компаний,
-                        специализирующихся в сфере IT, так и тех, где IT-специалисты, являются только частью
+                        для компаний, специализирующихся в сфере IT, так и тех, где IT-специалисты, являются только
+                        частью
                         бизнес-процесса.</p>
 
                 </div>
@@ -47,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="row grid hide-for-small-only mb-50">
+        <div class="row grid hide-for-small-only mb-20">
             <div class="page__info">
                 <p>
                     <span class="page__info--l icon-license icons--warning"></span>
@@ -84,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="row grid hide-for-small-only mb-50">
+        <div class="row grid hide-for-small-only mb-20">
             <div class="page__info">
                 <p>
                     <span class="page__info--l icon-license icons--warning"></span>
@@ -94,29 +90,27 @@
             </div>
         </div>
         <div class="row grid">
-            <h2 class="text--success columns text-center" id="register">Заказать тренинг</h2>
+            <h2 class="text--success columns text-center" id="register">Заказать обучение</h2>
 
             <div class="medium-12 columns mb-20">
                 <div class="large-9 medium-12 columns">
-                    <p class="text-justify">В зависимости от цели, требований компании, количества студентов и
+                    <p class="text-justify">В зависимости от цели, Ваших требований, количества студентов и
                         продолжительности мы предлагаем несколько вариантов обучения:
                     </p>
                     <ol>
-                        <li><p>Краткосрочные тренинги продолжительностью от 2 часов. Тема и продолжительность тренинга
-                                зависит
-                                от выбора заказчика.
+                        <li><p>Краткосрочные тренинги продолжительностью от 2 часов на выбранные темы.
                             </p></li>
                         <li><p>Тренинги повышения квалификации сотрудников, основанных на программах Webcamp. Программа
                                 читается в полном объеме.
                             </p></li>
                         <li><p>Тренинги “под заказ”. Программа составляется индивидуально для каждого заказчика а
-                                зависимости
-                                от его пожеланий. Может включать в себя материал их нескольких программ.
-                                Продолжительность
-                                оговаривается с заказчиком.
+                                зависимости от его пожеланий. Может включать в себя материал их нескольких программ.
+                                Продолжительность оговаривается с заказчиком.
                             </p></li>
                     </ol>
-
+                    <p>
+                        Для того чтобы заказать тренинг просто заполните форму ниже и наши специалисты свяжутся с Вами.
+                    </p>
                 </div>
                 <div class="large-3 columns hide-for-small-only hide-for-medium-only">
                     <img src="../../img/companies/05.png" alt=""/>
@@ -125,145 +119,35 @@
 
         </div>
 
-        <div class="row grid">
-            <form name="enrollCompany" class="enroll-form" method="post" action="../../pages/CoursesController.php">
-
-                <div class="row">
+        <div class="grid">
+            <form class="enroll-form" method="post" id="company-enroll" >
+                <div class="row mb-20">
                     <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="name">Компания</label>
+                        <div class="medium-6 columns">
+                            <label class="" for="email">Контактный e-mail
+                                <input class="" type="text" name="email" required placeholder="info@webcamp.com.ua"/>
+                            </label>
                         </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="text" id="name" placeholder="Название компании"/>
+                        <div class="medium-6 columns">
+                            <label class="" for="phone">Контактный телефон
+                                <input class="" type="text" name="phone" required placeholder="044 235 6117"/>
+                            </label>
                         </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
+                        <div class="medium-12 columns">
+                            <label for="emailBody">Текст письма
+                                <textarea name="emailBody" name="emailBody" rows="10"
+                                          placeholder="Напишите Ваши пожелания"></textarea>
+                            </label>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="contact">Контактное лицо</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="text" id="contact" placeholder="Контактное лицо"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="address">Адрес</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="text" id="address" placeholder="Физический адрес"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="email">Контактный e-mail</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="email" id="email" placeholder="Контактный e-mail"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="phone">Контактный телефон</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="tel" id="phone" placeholder="Контактный телефон"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="course_id">Выберете курс</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <select class="" id="course_id">
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="pupilCount">Количество обучающихся</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="text" id="pupilCount" placeholder="Количество обучающихся"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="time">Время проведения занятий</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <input class="" type="text" id="time" placeholder="Время проведения занятий"/>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row mb-50">
-                    <div class="medium-12 columns">
-                        <div class="medium-2 columns">
-                            <label class="right inline" for="comment">Комментарий</label>
-                        </div>
-                        <div class="medium-7 columns">
-                            <textarea class="" id="comment" rows="3" placeholder="Комментарий"></textarea>
-                        </div>
-                        <div class="medium-3 columns">
-                            <div class="inline">Error message</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row grid mb-50">
                     <div class="medium-4 medium-centered columns">
-                        <input type="submit" value="Отправить заявку" onclick="" formaction="../../pages/CourseController.php" formmethod="post" class="enroll-form__enroll" />
+                        <input type="submit" value="Отправить заявку" id="submitCompany" class="enroll-form__enroll"/>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
 {% endblock %}
+
