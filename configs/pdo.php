@@ -18,6 +18,7 @@ class DB
         self::$con = new PDO('mysql:dbname=wc;host=localhost;charset=utf8', self::$username, self::$password);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
+        self::$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     public static function getMenu()
@@ -73,10 +74,17 @@ class DB
         try {
             $res = self::$con->prepare($query);
             $res->execute($data);
+            Flight::json(array('success' => 'true'));
         } catch (PDOException $e) {
             file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
-            header('HTTP/1.1 500 Internal Server Error');
-            echo $e->getMessage();
+            if ($e->errorInfo[1] == 1062) {
+                // duplicate entry, do something else
+                Flight::json(array('sqlError' => array('code'=>1062, 'message'=>$e->errorInfo[2])));
+            } else {
+                // an error other than duplicate entry occurred
+                header('HTTP/1.1 500 Internal Server Error');
+                Flight::error($e);
+            }
         }
     }
 }

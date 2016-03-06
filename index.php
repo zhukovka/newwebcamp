@@ -77,6 +77,10 @@ $app->route('/api/courses', function () {
     require_once(ROOT . 'pages/CoursesController.php');
     CoursesController::all();
 });
+$app->route('/api/courses/names', function () {
+    require_once(ROOT . 'pages/CoursesController.php');
+    CoursesController::coursenames();
+});
 $app->route('/api/courses/@alias', function ($alias) {
     require_once(ROOT . 'pages/CoursesController.php');
     CoursesController::courses($alias);
@@ -87,7 +91,11 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
 });
 $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::enroll();
+    try{
+        CoursesController::enroll();
+    }catch (PDOException $e){
+        Flight::error($e);
+    }
 });
 
 /* slider routes block */
