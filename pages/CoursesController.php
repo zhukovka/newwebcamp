@@ -91,4 +91,11 @@ class CoursesController
                   VALUES (:id, :name, :contact, :address, :email, :phone, :course_id, :pupilCount, :time, :comment);";
         DB::postOne($query, array_merge($data, $_POST));
     }
+
+    public static function coursenames()
+    {
+        include_once("pages/code/course.php");
+        $courses = DB::getArray('SELECT course.id as course_id, course.name as course_name FROM course');
+        echo json_encode($courses);
+    }
 }

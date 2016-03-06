@@ -3,9 +3,7 @@
  */
 angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Calendar', 'Clock', 'Timeline', 'Enroll'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-
         $routeProvider
-
             // route for the home page
             .when('/', {
                 templateUrl: function () {
@@ -22,11 +20,15 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
         $locationProvider.html5Mode(true);
     }])
-    .controller('WebcampCtrl', ['$scope', 'Course', function ($scope, Course) {
+    .controller('WebcampCtrl', ['$scope', 'Course', 'Schedule', function ($scope, Course, Schedule) {
         $scope.showModal = false;
-        $scope.enroll = function (course) {
+        $scope.enroll = function (schedule) {
             $scope.showModal = true;
-
+            if (schedule) {
+                $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                $scope.enrollSchedule.course_id = schedule.course_id;
+                $scope.enrollSchedule.course_name = schedule.course_name;
+            }
         };
         $scope.hideModal = function () {
             $scope.showModal = false;
@@ -36,9 +38,29 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.course = {};
         $scope.enrollSchedule = {
             modifier_id: 0,
-            course_id: 0
+            course_id: 0,
+            course_name: ""
         };
+        function getSchedules() {
+            Schedule.schedule({id: $scope.enrollSchedule.course_id}, function (schedules) {
+                if (schedules.length) {
+                    $scope.schedules = schedules;
+                    $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
+                }
+            });
+        }
 
+        $scope.courseChange = function () {
+            console.log("change", $scope.enrollSchedule);
+            getSchedules();
+        };
+        Course.names(function (courses) {
+            if (courses.length) {
+                $scope.courseNames = courses;
+                $scope.enrollSchedule = courses[0];
+                getSchedules();
+            }
+        });
 
     }])
     .controller('MainCoursesController', ['$scope', 'Course', function ($scope, Course) {
@@ -52,7 +74,6 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             $scope.activeSchedule = schedule;
             $scope.activeTab = $scope.activeSchedule.modifier_name;
             $scope.enrollSchedule.modifier_id = $scope.activeSchedule.modifier_id;
-            console.log($scope);
             $scope.getDayLesson(0);
             $scope.$broadcast('activateSchedule');
         };
@@ -78,25 +99,25 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             //$scope.course = course;
             course.getLessons().then(function () {
                 angular.extend($scope.course, course);
-            Schedule.schedule({id: course.id}, function (schedules) {
-                if (schedules) {
+                Schedule.schedule({id: course.id}, function (schedules) {
+                    if (schedules) {
 
-                    //$scope.schedules
-                    var schdls = _.sortBy(schedules, function (schedule) {
-                        schedule.course_name = course.name;
-                        schedule.setCourseDays($scope.getLessonCount(schedule));
-                        schedule.lessonCount = course.duration / schedule.durationHours | 0;
-                        return schedule.begin;
-                    });
-                    angular.extend($scope.schedules, schdls);
-                    if ($routeParams.active) {
-                        $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
-                    } else {
-                        $scope.closest = $scope.schedules[0];
+                        //$scope.schedules
+                        var schdls = _.sortBy(schedules, function (schedule) {
+                            schedule.course_name = course.name;
+                            schedule.setCourseDays($scope.getLessonCount(schedule));
+                            schedule.lessonCount = course.duration / schedule.durationHours | 0;
+                            return schedule.begin;
+                        });
+                        angular.extend($scope.schedules, schdls);
+                        if ($routeParams.active) {
+                            $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
+                        } else {
+                            $scope.closest = $scope.schedules[0];
+                        }
+                        $scope.activateSchedule($scope.closest);
                     }
-                    $scope.activateSchedule($scope.closest);
-                }
-            });
+                });
             });
             $scope.enrollSchedule.course_id = course.id;
             $scope.enrollSchedule.course_name = course.name;
@@ -106,7 +127,6 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.courses;
         Course.query().$promise.then(function (courses) {
             $scope.courses = courses;
-            console.log(courses);
         });
 
         $scope.predicate = 'track';
@@ -272,6 +292,11 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 method: 'GET',
                 params: {alias: '@alias'},
                 isArray: true
+            },
+            'names': {
+                method: 'GET',
+                params: {alias: 'names'},
+                isArray: true
             }
         });
         Course.enroll = function (course) {
@@ -337,7 +362,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
         }
     }])
-    .directive('mainSlider', ['$window', '$interval','$timeout', function ($window, $interval, $timeout) {
+    .directive('mainSlider', ['$window', '$interval', '$timeout', function ($window, $interval, $timeout) {
         return {
             restrict: 'A',
             link: function (scope, el) {
@@ -373,11 +398,11 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                     changeActiveSlide(hoverIndex);
                     changeActiveControl(hoverIndex);
                     activeIndex = hoverIndex;
-                    if(timeout != null){
+                    if (timeout != null) {
                         $timeout.cancel(timeout);
                         stopInterval();
                     }
-                    timeout = $timeout(function(){
+                    timeout = $timeout(function () {
                         launchInterval(ms);
                     }, 3000);
                 });
@@ -409,12 +434,15 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 }
 
                 function launchInterval(ms, count) {
-                    cancelled = false;
-                    interval = $interval(activateNext, ms, count);
+                    if (!interval) {
+                        cancelled = false;
+                        interval = $interval(activateNext, ms, count);
+                    }
                 }
 
                 function stopInterval() {
                     cancelled = $interval.cancel(interval);
+                    interval = null;
                 }
 
                 function setWidth() {

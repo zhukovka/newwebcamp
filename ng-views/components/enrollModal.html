@@ -3,9 +3,13 @@
 
     </div>
 
-    <div  class="enroll-modal__content clearfix">
+    <div class="enroll-modal__content clearfix">
         <div class="row">
             <h2 class="enroll__course-title">{{enrollSchedule.course_name}}</h2>
+            <label>Название
+                <select ng-model="enrollSchedule"
+                        ng-options="courseName.course_name for courseName in courseNames" ng-change="courseChange()"></select>
+            </label>
         </div>
 
         <form ng-show="showEnrollForm" novalidate name="enrollForm" class="enroll-form">
@@ -77,12 +81,14 @@
             <div class="row">
                 <div class="medium-4 medium-centered columns">
 
-                    <input type="submit" value="Записаться" ng-click="postEnroll(student, enrollForm)" class="enroll-form__enroll"/>
+                    <input type="submit" value="Записаться" ng-click="postEnroll(student, enrollForm)"
+                           class="enroll-form__enroll"/>
                 </div>
             </div>
         </form>
         <div ng-show="enrollSuccess">
             <h3>{{student.name}}, cпасибо, что записались на наш курс {{enrollSchedule.course_name}}</h3>
+
             <p class="lead">
                 На ваш email отправлено письмо с подтверждением о регистрации.
             </p>
