@@ -1,0 +1,28 @@
+{#<div class="panel--success mb-50">#}
+        {#<div class="divider row grid">#}
+            {#<div class="divider__text layout-table">#}
+                {#<div class="layout-table__cell w_m-60 w_l-70 layout-table__cell--middle">#}
+                    {#<h2>Новости WebCamp</h2>#}
+
+                    {#<p>Все новое о курсах и программах, что нового происходит в сфере IT: <br> выставки, семинары, мастер-классы и многое другое</p>#}
+                {#</div>#}
+                {#<div class="layout-table__cell w_m-40 w_l-30 layout-table__cell--middle text-right">#}
+                    {#<a href="/news" class="btn--warning btn--follow btn--lg">#}
+                        {#<span class="follow">Все новости</span>#}
+                    {#</a>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="grid row latest-news">#}
+
+        {#{% for i in 0..2 %}#}
+            {#<div class="medium-4 columns latest-news__item">#}
+                {#<p> {{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab culpa eligendi enim eos, exercitationem#}
+                    {#incidunt laboriosam magnam modi odio optio provident quae quod ratione recusandae saepe sit tempora#}
+                    {#veniam vero!'[:80] }} <a href="#"#}
+                                             {#class="latest-news__more icon-dots-three-horizontal icons--warning"></a>#}
+                {#</p>#}
+            {#</div>#}
+        {#{% endfor %}#}
+    {#</div>#}

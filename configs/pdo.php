@@ -11,11 +11,11 @@ class DB
     private static $con;
     private static $servername = "";
     private static $username = "root";
-    private static $password = "";
+    private static $password = "root";
 
     public static function connect()
     {
-        self::$con = new PDO('mysql:dbname=wc;host=localhost;charset=utf8', self::$username, self::$password);
+        self::$con = new PDO('mysql:dbname=webcamp;host=localhost;charset=utf8', self::$username, self::$password);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
         self::$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

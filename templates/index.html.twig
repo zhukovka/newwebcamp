@@ -1,13 +1,9 @@
 {% extends "base.html.twig" %}
 {% block title %}Index{% endblock %}
-{#{% block head %}#}
-    {#{{ parent() }}#}
-    {#<style type="text/css">#}
-        {#.important { color: #336699; }#}
-    {#</style>#}
-{#{% endblock %}#}
+
 {% block content %}
     {{ include('slider.html.twig') }}
+
     <div class="panel--success mb-50">
         <div class="divider grid" id="closest">
             <div class="divider__text--right">
@@ -22,54 +18,11 @@
             </div>
         </div>
     </div>
-
-    <div class="row mb-50" ng-controller="SchedulesController">
-        {% verbatim %}
-
-        <div class="medium-6 columns closest" ng-class="{'end': $last}" ng-repeat="schedule in closest">
-            <div class="row">
-                <div class="small-3 columns closest__date">
-                    <p class="closest__day">
-                        {{ schedule.begin | date:'d' }}
-                    </p>
-
-                    <p class="closest__month">
-                        {{ schedule.begin | date:'MMMM' }}
-                    </p>
-                </div>
-                <div class="small-9 columns">
-                    <div class="closest__course">
-                        <h3 class="closest__name">
-                            <a href="/courses/{{ schedule.course_alias }}">
-                                {{ schedule.course_name }}
-                            </a>
-                        </h3>
-
-                        <p class="closest__time">
-                            {{ schedule.begin | date:'HH:mm' }}
-                            -{{ schedule.getEndTime() | date:'HH:mm' }}
-                            | {{ schedule.lessonCount }}
-                            уроков</p>
-
-                        <p class="closest__price">{{ schedule.price }} грн</p>
-                        <a href="#" class="btn--warning closest__enroll" ng-click="enroll(schedule)">Записаться</a>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-        {% endverbatim %}
-        {#{% for item in closest %}#}
-        {#{% endfor %}#}
-    </div>
-
+    {{ include('parts/main-schedules.html.twig') }}
     <div class="tracks">
         <div class="row divider">
             <div class="divider__text--center">
                 <h2>Специальности</h2>
-
-                <p>НЕТ ТЕКСТА</p>
             </div>
         </div>
         <div class="row track">
@@ -98,53 +51,7 @@
 
         </div>
     </div>
-    <div class="panel--success mb-50">
-        <div class="divider row grid">
-            <div class="divider__text layout-table">
-                <div class="layout-table__cell w_m-60 w_l-70 layout-table__cell--middle">
-                    <h2>Новости WebCamp</h2>
 
-                    <p>Все новое о курсах и программах, что нового происходит в сфере IT: <br> выставки, семинары, мастер-классы и многое другое</p>
-                </div>
-                <div class="layout-table__cell w_m-40 w_l-30 layout-table__cell--middle text-right">
-                    <a href="/news" class="btn--warning btn--follow btn--lg">
-                        <span class="follow">Все новости</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="grid row latest-news">
-
-        {% for i in 0..2 %}
-            <div class="medium-4 columns latest-news__item">
-                <p> {{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab culpa eligendi enim eos, exercitationem
-                    incidunt laboriosam magnam modi odio optio provident quae quod ratione recusandae saepe sit tempora
-                    veniam vero!'[:80] }} <a href="#"
-                                             class="latest-news__more icon-dots-three-horizontal icons--warning"></a>
-                </p>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="awards">
-        <div class="divider grid row">
-            <div class="divider__text layout-table">
-                <div class="layout-table__cell-70 layout-table__cell--middle">
-                    <h2>Наши награды</h2>
-
-                    <p>21 марта 2015 года в рамках всеукраинской конференции IT Jam проходил конкурс IT Education Awards.
-                        Среди 46 участников со всей Украины, по итогам конкурса были отмечены лучшие учебные центры и образовательные инициативы.
-                        </p>
-
-                    <p>Курсы программирования Webcamp стали победителями в номинации "Специализированое IT-образование".</p>
-                </div>
-                <div class="layout-table__cell-30 layout-table__cell--middle">
-
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="reviews">
         <div class="row grid divider">
             <div class="divider__text--center mb-20">
@@ -168,6 +75,25 @@
             </div>
         </div>
     </div>
+    <div class="awards">
+        <div class="divider grid row">
+            <div class="divider__text layout-table">
+                <div class="layout-table__cell-70 layout-table__cell--middle">
+                    <h2>Наши награды</h2>
+
+                    <p>21 марта 2015 года в рамках всеукраинской конференции IT Jam проходил конкурс IT Education Awards.
+                        Среди 46 участников со всей Украины, по итогам конкурса были отмечены лучшие учебные центры и образовательные инициативы.
+                        </p>
+
+                    <p>Курсы программирования Webcamp стали победителями в номинации "Специализированое IT-образование".</p>
+                </div>
+                <div class="layout-table__cell-30 layout-table__cell--middle">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row divider employers">
         <div class="divider__text--center mb-30">
             <h2 class="text--success">Компании в которых работают наши студенты</h2>
