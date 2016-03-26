@@ -1,5 +1,6 @@
 angular.module('Enroll', [])
-    .controller('EnrollController', ['$scope', '$http', '$httpParamSerializerJQLike', function ($scope, $http, $httpParamSerializerJQLike) {
+    .controller('EnrollController', ['$scope', '$http', '$httpParamSerializerJQLike',
+        function ($scope, $http, $httpParamSerializerJQLike) {
         $scope.how = ['Google', 'Посоветовали', 'Facebook', 'Другое'];
         $scope.enrollSuccess = false;
         $scope.enrollError = false;
