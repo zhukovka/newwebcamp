@@ -1,0 +1,40 @@
+<div class="row mb-50" ng-controller="SchedulesController">
+    {% verbatim %}
+
+        <div class="medium-6 columns closest" ng-class="{'end': $last}" ng-repeat="schedule in closest">
+            <div class="row">
+                <div class="medium-3 columns closest__date">
+                    <p class="closest__day">
+                        {{ schedule.begin | date:'d' }}
+                    </p>
+
+                    <p class="closest__month">
+                        {{ schedule.begin | date:'MMMM' }}
+                    </p>
+                </div>
+                <div class="medium-9 columns">
+                    <div class="closest__course">
+                        <h3 class="closest__name">
+                            <a href="/courses/{{ schedule.course_alias }}">
+                                {{ schedule.course_name }}
+                            </a>
+                        </h3>
+
+                        <p class="closest__time">
+                            {{ schedule.begin | date:'HH:mm' }}
+                            -{{ schedule.getEndTime() | date:'HH:mm' }}
+                            | {{ schedule.lessonCount }}
+                            уроков</p>
+
+                        <p class="closest__price">{{ schedule.price }} грн</p>
+                        <a href="#" class="btn--warning closest__enroll" ng-click="enroll(schedule)">Записаться</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        {% endverbatim %}
+    {#{% for item in closest %}#}
+    {#{% endfor %}#}
+</div>
