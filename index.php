@@ -98,57 +98,30 @@ $app->route('POST /enroll', function () {
     }
 });
 
-/* slider routes block */
-
-$app->route('/career', function(){
-    echo Flight::get('twig')->render('Slider/career.html.twig',
-        array('active' => 'career')
-    );
-});
-
-$app->route('/companies', function(){
-    echo Flight::get('twig')->render('Slider/companies.html.twig',
-        array('active' => 'companies')
-    );
-});
-
-$app->route('/practice', function(){
-    echo Flight::get('twig')->render('Slider/practice.html.twig',
-        array('active' => 'practice')
-    );
-});
-
-$app->route('/specs', function(){
-    echo Flight::get('twig')->render('Slider/specs.html.twig',
-        array('active' => 'specs')
-    );
-});
-
-$app->route('/promotions', function(){
-    echo Flight::get('twig')->render('Slider/promotions.html.twig',
-        array('active' => 'promotions')
-    );
-});
-
-/* end of slider block */
-
-/* new routes from Andrii */
-
-$app->route('/faq', function(){
-    echo Flight::get('twig')->render('FAQ/index.html.twig',
-        array('active' => 'faq')
-    );
-});
-$app->route('/news', function(){
-    echo Flight::get('twig')->render('News/index.html.twig',
-        array('active' => 'news')
-    );
-});
-$app->route('/certification', function(){
-    echo Flight::get('twig')->render('Certification\index.html.twig',
-        array('active' => 'certification')
-    );
-});
+/* new routes under construction */
+//
+//$app->route('/faq', function(){
+//    echo Flight::get('twig')->render('FAQ/index.html.twig',
+//        array('active' => 'faq')
+//    );
+//});
+//$app->route('/companies', function(){
+//    echo Flight::get('twig')->render('Slider/companies.html.twig',
+//        array('active' => 'companies')
+//    );
+//});
+//
+//$app->route('/practice', function(){
+//    echo Flight::get('twig')->render('Slider/practice.html.twig',
+//        array('active' => 'practice')
+//    );
+//});
+//
+//$app->route('/specs', function(){
+//    echo Flight::get('twig')->render('Slider/specs.html.twig',
+//        array('active' => 'specs')
+//    );
+//});
 
 
 $app->start();
