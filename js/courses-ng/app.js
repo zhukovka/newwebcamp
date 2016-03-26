@@ -63,11 +63,12 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         });
 
     }])
-    .controller('MainCoursesController', ['$scope', 'Course', function ($scope, Course) {
+    .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
         $scope.menuitem;
     }])
-    .controller('CourseController', ['$scope', '$routeParams', 'Course', 'Schedule', function ($scope, $routeParams, Course, Schedule) {
+    .controller('CourseController', ['$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', function ($rootScope, $scope, $routeParams, Course, Schedule) {
         $scope.activeSchedule;
+
         $scope.predicate = 'begin';
         $scope.reverse = false;
         $scope.activateSchedule = function (schedule) {
@@ -98,6 +99,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         Course.get({alias: $routeParams.alias}, function (course) {
             //$scope.course = course;
             course.getLessons().then(function () {
+                $rootScope.description = course.name;
                 angular.extend($scope.course, course);
                 Schedule.schedule({id: course.id}, function (schedules) {
                     if (schedules) {

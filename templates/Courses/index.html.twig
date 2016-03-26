@@ -1,5 +1,12 @@
 {% extends "base.html.twig" %}
 {% block base %}/courses/{% endblock %}
+
+
+{% block meta %}
+    {% verbatim %}
+    <meta description="{{ description || 'Треннинги и курсы программирования WebCamp'}}"/>
+    {% endverbatim %}
+{% endblock %}
 {% block content %}
 
     <div class="page" ng-init="menuitem='{{ menuItem.name }}'" ng-view autoscroll="true">

@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="row"><a href="/courses">{{menuitem}}</a>/{{course.name}}</div>
-<div class="row mb-20">
+<div class="row mb-20 hide-for-small-only">
     <div class="page__info">
         <p>
             <span class="page__info--l icon-coins icons--warning"></span>
@@ -19,7 +19,7 @@
 
 <div class="row mb-20">
 
-    <div class="medium-6 columns">
+    <div class="large-6 columns">
         <div class="row">
             <div class="medium-8 columns">
                 <h3 class="closest__name">
@@ -40,7 +40,7 @@
         <p class="">Ближайшая группа:</p>
 
         <div class="row closest">
-            <div class="small-3 columns closest__date" ng-if="closest.begin">
+            <div class="medium-3 columns closest__date" ng-if="closest.begin">
                 <p class="closest__day">
                     {{ closest.begin | date:'d' }}
                 </p>
@@ -50,7 +50,7 @@
                 </p>
             </div>
 
-            <div class="small-9 columns">
+            <div class="medium-9 columns">
 
                 <div ng-if="closest" class="closest__course">
 
@@ -72,7 +72,7 @@
 
         </div>
     </div>
-    <div class="medium-6 columns courseinfo__video">
+    <div class="large-6 columns courseinfo__video">
         <img src="/img/placeholders/video-placeholder.jpg" alt=""/>
     </div>
 </div>
@@ -97,7 +97,7 @@
     </div>
 </div>
 <div class="row grid courseinfo__organizer">
-    <div class="medium-9 columns pad-l0">
+    <div class="large-9 columns pad-l0">
         <div id="course-schedules">
             <ul class="list-inline courseinfo__modifiers">
                 <li class="courseinfo__modifier"
@@ -110,9 +110,9 @@
                  ng-repeat="schedule in schedules | orderBy:predicate:reverse"
                  class="courseinfo__tab--{{schedule.modifier_name}}">
                 <div class="row">
-                    <div class="courseinfo__start medium-6 columns">
+                    <div class="courseinfo__start small-6 columns">
                         <ul class="list-table">
-                            <li><span class="icon-rocket courseinfo__icon--{{schedule.modifier_name}}"></span></li>
+                            <li class="hide-for-small-only"><span class="icon-rocket courseinfo__icon--{{schedule.modifier_name}}"></span></li>
                             <li>
                                 <p class="text-center"> Старт: <br/>
                                     {{schedule.begin|date:'EEEE d MMMM'}}
@@ -122,7 +122,7 @@
                         </ul>
 
                     </div>
-                    <div ng-show="schedule.endDate" class="courseinfo__end medium-6 columns">
+                    <div ng-show="schedule.endDate" class="courseinfo__end small-6 columns">
                         <ul class="list-table">
                             <li>
                                 <p class="text-center"> Финиш: <br/>
@@ -130,19 +130,19 @@
                                     {{schedule.endDate|date:'HH:mm'}}
                                 </p>
                             </li>
-                            <li>
+                            <li class="hide-for-small-only">
                                 <span class="icon-rocket--down courseinfo__icon--{{schedule.modifier_name}}"></span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="lessons">
-                    <timeline data-points="{{schedule.lessonCount}}" class="timeline--{{activeTab}}"></timeline>
+                    <timeline class="hide-for-small-only" data-points="{{schedule.lessonCount}}" class="timeline--{{activeTab}}"></timeline>
                     <p class="lessons__count">
                         {{schedule.lessonCount}} уроков
                     </p>
 
-                    <div class="lessons__content">
+                    <div class="lessons__content hide-for-small-only">
                         <p class="lesson-date" ng-show="schedule.begin">
                             <span class="lesson-date__daymonth">{{dayLesson.day|date:'d MMMM'}}</span>,
                             <span>{{dayLesson.day|date:'yyyy'}}</span>
@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-    <div class="medium-3 columns courseinfo" ng-controller="CourseCalendarCtrl">
+    <div class="show-for-large large-3 columns courseinfo" ng-controller="CourseCalendarCtrl">
 
         <div class="courseinfo__clock courseinfo__clock--{{activeTab}}">
             <clock></clock>
