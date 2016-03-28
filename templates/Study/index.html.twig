@@ -1,8 +1,180 @@
 {% extends "base.html.twig" %}
-{% block base %}/study/{% endblock %}
 {% block content %}
 
-    <div class="page" ng-init="menuitem='Обучение в Webcamp'" ng-view>
+    <div class="page">
+        <div class="page__header course">
+            <div class="row">
+                <div class="medium-3 columns end">
+                    <h1 class="page__title">Обучение в Webcamp</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row grid mb-50 hide-for-small-only">
+            <div class="page__info">
+                <p>
+                    <span class="page__info--l icon-calendar-full icons--warning"></span>
+                    <span class="page__info--ml text--success">Расписание курсов</span>
+                    <a href="/schedule" class="page__info--last text--warning">Узнать больше</a>
+                </p>
+            </div>
+        </div>
+        <div class="row grid mb_m-50">
+            <div class="medium-9 columns">
+                <div class="__h">
+                    <h3 class="page__h3">
+                        <span class="icon-clock2"></span> Время работы учебного центра
+                    </h3>
+                </div>
+
+                <table class="page__table">
+
+                    <tbody>
+                    <tr>
+
+                        <td class="hide-mobile">Учебные дни</td>
+                        <td>Понедельник-Пятница</td>
+                        <td>
+                            Суббота-Воскресенье
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td class="hide-mobile">Время проведения занятий</td>
+                        <td>10:00 - 14:00 <br> 19:00 - 21:00</td>
+                        <td> 10:00 - 18:00
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="medium-3 columns hide-mobile">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur deleniti, error? Dolorum, id illum
+                    inventore nostrum quis soluta temporibus veniam!</p>
+            </div>
+        </div>
+        <div class="reviews hide-for-small-only">
+            <div class="row grid divider">
+                <div class="medium-12 columns">
+                    <div class="divider__text--center mb-20">
+                        <h2 class="text--success">На наших занятиях</h2>
+                    </div>
+
+
+                    <div class="study-graph">
+                        <div class="clearfix text--success">
+                            <div class="study-graph__item float-left w-20 border-bottom">
+                                <p>начало</p>
+                            </div>
+                            <div class="study-graph__item study-graph__item--success float-left w-30">
+                                <p class="text-white"><span class="icon-bookshelf"></span>учебные материалы</p>
+                            </div>
+                            <div class="study-graph__item float-left w-50 border-bottom">
+                                <p><span class="icon-list"></span>подробный план</p>
+                            </div>
+                        </div>
+
+                        <div class="clearfix text--accent">
+                            <div class="float-left w-40">
+                                <div class="study-graph__item float-left w-50">
+                                    <p class="">на занятии</p>
+                                </div>
+                                <div class="study-graph__item float-left w-50">
+                                    <p><span class="icon-codereview"></span>разбор дз</p>
+                                </div>
+                                <div class="study-graph__item float-left border-top w-50">
+                                    <p>между занятиями</p>
+                                </div>
+                                <div class="study-graph__item float-left border-top w-50">
+                                    <p><span class="icon-sir"></span>мастер классы</p>
+                                </div>
+                            </div>
+                            <div class="float-left w-60">
+                                <div class="study-graph__item--height study-graph__item--accent float-left w-30">
+                                    <p class="text-white">много <br/>много <br/><span class="icon-keyboard m-0"></span> <br/>практики
+                                    </p>
+                                </div>
+                                <div class="study-graph__item float-left w-40">
+                                    <p class="w-20"><span class="icon-brain m-0"></span></p>
+
+                                    <p>объяснение теории урока</p>
+                                </div>
+                                <div class="study-graph__item float-left w-30">
+                                    <p><span class="icon-homecode"></span>выдача дз</p>
+                                </div>
+                                <div class="study-graph__item float-right w-70 border-top">
+                                    <p>консультации с преподавателем</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix text--warning">
+                            <div class="study-graph__item float-left w-20 border-top">
+                                <p>после обучения</p>
+                            </div>
+                            <div class="study-graph__item float-left w-30 border-top">
+                                <p><span class="icon-license"></span>сертификат</p>
+                            </div>
+                            <div class="study-graph__item study-graph__item--warning float-left w-50">
+                                <p class="text-white"><span class="icon-terminal"></span>стажировка</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row grid divider" id="promo">
+            <div class="divider__text--center mb-30">
+                <h2 class="text--success">Акции и скидки</h2>
+            </div>
+            <div class="medium-4 columns promo">
+                <p class="promo__icon"><span class="icon-cake"></span></p>
+
+                <p class="promo__name">Пробный урок</p>
+
+                <div class="promo__info">
+                    Каждый первый урок любого курса вы можете посетить абсолютно бесплатно.
+                </div>
+            </div>
+            <div class="medium-4 columns promo">
+                <p class="promo__icon"><span class="icon-friends"></span></p>
+
+                <p class="promo__name">Приведи друга</p>
+
+                <div class="promo__info">
+                    Приведи на любой из курсов своего товарища или пройдите его вместе с ним и получи <span
+                            class="text--success">10%</span> скидку!
+                </div>
+            </div>
+            <div class="medium-4 columns promo">
+                <p class="promo__icon"><span class="icon-webcamper"></span></p>
+
+                <p class="promo__name">Webcamper</p>
+
+                <div class="promo__info">
+                    Нашим студентам действует постоянная скидка <span class="text--success">5%</span> на каждый следующий курс.
+                </div>
+            </div>
+        </div>
+        <div class="grid  place">
+            <div class="row divider">
+                <div class="divider__text--center mb-30">
+                    <h2 class="text--success">Наши учебные аудитории</h2>
+                </div>
+                <div class="medium-12 columns">
+                    <div class="slide-slider">
+                        <div class="slide-slider__left"><span class="icon-chevron-left"></span></div>
+                        <div class="slide-slider__content">
+                            <img class="slide-slider__content--img" src="/img/place/place1.JPG" alt=""/>
+                            <img class="slide-slider__content--img" src="/img/place/place2.JPG" alt=""/>
+                            <img class="slide-slider__content--img" src="/img/place/place3.JPG" alt=""/>
+                            <img class="slide-slider__content--last" src="/img/place/place1.JPG" alt=""/>
+                        </div>
+                        <div class="slide-slider__right"><span class="icon-chevron-right"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
