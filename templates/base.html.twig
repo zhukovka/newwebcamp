@@ -53,15 +53,16 @@
 <div id="content">{% block content %}{% endblock %}</div>
 <footer>
     <div class="footer">
-        <div class="row">
+        <div class="row grid">
             <div class="medium-2 columns footer__links">
                 <p>Обучение</p>
                 <ul class="list-nostyle">
-                    <li><a href="/promotions">Бесплатный пробный урок</a></li>
+                    <li><a href="/study/#promo">Бесплатный пробный урок</a></li>
                     <li><a href="/courses">Курсы и тренинги</a></li>
                     <li><a href="/schedule">Расписание</a></li>
-                    <li><a href="/career">Карьера в IT</a></li>
-                    <li><a href="/practice">Практика</a></li>
+                    <li><a href="/aboutus#reviews">Отзывы</a></li>
+                    {#<li><a href="/career">Карьера в IT</a></li>#}
+                    {#<li><a href="/practice">Практика</a></li>#}
                 </ul>
             </div>
             <div class="medium-2 columns footer__links">
@@ -71,7 +72,7 @@
                     <li><a href="/aboutus#instructors">Преподаватели</a></li>
                     <li><a href="/companies#advantages">Преимущества</a></li>
                     <li><a href="/companies#register">Регистрация</a></li>
-                    <li><a href="/aboutus#reviews">Отзывы</a></li>
+
                 </ul>
             </div>
             <div class="medium-2 columns footer__links">
@@ -79,21 +80,22 @@
                 <ul class="list-nostyle">
                     <li><a href="/faq">Часто задаваемые вопросы</a></li>
                     <li><a href="/specs">Специальности</a></li>
-                    <li><a href="/certification">Сертификаты</a></li>
-                    <li><a href="/news">Новости</a></li>
+                    <li><a href="/study/#worktime">Время работы</a></li>
+                    {#<li><a href="/certification">Сертификаты</a></li>#}
+                    {#<li><a href="/news">Новости</a></li>#}
                     <li><a href="/aboutus#reviews">Отзывы</a></li>
                 </ul>
             </div>
-            <div class="medium-2 columns footer__links">
-                <p>Специальности</p>
-                <ul class="list-nostyle">
-                    <li><a href="/specs#JAVA-fullstack">FullStack Java Developer</a></li>
-                    <li><a href="/specs#JAVA-backend">Web Java Developer</a></li>
-                    <li><a href="/specs#Javascript">JavaScript Developer</a></li>
-                    <li><a href="/specs#Frontend">Frontend Developer</a></li>
-                    <li><a href="/specs#PHP">PHP Developer</a></li>
-                </ul>
-            </div>
+            {#<div class="medium-2 columns footer__links">#}
+                {#<p>Специальности</p>#}
+                {#<ul class="list-nostyle">#}
+                    {#<li><a href="/specs#JAVA-fullstack">FullStack Java Developer</a></li>#}
+                    {#<li><a href="/specs#JAVA-backend">Web Java Developer</a></li>#}
+                    {#<li><a href="/specs#Javascript">JavaScript Developer</a></li>#}
+                    {#<li><a href="/specs#Frontend">Frontend Developer</a></li>#}
+                    {#<li><a href="/specs#PHP">PHP Developer</a></li>#}
+                {#</ul>#}
+            {#</div>#}
             <div class="medium-4 columns footer__social text-right">
                 <p>Мы в соцсетях</p>
                 <ul class="list-inline">

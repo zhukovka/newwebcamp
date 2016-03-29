@@ -10,12 +10,12 @@ class DB
 {
     private static $con;
     private static $servername = "";
-    private static $username = "root";
-    private static $password = "root";
+    private static $username = "webcamp_test";
+    private static $password = "mjvhk2wq";
 
     public static function connect()
     {
-        self::$con = new PDO('mysql:dbname=webcamp;host=localhost;charset=utf8', self::$username, self::$password);
+        self::$con = new PDO('mysql:dbname=webcamp_test;host=webcamp.mysql.ukraine.com.ua;charset=utf8', self::$username, self::$password);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
         self::$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
