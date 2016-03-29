@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6{
 .awards{
     background: url(/img/backgrounds/award.png) #008184 100% 79% no-repeat;
 }
-.reviews .reviewer__pic{
+.reviews .reviewer__pic.mainpic{
     width: 200px;
     height: 200px;
 }
