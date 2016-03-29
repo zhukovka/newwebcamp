@@ -5,11 +5,11 @@
                 <li class="slide {% if loop.first %}active{% endif %}" style="background-image: url({{ item.img }})">
                     <div class="gradient">
                         <div class="grid">
-                            <div class="slide__content grid__left w_m-70 w_l-50">
+                            <div class="slide__content grid__left w_m-70 w_l-50 centered">
                                 <h3>{{ item.title }}</h3>
 
                                 <p>{{ item.description }}</p>
-                                <a href="/{{ item.alias }}" class="btn-more">Подробнее</a>
+                                <a href="/{{ item.alias }}" class="btn-more position-right">Подробнее</a>
                             </div>
                         </div>
                     </div>

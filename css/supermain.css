@@ -1,0 +1,21 @@
+h1, h2, h3, h4, h5, h6{
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+}
+
+.centered{
+    width: 100%;
+    margin: 15% 0 0;
+}
+.centered > h3{
+    text-align: center;
+    text-transform: uppercase;
+}
+.centered > p{
+    text-align: center;
+}
+.centered > a.btn-more {
+    left: 80%;
+}
+.awards{
+    background: url(/img/backgrounds/award.png) #008184 111% 79% no-repeat;
+}
