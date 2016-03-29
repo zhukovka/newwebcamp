@@ -99,18 +99,18 @@ $app->route('POST /enroll', function () {
 });
 
 /* new routes under construction */
-//
-//$app->route('/faq', function(){
-//    echo Flight::get('twig')->render('FAQ/index.html.twig',
-//        array('active' => 'faq')
-//    );
-//});
+
+$app->route('/faq', function(){
+    echo Flight::get('twig')->render('FAQ/index.html.twig',
+        array('active' => 'faq')
+    );
+});
 //$app->route('/companies', function(){
 //    echo Flight::get('twig')->render('Slider/companies.html.twig',
 //        array('active' => 'companies')
 //    );
 //});
-//
+
 //$app->route('/practice', function(){
 //    echo Flight::get('twig')->render('Slider/practice.html.twig',
 //        array('active' => 'practice')

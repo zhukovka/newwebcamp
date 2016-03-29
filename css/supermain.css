@@ -23,3 +23,12 @@ h1, h2, h3, h4, h5, h6{
     width: 200px;
     height: 200px;
 }
+a.text-dark:focus{
+    color: #525559;
+}
+#faq dd {
+    padding-left: 30px;
+}
+#faq dt {
+    margin-top:10px;
+}

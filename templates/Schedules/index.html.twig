@@ -55,9 +55,9 @@
                             {{ schedule.begin | date:'shortDate' }}
                         </td>
                         <td class="hide-navmedia">{{ schedule.begin | date:'HH:mm' }}
-                            -{{ schedule.getEndTime() | date:'HH:mm' }}</td>
+                            - {{ schedule.getEndTime() | date:'HH:mm' }}</td>
                         <td class="hide-navmedia">{{ schedule.lessonCount }} уроков</td>
-                        <td class="hide-mobile"><span class="course__price">{{ schedule.price }}</span>грн.</td>
+                        <td class="hide-mobile"><span class="course__price">{{ schedule.price }}</span> грн.</td>
                     </tr>
                     <tr ng-repeat-end></tr>
                     </tbody>
@@ -67,16 +67,16 @@
         </div>
 
         <div class="row grid hide-for-small-only">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consequuntur cum dolorum ea est
-                excepturi, fugit magnam nam obcaecati provident quam quasi quibusdam, quis quo ratione sequi similique
-                tempora unde.</p>
+            <p>В этом разделе указаны запланированные курсы и тренинги, которые проводятся на базе WebCamp. Чтобы
+                заказать индивидуальные занятия или корпоративный тренинг <a href="#" rel="#sign_up_form"
+                                                                                      ng-click="enroll()">оформите заявку</a>.</p>
         </div>
         <div class="row mb-20 grid hide-for-small-only">
             <div class="page__info">
                 <p>
                     <span class="page__info--l icon-license icons--warning"></span>
-                    <span class="page__info--ml text--success">Сертификаты по завершению обучения</span>
-                    <a href="/certificates" class="page__info--last text--warning">Узнать больше</a>
+                    <span class="page__info--ml text--success">Все курсы</span>
+                    <a href="/courses" class="page__info--last text--warning">Узнать больше</a>
                 </p>
             </div>
         </div>
