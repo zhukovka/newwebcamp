@@ -71,6 +71,7 @@ class CoursesController
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
         DB::postOne($query, array_merge($data, $_POST));
+        
     }
 
     public static function enrollCompany()
