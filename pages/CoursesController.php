@@ -1,6 +1,7 @@
 <?php
 
 require_once ROOT . 'configs/pdo.php';
+require_once ROOT . 'pages/MailController.php';
 /**
  * Created by IntelliJ IDEA.
  * User: lenka
@@ -71,25 +72,7 @@ class CoursesController
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
         DB::postOne($query, array_merge($data, $_POST));
-    }
-
-    public static function enrollCompany()
-    {
-        $data = array(
-            'id' => null,
-            'name' => null,
-            'contact' => null,
-            'address' => null,
-            'email' => null,
-            'phone' => null,
-            'course_id' => null,
-            'pupilCount' => null,
-            'time' => null,
-            'comment' => null
-        );
-        $query = "INSERT INTO companies (id, name, contact, address, email, phone, course_id, pupilCount, time, comment)
-                  VALUES (:id, :name, :contact, :address, :email, :phone, :course_id, :pupilCount, :time, :comment);";
-        DB::postOne($query, array_merge($data, $_POST));
+        MailController::registerMail(array_merge($data, $_POST));
     }
 
     public static function coursenames()
