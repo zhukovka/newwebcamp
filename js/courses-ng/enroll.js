@@ -33,6 +33,7 @@ angular.module('Enroll', [])
             $scope.enrollError = true;
             $scope.showEnrollForm = false;
             $scope.sqlError = false;
+            console.log(response);
         }
 
         $scope.postEnroll = function (student, form) {

@@ -91,12 +91,7 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
 });
 $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
-    try{
-        $resp = CoursesController::enroll();
-        Flight::json($resp);
-    }catch (PDOException $e){
-        Flight::error($e);
-    }
+    CoursesController::enroll();
 });
 
 /* new routes under construction */

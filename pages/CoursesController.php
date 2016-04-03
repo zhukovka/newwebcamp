@@ -75,7 +75,8 @@ class CoursesController
 
         try{
             $resp = DB::postOne($query, array_merge($data, $_POST));
-            mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
+            Flight::json($resp);
+           // mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 // duplicate entry, do something else
