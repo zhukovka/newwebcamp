@@ -76,7 +76,7 @@ class CoursesController
         try{
             $resp = DB::postOne($query, array_merge($data, $_POST));
             MailController::registerMail(array_merge($data, $_POST));
-            Flight::json($resp);
+            return $resp;
         }catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 // duplicate entry, do something else

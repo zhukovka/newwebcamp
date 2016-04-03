@@ -86,11 +86,6 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
             <body>
                 <table style="width:90%">
                     <tr>
-                        <td colspan="2">
-                            <img src="http://'.self::$testDomain.self::$webcampDomain.'/img/icons/logo.svg" height="100px" width="100px" align="center">
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
                             <p>
                             Здравствуйте '. $name .' !<br>
