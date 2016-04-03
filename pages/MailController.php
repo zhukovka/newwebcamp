@@ -15,7 +15,7 @@ class MailController
     private static $register = "register";
     private static $info = "info";
     private static $manager = "manager";
-    private static $header = "Content - type: text / html; charset = utf - 8\r\n";
+    private static $header = 'Content-type: text/html; charset=utf-8';
 
     public static function registerMail($data)
     {
@@ -41,7 +41,7 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                 Комментарий:\t" . $data["comment"] . "\n
                 ";
 
-        $headers = self::$header . 'From: <' . $mail . '>' . "\r\n" . 'To: <' . $to . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n" . 'To: WebCamp<' . $to . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
         self::userMail($mail, $info);
     }
@@ -55,7 +55,7 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                 мы вам когда-нибудь позвоним или не позвоним.\r\n
                 Щастяздоровля
                 ";
-        $headers = self::$header.'From: <' . self::$register . self::$webcampDomain . '>' . "\r\n" . 'To: <' . $to . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . self::$webcampDomain . '>' . "\r\n" . 'To: <' . $to . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
 
