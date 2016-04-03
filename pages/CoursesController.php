@@ -1,6 +1,7 @@
 <?php
 
 require_once ROOT . 'configs/pdo.php';
+require_once ROOT . 'pages/MailController.php';
 /**
  * Created by IntelliJ IDEA.
  * User: lenka
@@ -57,6 +58,7 @@ class CoursesController
 
     public static function enroll()
     {
+
         $data = array(
             'id' => null,
             'name' => null,
