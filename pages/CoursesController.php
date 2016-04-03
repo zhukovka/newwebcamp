@@ -75,7 +75,6 @@ class CoursesController
 
         try{
             DB::postOne($query, array_merge($data, $_POST));
-
            // mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
             Flight::json($e);
