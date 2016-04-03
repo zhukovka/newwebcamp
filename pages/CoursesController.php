@@ -74,11 +74,19 @@ class CoursesController
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
 
         try{
-            $resp = DB::postOne($query, array_merge($data, $_POST));
-            Flight::json($resp);
+            DB::postOne($query, array_merge($data, $_POST));
+
            // mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
             Flight::json($e);
+            if ($e->errorInfo[1] == 1062) {
+                // duplicate entry, do something else
+                Flight::json(array('sqlError' => array('code'=>1062, 'message'=>$e->errorInfo[2])));
+            } else {
+                // an error other than duplicate entry occurred
+                header('HTTP/1.1 500 Internal Server Error');
+                Flight::error($e);
+            }
         }
     }
 
