@@ -95,6 +95,8 @@ $app->route('POST /enroll', function () {
         CoursesController::enroll();
         Flight::json(array('success' =>'true'));
     } catch (PDOException $e) {
+        file_put_contents('PDOErrors.txt', $e->getMessage().$e->errorInfo[1], FILE_APPEND);
+
         if ($e->errorInfo[1] == 1062) {
             // duplicate entry, do something else
             header('Content-Type: application/json');
