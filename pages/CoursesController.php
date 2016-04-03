@@ -75,11 +75,18 @@ class CoursesController
 
         try{
             $resp = DB::postOne($query, array_merge($data, $_POST));
-            MailController::registerMail(array_merge($data, $_POST));
         }catch (PDOException $e) {
-
+            if ($e->errorInfo[1] == 1062) {
+                // duplicate entry, do something else
+                Flight::json(array('sqlError' => array('code'=>1062, 'message'=>$e->errorInfo[2])));
+            } else {
+                // an error other than duplicate entry occurred
+                header('HTTP/1.1 500 Internal Server Error');
+                Flight::error($e);
+            }
+            return null;
         }
-
+        MailController::registerMail(array_merge($data, $_POST));
 
     }
 
