@@ -91,7 +91,8 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
 });
 $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::enroll();
+    Flight::json(array('active' => 'faq'));
+    //CoursesController::enroll();
 });
 
 /* new routes under construction */
