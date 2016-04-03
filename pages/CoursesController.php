@@ -75,6 +75,7 @@ class CoursesController
 
         try{
             $resp = DB::postOne($query, array_merge($data, $_POST));
+            mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 // duplicate entry, do something else
@@ -84,10 +85,7 @@ class CoursesController
                 header('HTTP/1.1 500 Internal Server Error');
                 Flight::error($e);
             }
-            return null;
         }
-        MailController::registerMail(array_merge($data, $_POST));
-
     }
 
     public static function coursenames()
