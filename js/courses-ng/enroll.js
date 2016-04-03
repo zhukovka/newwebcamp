@@ -18,7 +18,7 @@ angular.module('Enroll', [])
             $scope.sqlError = false;
         });
         function successCallback(response) {
-            if(response.data.sqlError){
+            if(response.data && response.data.sqlError){
                 $scope.sqlError = true;
             }else{
                 $scope.enrollSuccess = true;
