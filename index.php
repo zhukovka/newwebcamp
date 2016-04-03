@@ -92,7 +92,8 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
 $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
     try {
-        Flight::json(CoursesController::enroll());
+        CoursesController::enroll();
+        Flight::json(array('success' =>'true'));
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
             // duplicate entry, do something else
@@ -105,6 +106,7 @@ $app->route('POST /enroll', function () {
             Flight::error($e);
         }
     }
+
 });
 
 /* new routes under construction */

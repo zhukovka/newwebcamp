@@ -74,8 +74,7 @@ class CoursesController
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
 
         try{
-            $resp = DB::postOne($query, array_merge($data, $_POST));
-            return array('success' => 'true');
+            DB::postOne($query, array_merge($data, $_POST));
            // mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
            throw $e;
