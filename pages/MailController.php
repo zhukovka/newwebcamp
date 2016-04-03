@@ -15,11 +15,12 @@ class MailController
     private static $register = "register";
     private static $info = "info";
     private static $manager = "manager";
+    private static $test = "test";
     private static $header = 'Content-type: text/html; charset=utf-8';
 
     public static function registerMail($data)
     {
-        $to = self::$register . "@" . self::$webcampDomain;
+        $to = self::$test . "@" . self::$webcampDomain;
         $subj = "Заявка на курс";
         $mail = $data["email"];
         $modifier_id = $data["modifier_id"];
@@ -29,19 +30,43 @@ JOIN modifiers ON modifiers.id = courseinfo.modifier
 JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . " .";
+        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . ".";
         if (strlen($courseinfo[0]["start"]) > 0) {
             $info .= "Стартуем: " . $courseinfo[0]["start"] . " ";
         }
-        $msg = "
-                Имя:\t" . $data["name"] . "\n
-                Телефон:\t" . $data["phone"] . "\n
-                Курс:\t" . $info . "\n
-                Как нашли:\t" . $data["how"] . "\n
-                Комментарий:\t" . $data["comment"] . "\n
-                ";
+        $msg = '
+                <html>
+                    <head>
+                        <title>Регистрация на курс</title>
+                    </head>
+                    <body>
+                        <table>
+                            <tr>
+                                <td>Имя:</td>
+                                <td>'.$data["name"].'</td>
+                            </tr>
+                            <tr>
+                                <td>Телефон:</td>
+                                <td>'.$data["phone"].'</td>
+                            </tr>
+                            <tr>
+                                <td>Курс:</td>
+                                <td>'.$info.'</td>
+                            </tr>
+                            <tr>
+                                <td>Как нашли:</td>
+                                <td>'.$data["how"].'</td>
+                            </tr>
+                            <tr>
+                                <td>Комментарий:</td>
+                                <td>'.$data["comment"].'</td>
+                            </tr>
+                        </table>
+                </body>
+                </html>
+                ';
 
-        $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n" . 'To: WebCamp<' . $to . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
         self::userMail($mail, $info);
     }
@@ -55,7 +80,7 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                 мы вам когда-нибудь позвоним или не позвоним.\r\n
                 Щастяздоровля
                 ";
-        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . self::$webcampDomain . '>' . "\r\n" . 'To: <' . $to . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
 
