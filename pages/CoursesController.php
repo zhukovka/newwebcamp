@@ -74,7 +74,8 @@ class CoursesController
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
 
         try{
-            DB::postOne($query, array_merge($data, $_POST));
+            $resp = DB::postOne($query, array_merge($data, $_POST));
+            return array('success' => 'true');
            // mail("test@webcamp.com.ua", "OLOLO", "PESDEC");
         }catch (PDOException $e) {
             Flight::json($e);
