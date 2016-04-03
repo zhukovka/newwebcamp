@@ -35,9 +35,9 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                 Комментарий: ' . $data["comment"] . '\n
                 ';
 
-        $headers = "Content - type: text / html; charset = utf - 8 \r\n"; //Кодировка письма
-        $headers .= 'From: Отправитель <' . $_POST['email'] . '>\r\n'; //Наименование и почта отправителя
-        mail($to, $subj, $msg, $headers); //Отправка письма с помощью функции mail
+        $headers = "Content - type: text / html; charset = utf - 8 \r\n";
+        $headers .= 'From: Отправитель <' . $data["email"] . '>\r\n';
+        mail($to, $subj, $msg, $headers);
 
     }
 }
