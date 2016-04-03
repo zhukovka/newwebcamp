@@ -89,7 +89,7 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
     require_once(ROOT . 'pages/CoursesController.php');
     Flight::json(CoursesController::lessons($courseId));
 });
-$app->route('POST/enroll', function () {
+$app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
     try{
         CoursesController::enroll();
