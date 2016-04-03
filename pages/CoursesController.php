@@ -72,8 +72,23 @@ class CoursesController
         );
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
-        MailController::registerMail(array_merge($data, $_POST));
-        DB::postOne($query, array_merge($data, $_POST));
+
+        try{
+            $resp = DB::postOne($query, array_merge($data, $_POST));
+            MailController::registerMail(array_merge($data, $_POST));
+            Flight::json($resp);
+        }catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                // duplicate entry, do something else
+                Flight::json(array('sqlError' => array('code'=>1062, 'message'=>$e->errorInfo[2])));
+            } else {
+                // an error other than duplicate entry occurred
+                header('HTTP/1.1 500 Internal Server Error');
+                Flight::error($e);
+            }
+        }
+
+
     }
 
     public static function coursenames()

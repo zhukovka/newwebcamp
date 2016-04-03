@@ -41,7 +41,8 @@ angular.module('Enroll', [])
 
                 student.course_id = $scope.enrollSchedule.course_id;
                 student.modifier_id = $scope.enrollSchedule.modifier_id;
-                student.hash = student.course_id + student.modifier_id + student.phone;
+                student.hash = student.course_id + "" + student.modifier_id + "" + student.phone;
+                console.log(student.hash);
                 form.$setPristine();
                 form.$setUntouched();
 

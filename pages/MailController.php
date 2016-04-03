@@ -17,6 +17,7 @@ class MailController
     private static $manager = "manager";
     private static $test = "test";
     private static $header = 'Content-type: text/html; charset=utf-8';
+    private static $testDomain = "devtest.";
 
     public static function registerMail($data)
     {
@@ -31,9 +32,8 @@ JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
         $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . ".";
-        if (strlen($courseinfo[0]["start"]) > 0) {
-            $info .= "Стартуем: " . $courseinfo[0]["start"] . " ";
-        }
+        strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
+
         $msg = '
                 <html>
                     <head>
@@ -43,23 +43,27 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                         <table>
                             <tr>
                                 <td>Имя:</td>
-                                <td>'.$data["name"].'</td>
+                                <td>' . $data["name"] . '</td>
                             </tr>
                             <tr>
                                 <td>Телефон:</td>
-                                <td>'.$data["phone"].'</td>
+                                <td>' . $data["phone"] . '</td>
                             </tr>
                             <tr>
                                 <td>Курс:</td>
-                                <td>'.$info.'</td>
+                                <td>' . $info . '</td>
+                            </tr>
+                            <tr>
+                                <td>Ближайшая группа:</td>
+                                <td>' . $start . '</td>
                             </tr>
                             <tr>
                                 <td>Как нашли:</td>
-                                <td>'.$data["how"].'</td>
+                                <td>' . $data["how"] . '</td>
                             </tr>
                             <tr>
                                 <td>Комментарий:</td>
-                                <td>'.$data["comment"].'</td>
+                                <td>' . $data["comment"] . '</td>
                             </tr>
                         </table>
                 </body>
@@ -68,19 +72,39 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
 
         $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
-        self::userMail($mail, $info);
+        self::userMail($mail, $data['name'], $info, $start);
     }
 
-    public static function userMail($to, $info)
+    public static function userMail($to, $name, $info, $start)
     {
         $subj = "Регистрация на курс от Webcamp.";
-        $msg = "
-                ололо!\r\n
-                вы записались на курс " . $info . ". \r\n
-                мы вам когда-нибудь позвоним или не позвоним.\r\n
-                Щастяздоровля
-                ";
-        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . self::$webcampDomain . '>' . "\r\n";
+        $msg = '
+            <html>
+            <head>
+            <title>Регистрация на курс от Webcamp</title>
+            </head>
+            <body>
+                <table style="width:90%">
+                    <tr>
+                        <td colspan="2">
+                            <img src="http://'.self::$testDomain.self::$webcampDomain.'/img/icons/logo.svg" height="100px" width="100px" align="center">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                            Здравствуйте '. $name .' !<br>
+                            Вы записались на курсы от Webcamp.<br>
+                            Хуй Вам.
+
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>
+';
+        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register .'@'. self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
 
