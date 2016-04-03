@@ -28,7 +28,7 @@ JOIN modifiers ON modifiers.id = courseinfo.modifier
 JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " .$courseinfo[0]["course_modifier"]. " .";
+        $info = $courseinfo[0]["course_name"] . " " .$courseinfo[0]["modifier_name"]. " .";
         if(strlen($courseinfo[0]["start"]) > 0) {
             $info .= "Стартуем: " . $courseinfo[0]["start"]." ";
         }
