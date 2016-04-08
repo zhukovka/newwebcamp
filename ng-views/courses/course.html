@@ -183,12 +183,12 @@
     <p class="lead">Программа курса</p>
 
     <div class="medium-6 columns">
-        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2">
+        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2-1">
             {{lesson.description}}
         </p>
     </div>
     <div class="medium-6 columns">
-        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2">
+        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2-1">
             {{lesson.description}}
         </p>
     </div>
