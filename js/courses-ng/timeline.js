@@ -9,8 +9,10 @@ angular.module('Timeline', [])
         return {
             restrict: 'E',
             templateUrl: '/ng-views/components/timeline.html',
+            scope:{},
             link: function (scope, el, attrs) {
                 // Create x2js instance with default config
+                window.tml = el;
                 var x2js = new X2JS();
 
                 var svg = el.find('svg'),
@@ -81,9 +83,10 @@ angular.module('Timeline', [])
                         $rootScope.$broadcast('circleClick', index);
                     }
                 });
-                $rootScope.$on('dayClick', function (e, index) {
-                    circleClick(svg.find('circle')[index]);
-                });
+                //$rootScope.$on('dayClick', function (e, index) {
+                //    var svg = el.find('svg');
+                //    circleClick(svg.find('circle')[index]);
+                //});
                 svg.html(xmlDocStr);
                 $compile(angular.element(svg))(scope);
             },

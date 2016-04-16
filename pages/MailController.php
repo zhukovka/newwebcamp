@@ -20,17 +20,16 @@ class MailController
     {
         $to = self::$register . "@" . self::$webcampDomain;
         $subj = 'Заявка на курс';
-        $modifier_id = $data["modifier_id"];
-        $course_id = $data["course_id"];
-        $courseinfo = DB::getArray("SELECT shedule.start as start, course.name as course_name, modifiers.name as modifier_name FROM courseinfo
-JOIN modifiers ON modifiers.id = courseinfo.modifier
-JOIN course ON course.id = courseinfo.course_id
-LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
-WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
+        $courseinfo = DB::getArray("
+          SELECT shedule.start as course_start, course.name as course_name, modifiers.name as modifier FROM shedule
+          JOIN course ON shedule.course_id=course.id
+          JOIN modifiers ON shedule.modifier=modifiers.id
+          WHERE shedule.modifier={$data["modifier_id"]} AND course.id={$data["course_id"]}
+          ");
         $msg = '
                 Имя: ' . $data["name"] . '\n
                 Телефон: ' . $data["phone"] . '\n
-                Курс:' . $courseinfo[0]["course_name"] . '\n
+                Курс:' . $courseinfo . '\n
                 Как нашли: ' . $data["how"] . '\n
                 Комментарий: ' . $data["comment"] . '\n
                 ';

@@ -71,8 +71,8 @@ class CoursesController
         );
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
-        MailController::registerMail(array_merge($data, $_POST));
         DB::postOne($query, array_merge($data, $_POST));
+        MailController::registerMail(array_merge($data, $_POST));
     }
 
     public static function coursenames()
