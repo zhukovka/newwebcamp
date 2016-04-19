@@ -6,190 +6,208 @@
     </div>
 </div>
 <div class="row"><a href="/courses">{{menuitem}}</a>/{{course.name}}</div>
-<div class="row mb-20 hide-for-small-only">
-    <div class="page__info">
-        <p>
-            <span class="page__info--l icon-coins icons--warning"></span>
-            <span class="page__info--ml text--success">Акции и скидки</span>
-            <a href="/promo" class="page__info--last text--warning">Узнать больше</a>
-        </p>
-    </div>
+<hr/>
+
+
+<div ng-hide="courseReady" class="spinner">
+    <div class="cube1"></div>
+    <div class="cube2"></div>
 </div>
+<div ng-show="courseReady">
+    <div  class="row mb-20">
 
-
-<div class="row mb-20">
-
-    <div class="large-6 columns">
-        <div class="row">
-            <div class="medium-8 columns">
-                <h3 class="closest__name">
-                    {{course.name}}
-                </h3>
-            </div>
-            <div class="medium-4 columns">
-                Уровень:
-                <ul class="course__level--{{ course.level }}">
-                    <li class="course__level--first"></li>
-                    <li class="course__level--middle"></li>
-                    <li class="course__level--middle"></li>
-                    <li class="course__level--middle"></li>
-                    <li class="course__level--last"></li>
-                </ul>
-            </div>
-        </div>
-        <p class="">Ближайшая группа:</p>
-
-        <div class="row closest">
-            <div class="medium-3 columns closest__date" ng-if="closest.begin">
-                <p class="closest__day">
-                    {{ closest.begin | date:'d' }}
-                </p>
-
-                <p class="closest__month">
-                    {{ closest.begin | date:'MMMM' }}
-                </p>
-            </div>
-
-            <div class="medium-9 columns">
-
-                <div ng-if="closest" class="closest__course">
-
-
-                    <p class="closest__time">
-                        {{ closest.begin | date:'HH:mm' }}
-                        -{{ closest.endDate | date:'HH:mm' }}
-                        | {{closest.lessonCount }}
-                        уроков</p>
-
-                    <p class="">{{ closest.price }} грн</p>
-
-                    <ul class="list-table">
-                        <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
-                        <li class="text-right"><a href="#course-schedules">Другие даты и время</a></li>
+        <div class="large-6 columns mb_m-15">
+            <div class="row">
+                <div class="medium-8 columns">
+                    <h3 class="closest__name">
+                        {{course.name}}
+                    </h3>
+                </div>
+                <div class="medium-4 columns">
+                    Уровень:
+                    <ul class="course__level--{{ course.level }}">
+                        <li class="course__level--first"></li>
+                        <li class="course__level--middle"></li>
+                        <li class="course__level--middle"></li>
+                        <li class="course__level--middle"></li>
+                        <li class="course__level--last"></li>
                     </ul>
                 </div>
             </div>
+            <p class="">Ближайшая группа:</p>
 
-        </div>
-    </div>
-    <div class="large-6 columns courseinfo__video">
-        <img src="/img/placeholders/video-placeholder.jpg" alt=""/>
-    </div>
-</div>
-<div class="courseinfo__description">
-    <div class="row">
-        <div class="medium-12 columns" ng-bind-html="course.description">
-        </div>
+            <div ng-hide="organizerReady" class="spinner">
+                <div class="cube1"></div>
+                <div class="cube2"></div>
+            </div>
+            <div class="row closest" ng-show="organizerReady">
+                <div class="medium-3 columns closest__date" ng-if="closest.begin">
+                    <p class="closest__day">
+                        {{ closest.begin | date:'d' }}
+                    </p>
 
-    </div>
-</div>
-<div class="courseinfo__results">
-        <p class="lead">По окончании курса вы сможете:</p>
+                    <p class="closest__month">
+                        {{ closest.begin | date:'MMMM' }}
+                    </p>
+                </div>
 
-    <div class="row">
+                <div class="medium-9 columns">
 
-        <div class="medium-6 medium-centered columns">
-            <ul class="results-list">
-                <li ng-repeat="result in course.results"><span class="icon-checkmark-circle"></span><span
-                        class="results-list__item">{{result}}</span></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="row grid courseinfo__organizer">
-    <div class="large-9 columns pad-l0">
-        <div id="course-schedules">
-            <ul class="list-inline courseinfo__modifiers">
-                <li class="courseinfo__modifier"
-                    ng-class="{'courseinfo__modifier--{{schedule.modifier_name}}':isActiveTab(schedule.modifier_name)}"
-                    ng-repeat="schedule in schedules" ng-click="activateSchedule(schedule)">
-                    <span>{{schedule.modifier_name | modifier}}</span>
-                </li>
-            </ul>
-            <div ng-show="isActiveTab(schedule.modifier_name)"
-                 ng-repeat="schedule in schedules | orderBy:predicate:reverse"
-                 class="courseinfo__tab--{{schedule.modifier_name}}">
-                <div class="row">
-                    <div class="courseinfo__start small-6 columns">
+                    <div ng-if="closest" class="closest__course">
+
+
+                        <p class="closest__time">
+                            {{ closest.begin | date:'HH:mm' }}
+                            -{{ closest.endDate | date:'HH:mm' }}
+                            | {{closest.lessonCount }}
+                            уроков</p>
+
+                        <p class="">{{ closest.price }} грн</p>
+
                         <ul class="list-table">
-                            <li class="hide-for-small-only"><span class="icon-rocket courseinfo__icon--{{schedule.modifier_name}}"></span></li>
-                            <li>
-                                <p class="text-center"> Старт: <br/>
-                                    {{schedule.begin|date:'EEEE d MMMM'}}
-                                    {{schedule.begin|date:'HH:mm'}}
-                                </p>
-                            </li>
-                        </ul>
-
-                    </div>
-                    <div ng-show="schedule.endDate" class="courseinfo__end small-6 columns">
-                        <ul class="list-table">
-                            <li>
-                                <p class="text-center"> Финиш: <br/>
-                                    {{schedule.endDate|date:'EEEE d MMMM'}}
-                                    {{schedule.endDate|date:'HH:mm'}}
-                                </p>
-                            </li>
-                            <li class="hide-for-small-only">
-                                <span class="icon-rocket--down courseinfo__icon--{{schedule.modifier_name}}"></span>
-                            </li>
+                            <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
+                            <li class="text-right"><a href="#course-schedules">Другие даты и время</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="lessons">
-                    <timeline class="hide-for-small-only" data-points="{{schedule.lessonCount}}" class="timeline--{{activeTab}}"></timeline>
-                    <p class="lessons__count">
-                        {{schedule.lessonCount}} уроков
-                    </p>
 
-                    <div class="lessons__content hide-for-small-only">
-                        <p class="lesson-date" ng-show="schedule.begin">
-                            <span class="lesson-date__daymonth">{{dayLesson.day|date:'d MMMM'}}</span>,
-                            <span>{{dayLesson.day|date:'yyyy'}}</span>
+            </div>
+        </div>
+        <div class="large-6 columns courseinfo__video text-center">
+            <img src="/img/placeholders/video-placeholder.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="courseinfo__description">
+        <div class="row">
+            <div class="medium-12 columns" ng-bind-html="course.description">
+            </div>
+
+        </div>
+    </div>
+    <div class="courseinfo__results">
+        <p class="lead">По окончании курса вы сможете:</p>
+
+        <div class="row">
+
+            <div class="medium-6 medium-centered columns">
+                <ul class="results-list">
+                    <li ng-repeat="result in course.results"><span class="icon-checkmark-circle"></span><span
+                            class="results-list__item">{{result}}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-hide="organizerReady" class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <div class="row grid courseinfo__organizer">
+        <div class="large-9 columns pad-l0">
+            <div id="course-schedules">
+                <ul class="list-inline courseinfo__modifiers">
+                    <li class="courseinfo__modifier"
+                        ng-class="{'courseinfo__modifier--{{schedule.modifier_name}}':isActiveTab(schedule.modifier_name)}"
+                        ng-repeat="schedule in schedules" ng-click="activateSchedule(schedule)">
+                        <span>{{schedule.modifier_name | modifier}}</span>
+                    </li>
+                </ul>
+                <div ng-show="isActiveTab(schedule.modifier_name)"
+                     ng-repeat="schedule in schedules | orderBy:predicate:reverse"
+                     class="courseinfo__tab--{{schedule.modifier_name}}">
+                    <div class="row">
+                        <div class="courseinfo__start small-6 columns">
+                            <ul class="list-table">
+                                <li class="hide-for-small-only"><span
+                                        class="icon-rocket courseinfo__icon--{{schedule.modifier_name}}"></span></li>
+                                <li>
+                                    <p class="text-center"> Старт: <br/>
+                                        {{schedule.begin|date:'EEEE d MMMM'}}
+                                        {{schedule.begin|date:'HH:mm'}}
+                                    </p>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div ng-show="schedule.endDate" class="courseinfo__end small-6 columns">
+                            <ul class="list-table">
+                                <li>
+                                    <p class="text-center"> Финиш: <br/>
+                                        {{schedule.endDate|date:'EEEE d MMMM'}}
+                                        {{schedule.endDate|date:'HH:mm'}}
+                                    </p>
+                                </li>
+                                <li class="hide-for-small-only">
+                                    <span class="icon-rocket--down courseinfo__icon--{{schedule.modifier_name}}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="lessons">
+                        <timeline class="hide-for-small-only" data-points="{{schedule.lessonCount}}"
+                                  class="timeline--{{activeTab}}"></timeline>
+                        <p class="lessons__count">
+                            {{schedule.lessonCount}} уроков
                         </p>
 
-                        <p class="lesson-date__weekday">{{dayLesson.day|date:'EEEE'}}, <span class="lesson-table__num">{{dayLesson.num}} урок</span>
-                        </p>
-                        <table class="lesson-table">
-                            <tr ng-repeat="item in dayLesson.items">
-                                <td class="lesson-table__time"><span
-                                        ng-class="{'lesson-table__time--first':$first}">{{schedule.addToBegin("hours",$index)|date:'HH:mm'}}</span>
-                                </td>
-                                <td>
-                                    {{item.num}}. {{item.description}}
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="lessons__content hide-for-small-only">
+                            <p class="lesson-date" ng-show="schedule.begin">
+                                <span class="lesson-date__daymonth">{{dayLesson.day|date:'d MMMM'}}</span>,
+                                <span>{{dayLesson.day|date:'yyyy'}}</span>
+                            </p>
+
+                            <p class="lesson-date__weekday">{{dayLesson.day|date:'EEEE'}}, <span
+                                    class="lesson-table__num">{{dayLesson.num}} урок</span>
+                            </p>
+                            <table class="lesson-table">
+                                <tr ng-repeat="item in dayLesson.items">
+                                    <td class="lesson-table__time"><span
+                                            ng-class="{'lesson-table__time--first':$first}">{{schedule.addToBegin("hours",$index)|date:'HH:mm'}}</span>
+                                    </td>
+                                    <td>
+                                        {{item.num}}. {{item.description}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="show-for-large large-3 columns courseinfo" ng-controller="CourseCalendarCtrl">
+        <div class="show-for-large large-3 columns courseinfo" ng-controller="CourseCalendarCtrl">
 
-        <div class="courseinfo__clock courseinfo__clock--{{activeTab}}">
-            <clock></clock>
+            <div class="courseinfo__clock courseinfo__clock--{{activeTab}}">
+                <clock></clock>
+            </div>
+            <div class="courseinfo__calendar--{{activeTab}}">
+                <calendar></calendar>
+
+            </div>
+
         </div>
-        <div class="courseinfo__calendar--{{activeTab}}">
-            <calendar></calendar>
+        <a href="#" class="btn--warning btn--bottom" ng-click="enroll()">Записаться</a>
+    </div>
 
+    <div class="row syllabus">
+        <p class="lead">Программа курса</p>
+
+        <div class="medium-6 columns">
+            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2">
+                {{lesson.description}}
+            </p>
         </div>
-
+        <div class="medium-6 columns">
+            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2">
+                {{lesson.description}}
+            </p>
+        </div>
     </div>
-    <a href="#" class="btn--warning btn--bottom" ng-click="enroll()">Записаться</a>
-</div>
-
-<div class="row syllabus">
-    <p class="lead">Программа курса</p>
-
-    <div class="medium-6 columns">
-        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2-1">
-            {{lesson.description}}
-        </p>
-    </div>
-    <div class="medium-6 columns">
-        <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2-1">
-            {{lesson.description}}
-        </p>
+    <div class="row mb-20 hide-for-small-only">
+        <div class="page__info">
+            <p>
+                <span class="page__info--l icon-coins icons--warning"></span>
+                <span class="page__info--ml text--success">Акции и скидки</span>
+                <a href="/promo" class="page__info--last text--warning">Узнать больше</a>
+            </p>
+        </div>
     </div>
 </div>

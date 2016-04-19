@@ -58,7 +58,6 @@ class CoursesController
 
     public static function enroll()
     {
-
         $data = array(
             'id' => null,
             'name' => null,
@@ -72,13 +71,8 @@ class CoursesController
         );
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
-
-        try{
-            DB::postOne($query, array_merge($data, $_POST));
-            MailController::registerMail(array_merge($data, $_POST));
-        }catch (PDOException $e) {
-           throw $e;
-        }
+        DB::postOne($query, array_merge($data, $_POST));
+        MailController::registerMail(array_merge($data, $_POST));
     }
 
     public static function coursenames()

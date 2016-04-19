@@ -68,7 +68,8 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
     }])
     .controller('CourseController', ['$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', function ($rootScope, $scope, $routeParams, Course, Schedule) {
         $scope.activeSchedule;
-
+        $scope.organizerReady = false;
+        $scope.courseReady = false;
         $scope.predicate = 'begin';
         $scope.reverse = false;
         $scope.activateSchedule = function (schedule) {
@@ -96,12 +97,14 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 });
             }
         };
-        Course.get({alias: $routeParams.alias}, function (course) {
+        Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
             //$scope.course = course;
+            $rootScope.description = course.name;
+            $scope.courseReady = true;
             course.getLessons().then(function () {
-                $rootScope.description = course.name;
                 angular.extend($scope.course, course);
                 Schedule.schedule({id: course.id}, function (schedules) {
+                    $scope.organizerReady = true;
                     if (schedules) {
 
                         //$scope.schedules
@@ -318,7 +321,8 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             var modifiersDict = {
                 'default': "Вечерний в рабочие дни",
                 'morning': "Утренний в рабочие дни",
-                'weekend': "Выходного дня"
+                'weekend': "Выходного дня",
+                'express': "Индивидуальные"
             };
             return modifiersDict[input];
         };

@@ -6,16 +6,15 @@
  * Date: 9/24/15
  * Time: 21:41
  */
+require("configs.php");
+
 class DB
 {
     private static $con;
-    private static $servername = "";
-    private static $username = "webcamp_test";
-    private static $password = "mjvhk2wq";
 
     public static function connect()
     {
-        self::$con = new PDO('mysql:dbname=webcamp_test;host=webcamp.mysql.ukraine.com.ua;charset=utf8', self::$username, self::$password);
+        self::$con = new PDO(DB_HOST, DB_USER, DB_PASSWORD);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
         self::$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -79,7 +78,7 @@ class DB
             file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
             if ($e->errorInfo[1] == 1062) {
                 // duplicate entry, do something else
-                Flight::json(array('sqlError' => array('code'=>1062, 'message'=>$e->errorInfo[2])));
+                Flight::json(array('sqlError' => array('code' => 1062, 'message' => $e->errorInfo[2])));
             } else {
                 // an error other than duplicate entry occurred
                 header('HTTP/1.1 500 Internal Server Error');

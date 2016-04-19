@@ -15,92 +15,28 @@ class MailController
     private static $register = "register";
     private static $info = "info";
     private static $manager = "manager";
-    private static $test = "test";
-    private static $header = 'Content-type: text/html; charset=utf-8';
-    private static $testDomain = "devtest.";
 
     public static function registerMail($data)
     {
-        $to = self::$test . "@" . self::$webcampDomain;
-        $subj = "Заявка на курс";
-        $mail = $data["email"];
-        $modifier_id = $data["modifier_id"];
-        $course_id = $data["course_id"];
-        $courseinfo = DB::getArray("SELECT shedule.start as start, course.name as course_name, modifiers.name as modifier_name FROM courseinfo
-JOIN modifiers ON modifiers.id = courseinfo.modifier
-JOIN course ON course.id = courseinfo.course_id
-LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
-WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . ".";
-        strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
-
+        $to = self::$register . "@" . self::$webcampDomain;
+        $subj = 'Заявка на курс';
+        $courseinfo = DB::getArray("
+          SELECT shedule.start as course_start, course.name as course_name, modifiers.name as modifier FROM shedule
+          JOIN course ON shedule.course_id=course.id
+          JOIN modifiers ON shedule.modifier=modifiers.id
+          WHERE shedule.modifier={$data["modifier_id"]} AND course.id={$data["course_id"]}
+          ");
         $msg = '
-                <html>
-                    <head>
-                        <title>Регистрация на курс</title>
-                    </head>
-                    <body>
-                        <table>
-                            <tr>
-                                <td>Имя:</td>
-                                <td>' . $data["name"] . '</td>
-                            </tr>
-                            <tr>
-                                <td>Телефон:</td>
-                                <td>' . $data["phone"] . '</td>
-                            </tr>
-                            <tr>
-                                <td>Курс:</td>
-                                <td>' . $info . '</td>
-                            </tr>
-                            <tr>
-                                <td>Ближайшая группа:</td>
-                                <td>' . $start . '</td>
-                            </tr>
-                            <tr>
-                                <td>Как нашли:</td>
-                                <td>' . $data["how"] . '</td>
-                            </tr>
-                            <tr>
-                                <td>Комментарий:</td>
-                                <td>' . $data["comment"] . '</td>
-                            </tr>
-                        </table>
-                </body>
-                </html>
+                Имя: ' . $data["name"] . '\n
+                Телефон: ' . $data["phone"] . '\n
+                Курс:' . $courseinfo . '\n
+                Как нашли: ' . $data["how"] . '\n
+                Комментарий: ' . $data["comment"] . '\n
                 ';
 
-        $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
-        mail($to, $subj, $msg, $headers);
-        self::userMail($mail, $data['name'], $info, $start);
+        $headers = "Content - type: text / html; charset = utf - 8 \r\n"; //Кодировка письма
+        $headers .= 'From: Отправитель <' . $_POST['email'] . '>\r\n'; //Наименование и почта отправителя
+        mail($to, $subj, $msg, $headers); //Отправка письма с помощью функции mail
+
     }
-
-    public static function userMail($to, $name, $info, $start)
-    {
-        $subj = "Регистрация на курс от Webcamp.";
-        $msg = '
-            <html>
-            <head>
-            <title>Регистрация на курс от Webcamp</title>
-            </head>
-            <body>
-                <table style="width:90%">
-                    <tr>
-                        <td>
-                            <p>
-                            Здравствуйте '. $name .' !<br>
-                            Вы записались на курсы от Webcamp.<br>
-                            Хуй Вам.
-
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </body>
-            </html>
-';
-        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register .'@'. self::$webcampDomain . '>' . "\r\n";
-        mail($to, $subj, $msg, $headers);
-    }
-
 }

@@ -9,10 +9,13 @@ angular.module('Timeline', [])
         return {
             restrict: 'E',
             templateUrl: '/ng-views/components/timeline.html',
+            scope: {
+                //points:"="
+            },
             link: function (scope, el, attrs) {
                 // Create x2js instance with default config
+                window.tml = el;
                 var x2js = new X2JS();
-
                 var svg = el.find('svg'),
                     svgEl = svg[0],
                     points = +attrs.points,
@@ -26,6 +29,7 @@ angular.module('Timeline', [])
                     lw = (width - points * r * 2) / (points - 1) | 0,
                     circles = [],
                     lines = [];
+
 
                 for (var i = 0; i < points; i++) {
                     var cx = x + (lw + r * 2) * i,
@@ -57,7 +61,6 @@ angular.module('Timeline', [])
                         lines.push(line);
                     }
                 }
-
                 // JSON to XML string
                 var xmlDocStr = x2js.json2xml_str(
                     {
@@ -67,25 +70,31 @@ angular.module('Timeline', [])
                 );
                 var index = 0;
 
+
+                //svg.on('click', function (e) {
+                //    if (e.target.nodeName == "circle") {
+                //        index = e.target.getAttribute('index');
+                //        circleClick(e.target);
+                //        $timeout(function () {
+                //            scope.getDayLesson(+index);
+                //        });
+                //        $rootScope.$broadcast('circleClick', index);
+                //    }
+                //});
+                //$rootScope.$on('dayClick', function (e, index) {
+                //    var svg = el.find('svg');
+                //    circleClick(svg.find('circle')[index]);
+                //});
+
+                svg.html(xmlDocStr);
+
+                $compile(angular.element(svg))(scope);
+                //var svg = el.find('svg');
+                //circleClick(svg.find('circle')[index]);
                 function circleClick(el) {
                     svg.find('circle').removeClass('timeline__circle--active').addClass('timeline__circle');
                     el.setAttribute('class', 'timeline__circle--active');
-                };
-                svg.on('click', function (e) {
-                    if (e.target.nodeName == "circle") {
-                        index = e.target.getAttribute('index');
-                        circleClick(e.target);
-                        $timeout(function () {
-                            scope.getDayLesson(+index);
-                        });
-                        $rootScope.$broadcast('circleClick', index);
-                    }
-                });
-                $rootScope.$on('dayClick', function (e, index) {
-                    circleClick(svg.find('circle')[index]);
-                });
-                svg.html(xmlDocStr);
-                $compile(angular.element(svg))(scope);
-            },
+                }
+            }
         }
     }]);
