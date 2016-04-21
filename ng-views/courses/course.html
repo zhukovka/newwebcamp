@@ -191,16 +191,35 @@
         <p class="lead">Программа курса</p>
 
         <div class="medium-6 columns">
-            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2">
+            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index <= course.lessons.length/2-1">
                 {{lesson.description}}
             </p>
         </div>
         <div class="medium-6 columns">
-            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2">
+            <p ng-repeat="lesson in course.lessons" class="syllabus__item" ng-if="$index > course.lessons.length/2-1">
                 {{lesson.description}}
             </p>
         </div>
     </div>
+
+    <div class="courseinfo__results">
+        <p class="lead">Требования к кандидатам:</p>
+        <div class="row">
+            <div class="medium-6 medium-centered columns">
+                <ul class="results-list">
+                    <li ng-repeat="requirement in course.requirements"><span class="icon-checkmark-circle"></span><span
+                            class="results-list__item">{{requirement}}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
     <div class="row mb-20 hide-for-small-only">
         <div class="page__info">
             <p>

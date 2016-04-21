@@ -40,7 +40,7 @@ class CoursesController
     public static function courses($alias)
     {
         include_once("pages/code/course.php");
-        $course = DB::getOne("SELECT course.id, course.name, course.alias, course.description, course.results, course.duration, course.level, tracks.name as track FROM course
+        $course = DB::getOne("SELECT course.id, course.name, course.alias, course.description, course.results, course.requirements, course.duration, course.level, tracks.name as track FROM course
                                 JOIN tracks ON tracks.id = course.track
                                 WHERE course.alias = '{$alias}'", 'Course');
         echo json_encode($course);

@@ -16,12 +16,21 @@ h1, h2, h3, h4, h5, h6{
 .centered > a.btn-more {
     left: 80%;
 }
-.awards{
-    background: url(/img/backgrounds/award.png) #008184 100% 79% no-repeat;
+.awards {
+    background: url(/img/backgrounds/award.png) #001314;
+    background-size: 62%;
+    background-position: -35% 65%;
+    background-repeat: no-repeat;
 }
 .reviews .reviewer__pic.mainpic{
-    width: 200px;
     height: 200px;
+    width: 200px;
+}
+@media screen and (max-width: 950px ){
+    .reviews .reviewer__pic.mainpic{
+        max-height: 150px;
+        max-width: 150px;
+    }
 }
 a.text-dark:focus{
     color: #525559;

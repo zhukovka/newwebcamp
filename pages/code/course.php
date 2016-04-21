@@ -5,11 +5,13 @@ class Course {
 //    public $shortDescription;
     public $description;
     public $results;
+    public $requirements;
 
 //    public $start;
     private function  __construct()
     {
         $this->results = explode("\n", $this->results);
+        $this->requirements = explode("\n", $this->requirements);
     }
     public static function fromPost()
     {
