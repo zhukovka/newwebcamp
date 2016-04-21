@@ -2,7 +2,7 @@
 class Course {
     public $alias;
     public $name;
-//    public $shortDescription;
+    public $metadesc;
     public $description;
     public $results;
     public $requirements;
@@ -18,6 +18,7 @@ class Course {
         $ret = new Course();
         $ret->alias = $_POST["alias"];
         $ret->name = $_POST["name"];
+        $ret->metadesc = $_POST["metadesc"];
         $ret->shortDescription = $_POST["shortDescription"];
         return $ret;
     }
