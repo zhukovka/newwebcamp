@@ -205,7 +205,6 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.instructors = '';
         $http.get('/api/instructors').then(function (res) {
             $scope.instructors = res.data;
-            console.log(res.data);
         });
     }])
     .controller('ReviewsController', ['$scope', '$window', '$timeout', '$q', function ($scope, $window, $timeout, $q) {
@@ -503,20 +502,21 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             }
         }
     }])
-    .directive('reviews', [function () {
+    .directive('reviewer', [function () {
         return {
             restrict: 'A',
             link: function (scope, el) {
-                var reviewItems = angular.element(el[0].querySelectorAll('.reviewer'));
-                var activeItem = null;
-                reviewItems.on('click', function () {
+                scope.activeItem = null;
+                el.on('click', function () {
+                    var reviewItems = angular.element(document.querySelectorAll('.reviewer'));
                     reviewItems.removeClass('active');
                     var item = angular.element(this);
-                    if (activeItem == this) {
+                    if (scope.activeItem == this) {
                         item.removeClass('active');
+                        scope.activeItem = null;
                     } else {
                         item.addClass('active');
-                        activeItem = this;
+                        scope.activeItem = this;
                     }
                 });
             }
@@ -525,7 +525,6 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
     .directive('navToggler', [function () {
         return function (scope, el, atts) {
             var target = angular.element(document.querySelector(atts.navToggler));
-            console.log('nav-toggler', el, target);
             el.on('click', function () {
                 target.toggleClass('active');
             });

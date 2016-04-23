@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="1326390718"></div>
@@ -93,7 +93,7 @@
                                 планах также прослушать продвинутый курс PHP.</p></div>
                     </div>
 
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="1160122656">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="clearfix">
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="100000200373297">
@@ -154,7 +154,7 @@
 
 
                     </div>
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="100000732876665">
@@ -184,7 +184,7 @@
                     </a>
                 </div>
                 <div class="reviews--more clearfix" ng-show="reviewsShown">
-                    <div class="medium-4 columns reviewer" ng-repeat="review in reviews" ng-if="review.review_text">
+                    <div class="medium-4 columns reviewer" data-reviewer ng-repeat="review in reviews" ng-if="review.review_text">
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="{{ review.reviewer.id }}"></div>
