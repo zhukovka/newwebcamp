@@ -114,7 +114,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                             schedule.lessonCount = course.duration / schedule.durationHours | 0;
                             return schedule.begin;
                         });
-                        angular.extend($scope.schedules, schdls);
+                        $scope.schedules = schdls;
                         if ($routeParams.active) {
                             $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
                         } else {
