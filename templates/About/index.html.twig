@@ -33,8 +33,9 @@
                         <li class="instructor__courses hide-for-small-only">
                             <ul class="instructor__courselist">
                                 <li ng-repeat="course in instructor.courses | split:', '">
-                                    <a href="/courses/{{ course }}">
+                                    <a href="/courses/{{ course }}" class="text-center text-white text-capitalize">
                                         <img ng-src="/img/icons/course-icons_{{ course }}.svg" alt=""/>
+                                        <span>{{ course| split:'_' | last }}</span>
                                     </a>
                                 </li>
                             </ul>
@@ -50,7 +51,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="1326390718"></div>
@@ -93,7 +94,7 @@
                                 планах также прослушать продвинутый курс PHP.</p></div>
                     </div>
 
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="1160122656">
@@ -122,7 +123,7 @@
                     </div>
                 </div>
                 <div class="clearfix">
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="100000200373297">
@@ -154,7 +155,7 @@
 
 
                     </div>
-                    <div class="medium-6 columns reviewer">
+                    <div class="medium-6 columns reviewer" data-reviewer>
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="100000732876665">
@@ -184,7 +185,7 @@
                     </a>
                 </div>
                 <div class="reviews--more clearfix" ng-show="reviewsShown">
-                    <div class="medium-4 columns reviewer" ng-repeat="review in reviews" ng-if="review.review_text">
+                    <div class="medium-4 columns reviewer" data-reviewer ng-repeat="review in reviews" ng-if="review.review_text">
 
                         <div class="reviewer__inner">
                             <div class="reviewer__pic" img-fetch="{{ review.reviewer.id }}"></div>

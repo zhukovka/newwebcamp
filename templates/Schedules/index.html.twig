@@ -50,7 +50,7 @@
                         orderBy:predicate:reverse">
                         <td><a href="/courses/{{ schedule.course_alias }}?active={{ schedule.modifier }}"
                                class="course__name">{{ schedule.course_name }} {{ schedule.modifier }}</a></td>
-                        <td class="hide-mobile"><a href="#" class="course__enroll">Записаться</a></td>
+                        <td class="hide-mobile"><a href="#" ng-click="enroll(schedule)" class="course__enroll">Записаться</a></td>
                         <td>
                             {{ schedule.begin | date:'shortDate' }}
                         </td>
