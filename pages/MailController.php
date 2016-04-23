@@ -31,7 +31,7 @@ JOIN modifiers ON modifiers.id = courseinfo.modifier
 JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . ".";
+        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"];
         strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
 
         $msg = '
@@ -90,8 +90,8 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
             В ближайшее время мы перезвоним Вам на указанный номер и сообщим детали.<br>
             Вы можете связаться с нами по телефонам:<br>
             <ul>
-            <li><a class="text-dark" href="tel:+38-063-478-41-07">+38 (063) 478-41-07 Андрей</a></li>
-            <li><a class="text-dark" href="tel:+38-063-707-85-13">+38 (063) 707-85-13 Юлия</a></li>
+            <li><a class="text-dark" href="tel:+38-063-478-41-07">+38 (063) 478-41-07</a> Андрей</li>
+            <li><a class="text-dark" href="tel:+38-063-707-85-13">+38 (063) 707-85-13</a> Юлия</li>
             </ul>
             Скайп: webcamp.welcome<br>
             <a href="https://www.facebook.com/webcamp.kiev"> Группа в Facebook</a>
