@@ -33,8 +33,9 @@
                         <li class="instructor__courses hide-for-small-only">
                             <ul class="instructor__courselist">
                                 <li ng-repeat="course in instructor.courses | split:', '">
-                                    <a href="/courses/{{ course }}">
+                                    <a href="/courses/{{ course }}" class="text-center text-white text-capitalize">
                                         <img ng-src="/img/icons/course-icons_{{ course }}.svg" alt=""/>
+                                        <span>{{ course| split:'_' | last }}</span>
                                     </a>
                                 </li>
                             </ul>

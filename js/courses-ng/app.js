@@ -338,6 +338,18 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             return input.split(delimeter);
         };
     })
+    .filter('join', function () {
+        return function (input, delimeter) {
+            input = input || [];
+            return input.join(delimeter);
+        };
+    })
+    .filter('last', function () {
+        return function (input) {
+            input = input || [];
+            return input[input.length - 1];
+        };
+    })
     .directive('imgFetch', ['$timeout', function ($timeout) {
         return function (scope, el, attrs) {
             attrs.$observe('imgFetch', function (val) {
