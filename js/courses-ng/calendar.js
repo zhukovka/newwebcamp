@@ -71,6 +71,9 @@ angular.module('Calendar', [])
 
             while (dates.length < count) {
                 for (var i = 0; i < intervals.length - 1; i++) {
+                    if(intervals[i] != startDate.getDay()){
+                        continue;
+                    }
                     addDays = this.daysToMs(intervals[i + 1] - intervals[i]);
                     startDate = this.addToDate(startDate, addDays);
                     if (dates.push(startDate) >= count) {
