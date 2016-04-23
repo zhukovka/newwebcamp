@@ -45,3 +45,6 @@ a.text-dark:focus{
 #faq dt {
     margin-top:10px;
 }
+ul.instructor__courselist > li > a > img + span{
+    font-size: 11px;
+}
