@@ -99,7 +99,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         };
         Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
             //$scope.course = course;
-            $rootScope.description = course.name;
+            $rootScope.description = course.metadesc;
             $scope.courseReady = true;
             course.getLessons().then(function () {
                 angular.extend($scope.course, course);

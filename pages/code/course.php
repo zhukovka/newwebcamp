@@ -2,20 +2,23 @@
 class Course {
     public $alias;
     public $name;
-//    public $shortDescription;
+    public $metadesc;
     public $description;
     public $results;
+    public $requirements;
 
 //    public $start;
     private function  __construct()
     {
         $this->results = explode("\n", $this->results);
+        $this->requirements = explode("\n", $this->requirements);
     }
     public static function fromPost()
     {
         $ret = new Course();
         $ret->alias = $_POST["alias"];
         $ret->name = $_POST["name"];
+        $ret->metadesc = $_POST["metadesc"];
         $ret->shortDescription = $_POST["shortDescription"];
         return $ret;
     }

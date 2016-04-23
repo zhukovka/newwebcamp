@@ -29,7 +29,7 @@ $app->map('notFound', function () {
 $app->route('/', function () {
     require_once("pages/code/Slide.php");
     $slides = DB::getAll('SELECT * FROM slider WHERE alias="courses"', 'Slide');
-    $tracks = DB::getGroup('SELECT tracks.name as track, course.name as course, course.alias as course_alias FROM tracks LEFT JOIN course ON course.track = tracks.id');
+    $tracks = DB::getGroup('SELECT tracks.name AS track, course.name AS course, course.alias AS course_alias FROM tracks LEFT JOIN course ON course.track = tracks.id INNER JOIN courseinfo ON courseinfo.course_id = course.id WHERE courseinfo.include = 1');
     echo Flight::get('twig')->render('index.html.twig',
         array('active' => 'home',
             'slides' => $slides,
@@ -91,16 +91,29 @@ $app->route('/api/lessons/@courseId', function ($courseId) {
 });
 $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
-    try{
+    try {
         CoursesController::enroll();
-    }catch (PDOException $e){
-        Flight::error($e);
+        Flight::json(array('success' =>'true'));
+    } catch (PDOException $e) {
+        file_put_contents('PDOErrors.txt', $e->getMessage().$e->errorInfo[1], FILE_APPEND);
+
+        if ($e->errorInfo[1] == 1062) {
+            // duplicate entry, do something else
+            header('Content-Type: application/json');
+            Flight::json(array('sqlError' => array('code' => 1062, 'message' => $e->errorInfo[2])));
+        } else {
+            // an error other than duplicate entry occurred
+            header('HTTP/1.1 500 Internal Server Error');
+            header('Content-Type: application/json');
+            Flight::error($e);
+        }
     }
+
 });
 
 /* new routes under construction */
 
-$app->route('/faq', function(){
+$app->route('/faq', function () {
     echo Flight::get('twig')->render('FAQ/index.html.twig',
         array('active' => 'faq')
     );

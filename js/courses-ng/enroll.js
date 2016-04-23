@@ -18,7 +18,7 @@ angular.module('Enroll', [])
             $scope.sqlError = false;
         });
         function successCallback(response) {
-            if(response.data.sqlError){
+            if(response.data && response.data.sqlError){
                 $scope.sqlError = true;
             }else{
                 $scope.enrollSuccess = true;
@@ -33,6 +33,7 @@ angular.module('Enroll', [])
             $scope.enrollError = true;
             $scope.showEnrollForm = false;
             $scope.sqlError = false;
+            console.log(response);
         }
 
         $scope.postEnroll = function (student, form) {
@@ -41,7 +42,8 @@ angular.module('Enroll', [])
 
                 student.course_id = $scope.enrollSchedule.course_id;
                 student.modifier_id = $scope.enrollSchedule.modifier_id;
-                student.hash = student.course_id + student.modifier_id + student.phone;
+                student.hash = student.course_id + "" + student.modifier_id + "" + student.phone;
+                console.log(student.hash);
                 form.$setPristine();
                 form.$setUntouched();
 
