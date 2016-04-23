@@ -39,7 +39,6 @@ angular.module('Enroll', [])
         $scope.postEnroll = function (student, form) {
             form = form || null;
             if(form.$valid){
-
                 student.course_id = $scope.enrollSchedule.course_id;
                 student.modifier_id = $scope.enrollSchedule.modifier_id;
                 student.hash = student.course_id + "" + student.modifier_id + "" + student.phone;
