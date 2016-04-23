@@ -18,6 +18,7 @@ angular.module('Enroll', [])
             $scope.sqlError = false;
         });
         function successCallback(response) {
+            _gaq.push(['_trackEvent', 'Регистрация', 'Записаться']);
             if(response.data && response.data.sqlError){
                 $scope.sqlError = true;
             }else{

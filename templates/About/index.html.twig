@@ -222,21 +222,3 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 {% endblock %}
-{#<div class="reviewer__more">#}
-                        {#<span class="icon-dots-three-horizontal"></span>#}
-                        {#</div>#}
-{#FB.init({
-    appId: '890216487659774',
-  });
-  FB.api(
-                "/217557725110551/ratings?access_token=CAAMppa2FKP4BAGQucHlc2RpYnNbRM06l5W3hHwhLMTNZAaSgdhqZBryzcZAvm9s7VcVD7ZA4tvRsqNGSPQEgbVQdht7m8jKRB6pVavuDWgnW0qtZAsVocw9tWIsi1l4dMgtLenWmDSK4NSJoCYv5DF67ZCbWPhUGJVELo7tzbCf1A2JmzWHhLllLdZBR7fQQVIZD",
-                function (response) {
-                  if (response && !response.error) {
-                        var reviews = new Reviews(response.data);
-                        var reviewsView = new ReviewsView({collection:reviews});
-                        self.changeView(reviewsView);
-                  }
-                  else{
-                    console.dir(response.error);
-                  }
-                });#}

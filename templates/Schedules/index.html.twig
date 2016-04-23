@@ -8,8 +8,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row mb-50 grid">
             {% verbatim %}
             <div class="courses" ng-controller="SchedulesController">
@@ -50,7 +48,8 @@
                         orderBy:predicate:reverse">
                         <td><a href="/courses/{{ schedule.course_alias }}?active={{ schedule.modifier }}"
                                class="course__name">{{ schedule.course_name }} {{ schedule.modifier }}</a></td>
-                        <td class="hide-mobile"><a href="#" ng-click="enroll(schedule)" class="course__enroll">Записаться</a></td>
+                        <td class="hide-mobile"><a href="#" ng-click="enroll(schedule)" class="course__enroll">Записаться</a>
+                        </td>
                         <td>
                             {{ schedule.begin | date:'shortDate' }}
                         </td>
@@ -69,7 +68,8 @@
         <div class="row grid hide-for-small-only">
             <p>В этом разделе указаны запланированные курсы и тренинги, которые проводятся на базе WebCamp. Чтобы
                 заказать индивидуальные занятия или корпоративный тренинг <a href="#" rel="#sign_up_form"
-                                                                                      ng-click="enroll()">оформите заявку</a>.</p>
+                                                                             ng-click="enroll()">оформите заявку</a>.
+            </p>
         </div>
         <div class="row mb-20 grid hide-for-small-only">
             <div class="page__info">
@@ -80,7 +80,5 @@
                 </p>
             </div>
         </div>
-
-
     </div>
 {% endblock %}
