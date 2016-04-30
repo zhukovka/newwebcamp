@@ -8,3 +8,4 @@ vendor
 .sass-cache
 configs/configs.php
 PDOErrors.txt
+build.sh
