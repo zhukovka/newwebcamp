@@ -45,3 +45,12 @@ a.text-dark:focus{
 #faq dt {
     margin-top:10px;
 }
+ul.instructor__courselist > li > a{
+    padding: 5px 15px;
+}
+ul.instructor__courselist > li > a > img{
+    max-height: 50px;
+}
+ul.instructor__courselist > li > a > img + span{
+    font-size: 12px;
+}

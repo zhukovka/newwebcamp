@@ -21,7 +21,7 @@ class MailController
 
     public static function registerMail($data)
     {
-        $to = self::$test . "@" . self::$webcampDomain;
+        $to = self::$register . "@" . self::$webcampDomain;
         $subj = "Заявка на курс";
         $mail = $data["email"];
         $modifier_id = $data["modifier_id"];
@@ -31,7 +31,7 @@ JOIN modifiers ON modifiers.id = courseinfo.modifier
 JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"] . ".";
+        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"];
         strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
 
         $msg = '
@@ -84,22 +84,22 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
             <title>Регистрация на курс от Webcamp</title>
             </head>
             <body>
-                <table style="width:90%">
-                    <tr>
-                        <td>
-                            <p>
-                            Здравствуйте '. $name .' !<br>
-                            Вы записались на курсы от Webcamp.<br>
-                            Хуй Вам.
-
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+            <p>
+            Здравствуйте ' . $name . ' !<br>
+            Вы записались на курс <b>' . $info . '</b> от Webcamp.<br>
+            В ближайшее время мы перезвоним Вам на указанный номер и сообщим детали.<br>
+            Вы можете связаться с нами по телефонам:<br>
+            <ul>
+            <li><a class="text-dark" href="tel:+38-063-478-41-07">+38 (063) 478-41-07</a> Андрей</li>
+            <li><a class="text-dark" href="tel:+38-063-707-85-13">+38 (063) 707-85-13</a> Юлия</li>
+            </ul>
+            Скайп: webcamp.welcome<br>
+            <a href="https://www.facebook.com/webcamp.kiev"> Группа в Facebook</a>
+            </p>
             </body>
             </html>
 ';
-        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register .'@'. self::$webcampDomain . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . '@' . self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
 

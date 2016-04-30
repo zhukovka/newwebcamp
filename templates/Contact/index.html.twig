@@ -6,7 +6,6 @@
 {% endblock %}
 {% block js %}
     <script type="text/javascript">
-
         var map;
         function initMap() {
             var office = {lat: 50.440672, lng: 30.526025};
@@ -66,9 +65,16 @@
                     strokeColor: '#e7571e'
                 }
             });
-
         }
-
+        function loadHangout() {
+            var e = document.getElementById("invite_box");
+            e.style.display = "block", function () {
+                var e = document.createElement("script");
+                e.type = "text/javascript", e.async = !0, e.src = "https://apis.google.com/js/platform.js";
+                var t = document.getElementsByTagName("script")[0];
+                t.parentNode.insertBefore(e, t)
+            }()
+        }
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU_GWiND8_ovfAp_HeqIRPpKt85qPPpew&callback=initMap&language=ru">
@@ -85,38 +91,41 @@
         </div>
 
         <div class="row grid mb_m-50">
-            <div class="medium-4 large-3 large-offset-1 columns text_s-center mb_s-20">
+            <div class="medium-4 columns text_s-center mb_s-20">
                 <h3 class="page__h3"><span class="icon-flypaper contacts__icons"></span>Напишите</h3>
                 <ul class="list-nostyle">
-                    <li>email: <a href="mailto:info@webcamp.com.ua?Subject=Site%20question" class="text-dark">info@webcamp.com.ua</a></li>
-                    <li>skype: <a class="text-dark">webcamp.welcome</a></li>
-                    <li>hangouts: <a class="text-dark">darvina10@gmail.com</a></li>
+                    <li>email: <a href="mailto:info@webcamp.com.ua?Subject=Site%20question" class="text-dark">info@webcamp.com.ua</a>
+                    </li>
+                    <li>skype: <a href="skype:webcamp.welcome?chat" class="text-dark">webcamp.welcome</a></li>
+                    <li id="invite_box">hangouts:
+                        <a onclick="loadHangout()" class="text-dark g-hangout" id="chat-button"
+                           data-render="createhangout"
+                           data-invites="[{ id : 'darvina10@gmail.com', invite_type : 'EMAIL' }]">darvina10@gmail.com</a>
+                    </li>
                 </ul>
             </div>
-            <div class="medium-4 large-3 large-offset-1 columns text_s-center mb_s-20">
+            <div class="medium-4 columns text_s-center mb_s-20">
                 <h3 class="page__h3"><span class="icon-iphone contacts__icons"></span>Позвоните</h3>
                 <ul class="list-nostyle">
-                    <li><a class="text-dark" href="tel:+38-063-478-41-07"> +38 (063) 478-41-07</a></li>
+                    <li><a class="text-dark" href="tel:+38-063-478-41-07">+38 (063) 478-41-07</a></li>
                     <li><a class="text-dark" href="tel:+38-063-707-85-13">+38 (063) 707-85-13</a></li>
                     <li><a class="text-dark" href="tel:+38-050-270-67-13">+38 (050) 270-67-13</a></li>
-                    <li><a class="text-dark" href="tel:+38-044-235-61-17">+38 (044) 235-61-17</a></li>
                     <li>
                         <small>все номера доступны в Viber</small>
                     </li>
                 </ul>
             </div>
-            <div class="medium-4 large-3 large-offset-1 columns text_s-center mb_s-20">
+            <div class="medium-4 columns text_s-center mb_s-20">
                 <h3 class="page__h3"><span class="icon-place contacts__icons"></span>Приходите</h3>
-                <p class="text-dark">г.Киев, ул. Дарвина, 10, оф.13 <br/>
+
+                <p class="text-dark">г.Киев, ул. Дарвина, 10, оф.13 <br>
+                    <a class="text-dark" href="tel:+38-044-235-61-17">+38 (044) 235-61-17</a><br>
                     <a class="map__link" target="_blank"
                        href="https://www.google.com/maps/d/u/0/viewer?mid=z1x4DSKne78E.k1HeVJp9_uk0">посмотреть маршрут
                         на
                         карте</a></p>
             </div>
         </div>
-
         <div id="map"></div>
     </div>
-
-
 {% endblock %}
