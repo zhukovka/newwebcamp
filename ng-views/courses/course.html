@@ -66,7 +66,7 @@
 
                         <ul class="list-table">
                             <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
-                            <li class="text-right"><a href="#course-schedules">Другие даты и время</a></li>
+                            <li class="text-right"><a scroll-to-el="#course-schedules" href="">Другие даты и время</a></li>
                         </ul>
                     </div>
                 </div>
@@ -147,6 +147,9 @@
                                   class="timeline--{{activeTab}}"></timeline>
                         <p class="lessons__count">
                             {{schedule.lessonCount}} уроков
+                        </p>
+                        <p class="lessons__price">
+                            Стоимость: {{schedule.price}} грн
                         </p>
 
                         <div class="lessons__content hide-for-small-only">

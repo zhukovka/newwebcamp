@@ -2,6 +2,7 @@
 
 require_once ROOT . 'configs/pdo.php';
 require_once ROOT . 'pages/MailController.php';
+
 /**
  * Created by IntelliJ IDEA.
  * User: lenka
@@ -78,7 +79,7 @@ class CoursesController
     public static function coursenames()
     {
         include_once("pages/code/course.php");
-        $courses = DB::getArray('SELECT course.id as course_id, course.name as course_name FROM course');
+        $courses = DB::getArray('SELECT course.id as course_id, course.name as course_name FROM course JOIN courseinfo ON course.id = courseinfo.course_id WHERE courseinfo.include = 1');
         echo json_encode($courses);
     }
 }

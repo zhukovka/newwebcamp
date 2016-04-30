@@ -541,4 +541,31 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 target.toggleClass('active');
             });
         }
+    }])
+    .directive('scrollToEl', ['$timeout', function ($timeout) {
+        return function (scope, el, atts) {
+            var target = document.querySelector(atts.scrollToEl);
+
+            function animateScrollTop(y, time) {
+                var fraction = 10;
+                var yFraction = y / fraction;
+                function doScroll(_y) {
+                    if (_y <= y) {
+                        $timeout(function () {
+                            window.scrollTo(0, _y);
+                            doScroll(_y + yFraction);
+                        }, time / fraction);
+                    }
+                }
+                doScroll(yFraction);
+            }
+
+            el.on('click', function (e) {
+                e.preventDefault();
+                if (target) {
+                    var top = target.getBoundingClientRect().top | 0;
+                    animateScrollTop(top - 20, 500);
+                }
+            });
+        }
     }]);
