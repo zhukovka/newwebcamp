@@ -4,3 +4,35 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# www Redirect
+RewriteCond %{HTTP_HOST} !^(www.) [NC]
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+
+# ErrorDocument 404 http://www.webcamp.com.ua/404.php
+
+Options -Indexes
+# Basic Redirect
+Redirect 301 /teachers http://webcamp.com.ua/aboutus
+Redirect 301 /studentfeedback http://webcamp.com.ua/aboutus
+Redirect 301 /promotions http://webcamp.com.ua/study
+Redirect 301 /skype-student http://webcamp.com.ua/study
+Redirect 301 /courses/indi http://webcamp.com.ua/courses/
+
+# Frontend Redirect
+Redirect 301 /courses/js-basic http://webcamp.com.ua/courses/js_basic
+Redirect 301 /courses/js-basic-m http://webcamp.com.ua/courses/js_basic
+Redirect 301 /courses/frontend-basic http://webcamp.com.ua/courses/frontend_basic
+Redirect 301 /courses/frontend-basic-m http://webcamp.com.ua/courses/frontend_basic
+
+# PHP Redirect
+Redirect 301 /courses/php-basic http://webcamp.com.ua/courses/php_starter
+Redirect 301 /courses/php-advanced http://webcamp.com.ua/courses/php_procedural
+Redirect 301 /courses/php-symfony http://webcamp.com.ua/courses/
+
+# Java Redirect
+Redirect 301 /courses/java-starter http://webcamp.com.ua/courses/java_starter
+Redirect 301 /courses/java-fundamentals http://webcamp.com.ua/courses/java_fundamentals
+Redirect 301 /courses/java-advanced http://webcamp.com.ua/courses/java_advanced
+Redirect 301 /courses/java-ee http://webcamp.com.ua/courses/java_hibernate
