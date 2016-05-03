@@ -24,7 +24,11 @@ $app = new Engine();
 Flight::set('twig', $twig);
 $app->map('notFound', function () {
     // Display custom 404 page
-    echo 'oppa-pa 404';
+    echo Flight::get('twig')->render('404.html.twig',
+        array('active' => '404')
+
+    );
+//    echo 'oppa-pa 404';
 });
 $app->route('/', function () {
     require_once("pages/code/Slide.php");
