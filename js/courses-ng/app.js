@@ -84,7 +84,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             return tab == $scope.activeTab;
         };
         $scope.getLessonCount = function (schedule) {
-            return $scope.course.duration / schedule.durationHours | 0;
+            return Math.ceil($scope.course.duration / schedule.durationHours);
         };
         $scope.getDayLesson = function (dayNum) {
             if ($scope.activeSchedule.coursedays) {
@@ -112,7 +112,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                         var schdls = _.sortBy(schedules, function (schedule) {
                             schedule.course_name = course.name;
                             schedule.setCourseDays($scope.getLessonCount(schedule));
-                            schedule.lessonCount = course.duration / schedule.durationHours | 0;
+                            schedule.lessonCount = Math.ceil(course.duration / schedule.durationHours);
                             return schedule.begin;
                         });
                         $scope.schedules = schdls;
