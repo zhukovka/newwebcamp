@@ -26,9 +26,10 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $scope.enroll = function (schedule) {
             $scope.showModal = true;
             if (schedule) {
-                $scope.enrollSchedule.modifier_id = schedule.modifier_id;
                 $scope.enrollSchedule.course_id = schedule.course_id;
                 $scope.enrollSchedule.course_name = schedule.course_name;
+                $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                getSchedules(schedule);
             }
         };
         $scope.hideModal = function () {
@@ -42,12 +43,16 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             course_id: 0,
             course_name: ""
         };
-        function getSchedules() {
+        function getSchedules(schedule) {
             var _id = $scope.enrollSchedule.course_id;
-            Schedule.schedule({id: _id}).$promise.then(function (schedules) {
+            return Schedule.schedule({id: _id}).$promise.then(function (schedules) {
                 if (schedules.length) {
                     $scope.schedules = schedules;
-                    $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
+                    if (schedule) {
+                        $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                    }else{
+                        $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
+                    }
                 }
             });
         }
@@ -131,7 +136,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             $scope.enrollSchedule.course_name = course.name;
             $scope.$emit('changeCourse');
         }, function (err) {
-            window.location.replace(window.location.origin+"/courses");
+            window.location.replace(window.location.origin + "/courses");
         });
     }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
