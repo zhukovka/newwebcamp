@@ -14,7 +14,7 @@
     <div class="cube2"></div>
 </div>
 <div ng-show="courseReady">
-    <div  class="row mb-20">
+    <div class="row mb-20">
 
         <div class="large-6 columns mb_m-15">
             <div class="row">
@@ -54,6 +54,7 @@
                 <div class="medium-9 columns">
 
                     <div ng-if="closest" class="closest__course">
+                        <p>{{closest.modifier_name | modifier}}</p>
 
 
                         <p class="closest__time">
@@ -66,7 +67,8 @@
 
                         <ul class="list-table">
                             <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
-                            <li class="text-right"><a scroll-to-el="#course-schedules" href="">Другие даты и время</a></li>
+                            <li class="text-right"><a scroll-to-el="#course-schedules" href="">Другие даты и время</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -148,6 +150,7 @@
                         <p class="lessons__count">
                             {{schedule.lessonCount}} уроков
                         </p>
+
                         <p class="lessons__price">
                             Стоимость: {{schedule.price}} грн
                         </p>
@@ -207,6 +210,7 @@
 
     <div class="courseinfo__results">
         <p class="lead">Требования к кандидатам:</p>
+
         <div class="row">
             <div class="medium-8 medium-centered columns">
                 <ul class="results-list">
@@ -216,11 +220,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 
 
     <div class="row mb-20 hide-for-small-only">

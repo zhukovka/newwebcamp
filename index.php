@@ -87,7 +87,12 @@ $app->route('/api/courses/names', function () {
 });
 $app->route('/api/courses/@alias', function ($alias) {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::courses($alias);
+    $course = CoursesController::courses($alias);
+    if (!$course) {
+        Flight::notFound();
+    } else {
+        Flight::json($course);
+    }
 });
 $app->route('/api/lessons/@courseId', function ($courseId) {
     require_once(ROOT . 'pages/CoursesController.php');
@@ -97,9 +102,9 @@ $app->route('POST /enroll', function () {
     require_once(ROOT . 'pages/CoursesController.php');
     try {
         CoursesController::enroll();
-        Flight::json(array('success' =>'true'));
+        Flight::json(array('success' => 'true'));
     } catch (PDOException $e) {
-        file_put_contents('PDOErrors.txt', $e->getMessage().$e->errorInfo[1], FILE_APPEND);
+        file_put_contents('PDOErrors.txt', $e->getMessage() . $e->errorInfo[1], FILE_APPEND);
 
         if ($e->errorInfo[1] == 1062) {
             // duplicate entry, do something else

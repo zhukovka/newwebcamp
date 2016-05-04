@@ -1,4 +1,5 @@
 .idea
+*.iml
 .Gruntfile
 sass
 node_modules
@@ -10,3 +11,4 @@ configs/configs.php
 PDOErrors.txt
 build.sh
 .htaccess
+_site
