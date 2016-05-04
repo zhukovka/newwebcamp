@@ -21,6 +21,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
         $locationProvider.html5Mode(true);
     }])
     .controller('WebcampCtrl', ['$scope', 'Course', 'Schedule', function ($scope, Course, Schedule) {
+
         $scope.showModal = false;
         $scope.enroll = function (schedule) {
             $scope.showModal = true;
@@ -42,7 +43,8 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             course_name: ""
         };
         function getSchedules() {
-            Schedule.schedule({id: $scope.enrollSchedule.course_id}, function (schedules) {
+            var _id = $scope.enrollSchedule.course_id;
+            Schedule.schedule({id: _id}).$promise.then(function (schedules) {
                 if (schedules.length) {
                     $scope.schedules = schedules;
                     $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
@@ -61,7 +63,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 getSchedules();
             }
         });
-
+        $scope.$on('changeCourse', getSchedules);
     }])
     .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
         $scope.menuitem;
@@ -127,6 +129,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
             $scope.enrollSchedule.course_id = course.id;
             $scope.enrollSchedule.course_name = course.name;
+            $scope.$emit('changeCourse');
         }, function (err) {
             window.location.replace(window.location.origin+"/courses");
         });

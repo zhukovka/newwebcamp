@@ -56,8 +56,6 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Курс
-                        <!--<select ng-model="myColor" ng-options="color.name group by color.shade for color in colors">-->
-                        <!--</select>-->
                         <select name="course" class="enroll-form__course"
                                 ng-model="enrollSchedule.modifier_id"
                                 ng-options="schedule.modifier_id as (schedule.modifier_name | modifier) group by schedule.course_name for schedule in schedules"></select>
