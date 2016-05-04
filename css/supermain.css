@@ -54,3 +54,22 @@ ul.instructor__courselist > li > a > img{
 ul.instructor__courselist > li > a > img + span{
     font-size: 12px;
 }
+.error{
+    background-image: url("../img/backgrounds/404.jpg");
+    background-position: center;
+    padding: 12% 0;
+}
+.error > p {
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+}
+.error> p:last-child{
+    margin-bottom: 0px;
+}
+
+#faq dd::selection, #faq dt::selection, p::selection, a::selection{
+    background-color: #e7571e;
+    color:#ffffff;
+
+}
