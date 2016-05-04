@@ -4,7 +4,7 @@
 angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Calendar', 'Clock', 'Timeline', 'Enroll'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
-            // route for the home page
+        // route for the home page
             .when('/', {
                 templateUrl: function () {
                     return '/ng-views' + location.pathname + 'index.html';
@@ -101,6 +101,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             //$scope.course = course;
             $rootScope.description = course.metadesc;
             $scope.courseReady = true;
+            $scope.courseError = false;
             course.getLessons().then(function () {
                 angular.extend($scope.course, course);
                 Schedule.schedule({id: course.id}, function (schedules) {
@@ -126,6 +127,8 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             });
             $scope.enrollSchedule.course_id = course.id;
             $scope.enrollSchedule.course_name = course.name;
+        }, function (err) {
+            window.location.replace(window.location.origin+"/courses");
         });
     }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
@@ -550,6 +553,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                 var fraction = 10;
                 var yFraction = y / fraction;
                 var repeatTime = time / fraction;
+
                 function doScroll(_y) {
                     if (_y <= y) {
                         $timeout(function () {
@@ -558,6 +562,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                         }, repeatTime);
                     }
                 }
+
                 doScroll(yFraction);
             }
 

@@ -1,4 +1,5 @@
 .idea
+*.iml
 .Gruntfile
 sass
 node_modules
