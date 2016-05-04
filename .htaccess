@@ -6,8 +6,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 
 # www Redirect
-RewriteCond %{HTTP_HOST} !^(www.) [NC]
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} !^(www.) [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 
 # ErrorDocument 404 http://www.webcamp.com.ua/404.php
