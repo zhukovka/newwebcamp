@@ -70,6 +70,6 @@ ul.instructor__courselist > li > a > img + span{
 
 #faq dd::selection, #faq dt::selection, p::selection, a::selection{
     background-color: #e7571e;
-    color:#008184;
+    color:#ffffff;
 
 }
