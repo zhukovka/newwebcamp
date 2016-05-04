@@ -549,12 +549,13 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
             function animateScrollTop(y, time) {
                 var fraction = 10;
                 var yFraction = y / fraction;
+                var repeatTime = time / fraction;
                 function doScroll(_y) {
                     if (_y <= y) {
                         $timeout(function () {
                             window.scrollTo(0, _y);
                             doScroll(_y + yFraction);
-                        }, time / fraction);
+                        }, repeatTime);
                     }
                 }
                 doScroll(yFraction);

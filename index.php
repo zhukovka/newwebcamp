@@ -83,7 +83,7 @@ $app->route('/api/courses/names', function () {
 });
 $app->route('/api/courses/@alias', function ($alias) {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::courses($alias);
+    Flight::json(CoursesController::courses($alias));
 });
 $app->route('/api/lessons/@courseId', function ($courseId) {
     require_once(ROOT . 'pages/CoursesController.php');

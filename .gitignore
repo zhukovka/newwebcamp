@@ -9,3 +9,4 @@ vendor
 configs/configs.php
 PDOErrors.txt
 build.sh
+_site
