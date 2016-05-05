@@ -17,7 +17,11 @@
                     </h3>
                     <label class="courses__search mb-20"> <input type="text" ng-model="searchText"></label>
                 </div>
-                <table class="page__table">
+                <div ng-hide="scheduleReady" class="spinner">
+                    <div class="cube1"></div>
+                    <div class="cube2"></div>
+                </div>
+                <table class="page__table" ng-show="scheduleReady">
                     <thead>
                     <tr>
                         <th width="30%"
@@ -47,7 +51,8 @@
                     <tr ng-repeat="schedule in scheduleGroup | filter:searchText |
                         orderBy:predicate:reverse">
                         <td><a href="/courses/{{ schedule.course_alias }}?active={{ schedule.modifier }}"
-                               class="course__name">{{ schedule.course_name }} {{ schedule.modifier }}</a></td>
+                               class="course__name">{{ schedule.course_name }}</a><br>
+                               <small>{{ schedule.modifier | modifier }}</small></td>
                         <td class="hide-mobile"><a href="#" ng-click="enroll(schedule)" class="course__enroll">Записаться</a>
                         </td>
                         <td>

@@ -50,7 +50,7 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
                     $scope.schedules = schedules;
                     if (schedule) {
                         $scope.enrollSchedule.modifier_id = schedule.modifier_id;
-                    }else{
+                    } else {
                         $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
                     }
                 }
@@ -141,7 +141,9 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
     }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
         $scope.courses;
+        $scope.coursesReady = false;
         Course.query().$promise.then(function (courses) {
+            $scope.coursesReady = true;
             $scope.courses = courses;
         });
 
@@ -196,11 +198,12 @@ angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Cale
     .controller('SchedulesController', ['$scope', 'Schedule', 'Utils', function ($scope, Schedule, Utils) {
         $scope.schedules;
         $scope.closest;
+        $scope.scheduleReady = false;
         Schedule.query().$promise.then(function (schedules) {
             $scope.schedules = schedules;
             $scope.closest = Utils.getCloses(schedules, 6);
-
             $scope.groupedSchedules = Utils.groupByMonth(schedules);
+            $scope.scheduleReady = true;
             //console.log(schedules, $scope.closest, $scope.groupedSchedules);
         });
 

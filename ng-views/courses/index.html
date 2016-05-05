@@ -17,8 +17,11 @@
             </h3>
             <label class="courses__search mb-20"> <input type="text" ng-model="searchText"></label>
         </div>
-
-        <table class="page__table">
+        <div ng-hide="coursesReady" class="spinner">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
+        </div>
+        <table class="page__table" ng-show="coursesReady">
             <thead>
             <tr>
                 <th width="30%" ng-click="order('name')">
