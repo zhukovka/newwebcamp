@@ -12,3 +12,5 @@ PDOErrors.txt
 build.sh
 .htaccess
 _site
+robots.txt
+.gitignore
