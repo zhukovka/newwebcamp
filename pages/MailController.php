@@ -99,7 +99,7 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
             </body>
             </html>
 ';
-        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$register . '@' . self::$webcampDomain . '>' . "\r\n";
+        $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$info . '@' . self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
 
