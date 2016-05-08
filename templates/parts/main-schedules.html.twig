@@ -22,9 +22,9 @@
 
                         <p class="closest__time">
                             {{ schedule.begin | date:'HH:mm' }}
-                            -{{ schedule.getEndTime() | date:'HH:mm' }}
+                            - {{ schedule.getEndTime() | date:'HH:mm' }}
                             | {{ schedule.lessonCount }}
-                            уроков</p>
+                            часов</p>
 
                         <p class="closest__price">{{ schedule.price }} грн</p>
                         <a href="#" class="btn--warning closest__enroll" ng-click="enroll(schedule)">Записаться</a>

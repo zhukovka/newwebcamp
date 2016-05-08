@@ -17,7 +17,6 @@ class DB
         self::$con = new PDO(DB_HOST, DB_USER, DB_PASSWORD);
         self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$con->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
-        self::$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     public static function getMenu()
@@ -73,7 +72,6 @@ class DB
         try {
             $res = self::$con->prepare($query);
             $res->execute($data);
-            Flight::json(array('success' => 'true'));
         } catch (PDOException $e) {
             file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);
             if ($e->errorInfo[1] == 1062) {
@@ -87,5 +85,3 @@ class DB
         }
     }
 }
-
-
