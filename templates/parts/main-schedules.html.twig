@@ -1,4 +1,4 @@
-<div class="row mb-50" ng-controller="SchedulesController">
+<div class="row grid mb-50" ng-controller="SchedulesController">
     {% verbatim %}
 
         <div class="large-6 columns closest" ng-class="{'end': $last}" ng-repeat="schedule in closest">
@@ -29,10 +29,11 @@
                         <p class="closest__price">{{ schedule.price }} грн</p>
                         <a href="#" class="btn--warning closest__enroll" ng-click="enroll(schedule)">Записаться</a>
                     </div>
+
                 </div>
             </div>
 
-
+            <div class="rule show-for-small-only mb-20"></div>
         </div>
         {% endverbatim %}
     {#{% for item in closest %}#}
