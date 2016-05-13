@@ -73,3 +73,40 @@ ul.instructor__courselist > li > a > img + span{
     color:#ffffff;
 
 }
+#icons-small a{
+    color: #ffffff;
+}
+@media screen and (max-width: 40em){
+    .row .row{
+        margin: 0;
+    }
+    .closest__name {
+        font-size: xx-large;
+    }
+    .closest__enroll{
+        font-size: x-large;
+    }
+    .closest{
+        border-bottom: 1px solid #797e83;
+        margin-bottom: 20px;
+    }
+    .closest:last-child{
+        border: none;
+        margin-bottom: 0;
+    }
+    .review__name{
+        text-align: center;
+    }
+    .review__content{
+        text-align: justify;
+    }
+    #main-menu > .nav-list__item > a{
+        line-height: 2;
+    }
+}
+.closest__day{
+    margin-bottom: 5%;
+}
+.track__item > img{
+    max-height: 110px;
+}
