@@ -1,123 +1,154 @@
-h1, h2, h3, h4, h5, h6{
-    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
-p{
+
+p {
     font-weight: 400;
 }
 
-.centered{
+.centered {
     width: 100%;
     margin: 15% 0 0;
 }
-.centered > h3{
+
+.centered > h3 {
     text-align: center;
     text-transform: uppercase;
     font-size: 3rem;
 }
-.centered > p{
+
+.centered > p {
     text-align: center;
 }
+
 .centered > a.btn-more {
     left: 80%;
 }
+
 .awards {
     background: url(/img/backgrounds/award.png) #001314;
     background-size: 62%;
     background-position: -35% 65%;
     background-repeat: no-repeat;
 }
-.reviews .reviewer__pic.mainpic{
+
+.reviews .reviewer__pic.mainpic {
     height: 200px;
     width: 200px;
 }
-@media screen and (max-width: 950px ){
-    .reviews .reviewer__pic.mainpic{
+
+@media screen and (max-width: 950px ) {
+    .reviews .reviewer__pic.mainpic {
         max-height: 150px;
         max-width: 150px;
     }
 }
-a.text-dark:focus{
+
+a.text-dark:focus {
     color: #525559;
 }
+
 #faq dd {
     padding-left: 30px;
 }
+
 #faq dt {
-    margin-top:10px;
+    margin-top: 10px;
 }
-ul.instructor__courselist > li > a{
+
+ul.instructor__courselist > li > a {
     padding: 5px 15px;
 }
-ul.instructor__courselist > li > a > img{
+
+ul.instructor__courselist > li > a > img {
     max-height: 50px;
 }
-ul.instructor__courselist > li > a > img + span{
+
+ul.instructor__courselist > li > a > img + span {
     font-size: 12px;
 }
-.error{
+
+.error {
     background-image: url("../img/backgrounds/404.jpg");
     background-position: center;
     padding: 12% 0;
 }
+
 .error > p {
     color: #fff;
     font-size: 50px;
     text-align: center;
 }
-.error> p:last-child{
+
+.error > p:last-child {
     margin-bottom: 0px;
 }
 
-#faq dd::selection, #faq dt::selection, p::selection, a::selection{
+#faq dd::selection, #faq dt::selection, p::selection, a::selection {
     background-color: #e7571e;
-    color:#ffffff;
+    color: #ffffff;
 
 }
-#icons-small a{
+
+#icons-small a {
     color: #ffffff;
 }
-@media screen and (max-width: 40em){
-    .row .row{
+
+@media screen and (max-width: 40em) {
+    .row .row {
         margin: 0;
     }
+
     .closest__name {
         font-size: xx-large;
     }
-    .closest__enroll{
+
+    .closest__enroll {
         font-size: x-large;
     }
-    .closest{
+
+    .closest {
         border-bottom: 1px solid #797e83;
         margin-bottom: 20px;
     }
-    .closest:last-child{
+
+    .closest:last-child {
         border: none;
         margin-bottom: 0;
     }
-    .review__name{
+
+    .review__name {
         text-align: center;
     }
-    .review__content{
+
+    .review__content {
         text-align: justify;
     }
-    #main-menu > .nav-list__item > a{
+
+    #main-menu > .nav-list__item > a,
+    .contacts .text-dark {
         line-height: 2;
     }
-    .contacts li{
+
+    .contacts li {
         margin: 20px 0;
     }
-    .contacts a{
+
+    .contacts a {
         padding: 10px;
     }
-    .contacts #maplink{
+
+    .contacts #maplink {
         display: block;
         margin: 20px 0;
     }
 
 }
-.closest__day{
+
+.closest__day {
     margin-bottom: 5%;
 }
-.track__item > img{
+
+.track__item > img {
     max-height: 110px;
 }
