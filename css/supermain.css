@@ -103,6 +103,17 @@ ul.instructor__courselist > li > a > img + span{
     #main-menu > .nav-list__item > a{
         line-height: 2;
     }
+    .contacts li{
+        margin: 20px 0;
+    }
+    .contacts a{
+        padding: 10px;
+    }
+    .contacts #maplink{
+        display: block;
+        margin: 20px 0;
+    }
+
 }
 .closest__day{
     margin-bottom: 5%;
