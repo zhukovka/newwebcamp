@@ -1,8 +1,8 @@
 /**
  * Created by lenka on 9/30/15.
  */
-angular.module('Courses', ['ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Calendar', 'Clock', 'Timeline', 'Enroll'])
-    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Utils', 'Calendar', 'Clock', 'Timeline', 'Enroll'])
+    .config(['$routeProvider', '$locationProvider', 'uiMaskConfigProvider', function ($routeProvider, $locationProvider, uiMaskConfigProvider) {
         $routeProvider
         // route for the home page
             .when('/', {

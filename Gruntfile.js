@@ -39,6 +39,7 @@ module.exports = function (grunt) {
                     "js/libs/xml2json.js",
                     "bower_components/angular/angular.js",
                     "bower_components/angular-locale-ru/angular-locale_ru.js",
+                    "bower_components/angular-ui-mask/dist/mask.js",
                     "bower_components/angular-route/angular-route.js",
                     "bower_components/angular-resource/angular-resource.js",
                     "bower_components/angular-sanitize/angular-sanitize.js",
