@@ -30,11 +30,11 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Телефон
-                        <input type="text" ng-model="student.phone" class="enroll-form__phone" ui-mask="+9?9?(?9?9?9) ?9?9?9-?9?9?9?9" model-view-value="true" name="phone"/>
+                        <input type="text" ng-pattern="regexPhone" ng-model="student.phone" class="enroll-form__phone" ui-mask="+?9?9(?9?9?9)?9?9?9-?9?9?9?9" model-view-value="true" name="phone" required/>
                     </label>
 
                     <div ng-show="enrollForm.$submitted || enrollForm.phone.$touched">
-                        <div ng-show="enrollForm.phone.$error.required">
+                        <div ng-show="enrollForm.phone.$error.required || enrollForm.phone.$error.pattern">
                             <span>Введите номер телефона пожалуйста.</span>
                         </div>
                     </div>
