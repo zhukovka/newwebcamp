@@ -41,7 +41,8 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
         $scope.enrollSchedule = {
             modifier_id: 0,
             course_id: 0,
-            course_name: ""
+            course_name: "",
+            modifier_name: "default"
         };
         function getSchedules(schedule) {
             var _id = $scope.enrollSchedule.course_id;
@@ -50,8 +51,10 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                     $scope.schedules = schedules;
                     if (schedule) {
                         $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                        $scope.enrollSchedule.modifier_name = schedule.modifier_name;
                     } else {
                         $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
+                        $scope.enrollSchedule.modifier_name = schedules[0].modifier_name;
                     }
                 }
             });
@@ -68,7 +71,9 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 getSchedules();
             }
         });
-        $scope.$on('changeCourse', getSchedules);
+        $scope.$on('changeCourse', function(){
+            getSchedules();
+        });
     }])
     .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
         $scope.menuitem;
