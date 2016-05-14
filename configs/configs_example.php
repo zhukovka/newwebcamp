@@ -10,3 +10,5 @@ define ("DB_PASSWORD", "mjvhk2wq");
 define ("DB_DATABASE", "webcamp_test");
 define ("DB_HOST",
 'mysql:dbname=webcamp_test;host=webcamp.mysql.ukraine.com.ua;charset=utf8');
+define('ENV', "dev");
+//define('ENV', "prod");

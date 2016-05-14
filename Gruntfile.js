@@ -11,6 +11,21 @@ module.exports = function (grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            app: {
+                files: {
+                    "js/annotated-ng/utils.js": ["js/courses-ng/utils.js"],
+                    "js/annotated-ng/calendar.js": ["js/courses-ng/calendar.js"],
+                    "js/annotated-ng/clock.js": ["js/courses-ng/clock.js"],
+                    "js/annotated-ng/timeline.js": ["js/courses-ng/timeline.js"],
+                    "js/annotated-ng/enroll.js": ["js/courses-ng/enroll.js"],
+                    "js/annotated-ng/app.js": ["js/courses-ng/app.js"]
+                }
+            }
+        },
         concat: {
             options: {
                 stripBanners: true
@@ -18,22 +33,17 @@ module.exports = function (grunt) {
             dist: {
 
                 src: [
-                    "/bower_components/lodash/lodash.js",
-                    "/bower_components/moment/moment.js",
-                    "/bower_components/moment/locale/ru.js",
-                    "/js/libs/xml2json.js",
-                    "/bower_components/angular/angular.js",
-                    "/bower_components/angular-locale-ru/angular-locale_ru.js",
-                    "/bower_components/angular-route/angular-route.js",
-                    "/bower_components/angular-resource/angular-resource.js",
-                    "/bower_components/angular-sanitize/angular-sanitize.js",
-                    "/js/courses-ng/utils.js",
-                    "/js/courses-ng/calendar.js",
-                    "/js/courses-ng/clock.js",
-                    "/js/courses-ng/timeline.js",
-                    "/js/courses-ng/enroll.js",
-                    "/js/courses-ng/app.js"
-                    ],
+                    "bower_components/lodash/lodash.js",
+                    "bower_components/moment/moment.js",
+                    "bower_components/moment/locale/ru.js",
+                    "js/libs/xml2json.js",
+                    "bower_components/angular/angular.js",
+                    "bower_components/angular-locale-ru/angular-locale_ru.js",
+                    "bower_components/angular-route/angular-route.js",
+                    "bower_components/angular-resource/angular-resource.js",
+                    "bower_components/angular-sanitize/angular-sanitize.js",
+                    "js/annotated-ng/*.js"
+                ],
                 dest: 'js/build.js'
             }
         },
@@ -43,7 +53,7 @@ module.exports = function (grunt) {
             },
             target: {
                 files: {
-                    'dist/style.css': ["/fonts/foundation-icons/foundation-icons.css",'/css/main.min.css', '/css/supermain.css']
+                    'dist/style.css': ["fonts/foundation-icons/foundation-icons.css", 'css/main.min.css', 'css/supermain.css']
                 }
             }
         },
@@ -131,9 +141,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     // Default task.
     grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-    grunt.registerTask('build', ['clean', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('build', ['clean', 'ngAnnotate', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('w_style', ['watch:w_sass']);
 
 };
