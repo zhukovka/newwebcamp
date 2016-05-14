@@ -11,4 +11,5 @@ configs/configs.php
 PDOErrors.txt
 build.sh
 .htaccess
+/js/build.js
 _site
