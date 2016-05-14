@@ -54,7 +54,7 @@ module.exports = function (grunt) {
             },
             target: {
                 files: {
-                    'dist/style.css': ["fonts/foundation-icons/foundation-icons.css", 'css/main.min.css', 'css/supermain.css']
+                    'dist/style.css': ['css/webcamp.min.css', 'css/supermain.css']
                 }
             }
         },

@@ -8,7 +8,8 @@ angular.module('Enroll', [])
         $scope.sqlError = false;
 
         var student = {
-            how: $scope.how[0]
+            how: $scope.how[0],
+            phone: "38"
         };
         $scope.student = angular.copy(student);
         $scope.$on('closeModal', function(){
