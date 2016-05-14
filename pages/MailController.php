@@ -54,6 +54,10 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                                 <td>' . $info . '</td>
                             </tr>
                             <tr>
+                                <td>Почта:</td>
+                                <td>' . $mail . '</td>
+                            </tr>
+                            <tr>
                                 <td>Ближайшая группа:</td>
                                 <td>' . $start . '</td>
                             </tr>

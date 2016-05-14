@@ -7,7 +7,7 @@
         <title>{{ title }}</title>
         <base href="{% block base %}{% endblock %}">
         {% block meta %}
-            <meta description="Тренинги и курсы программирования WebCamp"/>
+            <meta name="description" content="Тренинги и курсы программирования WebCamp"/>
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" href="/img/favicon.ico">
@@ -61,7 +61,7 @@
 <div id="content">{% block content %}{% endblock %}</div>
 <footer>
     <div class="footer">
-        <div class="row grid">
+        <div class="row grid hide-for-small-only">
             <div class="medium-3 small-6 columns mb-20 footer__links">
                 <p>Обучение</p>
                 <ul class="list-nostyle">
@@ -108,6 +108,13 @@
                     <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-36 ml-10" target="_blank"></a></li>
                 </ul>
             </div>
+        </div>
+        <div id="icons-small" class="row grid show-for-small-only text-center">
+            <ul class="list-inline">
+                <li><a href="https://www.facebook.com/webcamp.kiev" class="fi-social-facebook size-72" target="_blank"></a></li>
+                <li><a href="https://www.linkedin.com/company/webcamp" class="fi-social-linkedin size-72 ml_s-40" target="_blank"></a></li>
+                <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-72 ml_s-40" target="_blank"></a></li>
+            </ul>
         </div>
     </div>
     <div class="copyright text-center">
