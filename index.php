@@ -119,6 +119,11 @@ $app->route('POST /enroll', function () {
     }
 
 });
+$app->route('POST /subscribe', function () {
+    require_once(ROOT . 'MailChimp.php');
+    $MailChimp = new MailChimp('abc123abc123abc123abc123abc123-us1');
+    
+});
 
 /* new routes under construction */
 
