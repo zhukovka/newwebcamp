@@ -4,12 +4,14 @@
     {% block head %}
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="theme-color" content="#001314">
         <title>{{ title }}</title>
         <base href="{% block base %}{% endblock %}">
         {% block meta %}
             <meta name="description" content="Тренинги и курсы программирования WebCamp"/>
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" sizes="192x192" href="../img/icons/logo.svg">
         <link rel="shortcut icon" href="/img/favicon.ico">
         <link href='https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,300,600&subset=latin,cyrillic'
               rel='stylesheet'
