@@ -14,3 +14,4 @@ build.sh
 _site
 robots.txt
 .gitignore
+sitemap.xml

@@ -1,20 +1,39 @@
 AddDefaultCharset UTF-8
 RewriteEngine On
 
-Redirect 302 / http://hh.webcamp.com.ua/index.html
-
-#Убираем слеш
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^(.+)/$
-RewriteRule ^(.+)/$ /$1 [R=301,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
 
-#WWW
-RewriteCond %{HTTP_HOST} !^(www.) [NC]
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+# www Redirect
+#RewriteCond %{HTTP_HOST} !^(www.) [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 
-RewriteRule ^([a-zA-Z\-_0-9]+)[/]?$ index.php
-RewriteRule ^([a-zA-Z\-_0-9]+)/([a-zA-Z\-_0-9]+)$ index.php
-RewriteRule ^([a-zA-Z\-_0-9]+)/([a-zA-Z\-_0-9]+)/([a-zA-Z\-_0-9]+)$ index.php
-RewriteRule ^([a-zA-Z\-_0-9]+)\.htm(l)?$ index.php
-RewriteRule ^.*\.php$ index.php
+# ErrorDocument 404 http://www.webcamp.com.ua/404.php
+
+Options -Indexes
+
+# Basic Redirect
+Redirect 301 /teachers /aboutus#instructors
+Redirect 301 /studentfeedback /aboutus#reviews
+Redirect 301 /promotions /study#promo
+Redirect 301 /skype-student /study
+Redirect 301 /courses/indi /courses
+
+# Frontend Redirect
+Redirect 301 /courses/js-basic /courses/js_basic
+Redirect 301 /courses/js-basic-m /courses/js_basic
+Redirect 301 /courses/frontend-basic /courses/frontend_basic
+Redirect 301 /courses/frontend-basic-m /courses/frontend_basic
+
+# PHP Redirect
+Redirect 301 /courses/php-basic /courses/php_starter
+Redirect 301 /courses/php-advanced /courses/php_adv
+Redirect 301 /courses/php-symfony /courses
+
+# Java Redirect
+Redirect 301 /courses/java-starter /courses/java_starter
+Redirect 301 /courses/java-fundamentals /courses/java_fundamentals
+Redirect 301 /courses/java-advanced /courses/java_advanced
+Redirect 301 /courses/java-ee /courses/java_hibernate
