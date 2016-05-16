@@ -11,23 +11,57 @@ module.exports = function (grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            app: {
+                files: {
+                    "js/annotated-ng/utils.js": ["js/courses-ng/utils.js"],
+                    "js/annotated-ng/calendar.js": ["js/courses-ng/calendar.js"],
+                    "js/annotated-ng/clock.js": ["js/courses-ng/clock.js"],
+                    "js/annotated-ng/timeline.js": ["js/courses-ng/timeline.js"],
+                    "js/annotated-ng/enroll.js": ["js/courses-ng/enroll.js"],
+                    "js/annotated-ng/app.js": ["js/courses-ng/app.js"]
+                }
+            }
+        },
         concat: {
             options: {
-                banner: '<%= banner %>',
                 stripBanners: true
             },
             dist: {
-                src: ['lib/<%= pkg.name %>.js'],
-                dest: 'dist/<%= pkg.name %>.js'
+
+                src: [
+                    "bower_components/lodash/lodash.js",
+                    "bower_components/moment/moment.js",
+                    "bower_components/moment/locale/ru.js",
+                    "js/libs/xml2json.js",
+                    "bower_components/angular/angular.js",
+                    "bower_components/angular-locale-ru/angular-locale_ru.js",
+                    "bower_components/angular-ui-mask/dist/mask.js",
+                    "bower_components/angular-route/angular-route.js",
+                    "bower_components/angular-resource/angular-resource.js",
+                    "bower_components/angular-sanitize/angular-sanitize.js",
+                    "js/annotated-ng/*.js"
+                ],
+                dest: 'js/build.js'
+            }
+        },
+        cssmin: {
+            options: {
+                sourceMap: true
+            },
+            target: {
+                files: {
+                    'dist/style.css': ['css/webcamp.min.css', 'css/supermain.css']
+                }
             }
         },
         uglify: {
-            options: {
-                banner: '<%= banner %>'
-            },
             dist: {
                 src: '<%= concat.dist.dest %>',
-                dest: 'dist/<%= pkg.name %>.min.js'
+                dest: 'dist/script.min.js'
             }
         },
         jshint: {
@@ -90,6 +124,11 @@ module.exports = function (grunt) {
                 files: 'sass/*/*.scss',
                 tasks: ['sass:dist']
             }
+        },
+        clean: {
+            build: {
+                src: ['dist/*']
+            }
         }
     });
 
@@ -101,9 +140,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     // Default task.
     grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-    grunt.registerTask('style', ['sass', 'autoprefixer']);
+    grunt.registerTask('build', ['clean', 'ngAnnotate', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('w_style', ['watch:w_sass']);
 
 };

@@ -4,8 +4,8 @@ define("ROOT", __DIR__ . "/");
 require_once ROOT . 'vendor/autoload.php';
 use flight\Engine;
 
+require_once ROOT . 'configs/pdo.php';
 try {
-    require_once ROOT . 'configs/pdo.php';
     DB::connect();
     $menu = DB::getMenu();
 } catch (PDOException $e) {
@@ -16,10 +16,8 @@ $loader = new Twig_Loader_Filesystem(ROOT . 'templates');
 $twig = new Twig_Environment($loader);
 $twig->addGlobal('title', 'Webcamp');
 $twig->addGlobal('menu', $menu);
-//var_dump($menu);
-//$twig = new Twig_Environment($loader, array(
-//    'cache' => ROOT . 'compilation_cache',
-//));
+$twig->addGlobal('env', ENV);
+
 $app = new Engine();
 Flight::set('twig', $twig);
 $app->map('notFound', function () {
@@ -28,7 +26,6 @@ $app->map('notFound', function () {
         array('active' => '404')
 
     );
-//    echo 'oppa-pa 404';
 });
 $app->route('/', function () {
     require_once("pages/code/Slide.php");
@@ -117,6 +114,11 @@ $app->route('POST /enroll', function () {
             Flight::error($e);
         }
     }
+
+});
+$app->route('POST /subscribe', function () {
+    require_once(ROOT . 'MailChimp.php');
+    $MailChimp = new MailChimp('abc123abc123abc123abc123abc123-us1');
 
 });
 

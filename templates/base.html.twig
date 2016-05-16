@@ -4,45 +4,26 @@
     {% block head %}
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="theme-color" content="#001314">
         <title>{{ title }}</title>
         <base href="{% block base %}{% endblock %}">
         {% block meta %}
             <meta name="description" content="Тренинги и курсы программирования WebCamp"/>
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" sizes="192x192" href="../img/icons/logo.svg">
         <link rel="shortcut icon" href="/img/favicon.ico">
-        <link href='https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,300,600&subset=latin,cyrillic' rel='stylesheet'
+        <link href='https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,300,600&subset=latin,cyrillic'
+              rel='stylesheet'
               type='text/css'>
-        <link rel="stylesheet" type="text/css" href="/fonts/foundation-icons/foundation-icons.css"/>
-        <link rel="stylesheet" href="/css/main.min.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="/css/supermain.css" type="text/css" media="screen">
+        {% if env == "prod" %}
+            <link rel="stylesheet" href="/dist/style.css" type="text/css" media="screen">
+        {% else %}
+            <link rel="stylesheet" href="/css/webcamp.min.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="/css/supermain.css" type="text/css" media="screen">
+        {% endif %}
 
-        <script src="/bower_components/lodash/lodash.js"></script>
-        <script src="/bower_components/moment/moment.js"></script>
-        <script src="/bower_components/moment/locale/ru.js"></script>
-        <script src="/js/libs/xml2json.js"></script>
-        <script src="/bower_components/angular/angular.js"></script>
-        <script src="/bower_components/angular-locale-ru/angular-locale_ru.js"></script>
-        <script src="/bower_components/angular-route/angular-route.js"></script>
-        <script src="/bower_components/angular-resource/angular-resource.js"></script>
-        <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="/js/courses-ng/utils.js"></script>
-        <script src="/js/courses-ng/calendar.js"></script>
-        <script src="/js/courses-ng/clock.js"></script>
-        <script src="/js/courses-ng/timeline.js"></script>
-        <script src="/js/courses-ng/enroll.js"></script>
-        <script src="/js/courses-ng/app.js"></script>
 
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-48484111-1', 'auto');
-            ga('send', 'pageview');
-
-        </script>
     {% endblock %}
 </head>
 
@@ -90,30 +71,26 @@
                     <li><a href="/contacts#map">Где мы</a></li>
                 </ul>
             </div>
-            {#<div class="medium-2 columns footer__links">#}
-                {#<p>Специальности</p>#}
-                {#<ul class="list-nostyle">#}
-                    {#<li><a href="/specs#JAVA-fullstack">FullStack Java Developer</a></li>#}
-                    {#<li><a href="/specs#JAVA-backend">Web Java Developer</a></li>#}
-                    {#<li><a href="/specs#Javascript">JavaScript Developer</a></li>#}
-                    {#<li><a href="/specs#Frontend">Frontend Developer</a></li>#}
-                    {#<li><a href="/specs#PHP">PHP Developer</a></li>#}
-                {#</ul>#}
-            {#</div>#}
             <div class="medium-3 small-6 columns footer__social text-right">
                 <p>Мы в соцсетях</p>
                 <ul class="list-inline">
-                    <li><a href="https://www.facebook.com/webcamp.kiev" class="fi-social-facebook size-36" target="_blank"></a></li>
-                    <li><a href="https://www.linkedin.com/company/webcamp" class="fi-social-linkedin size-36 ml-10" target="_blank"></a></li>
-                    <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-36 ml-10" target="_blank"></a></li>
+                    <li><a href="https://www.facebook.com/webcamp.kiev" class="fi-social-facebook size-36"
+                           target="_blank"></a></li>
+                    <li><a href="https://www.linkedin.com/company/webcamp" class="fi-social-linkedin size-36 ml-10"
+                           target="_blank"></a></li>
+                    <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-36 ml-10"
+                           target="_blank"></a></li>
                 </ul>
             </div>
         </div>
         <div id="icons-small" class="row grid show-for-small-only text-center">
             <ul class="list-inline">
-                <li><a href="https://www.facebook.com/webcamp.kiev" class="fi-social-facebook size-72" target="_blank"></a></li>
-                <li><a href="https://www.linkedin.com/company/webcamp" class="fi-social-linkedin size-72 ml_s-40" target="_blank"></a></li>
-                <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-72 ml_s-40" target="_blank"></a></li>
+                <li><a href="https://www.facebook.com/webcamp.kiev" class="fi-social-facebook size-72"
+                       target="_blank"></a></li>
+                <li><a href="https://www.linkedin.com/company/webcamp" class="fi-social-linkedin size-72 ml_s-40"
+                       target="_blank"></a></li>
+                <li><a href="https://www.youtube.com/user/webcampkiev" class="fi-social-youtube size-72 ml_s-40"
+                       target="_blank"></a></li>
             </ul>
         </div>
     </div>
@@ -127,6 +104,45 @@
 <enroll-modal ng-show="showModal">
 
 </enroll-modal>
+
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-48484111-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+{% if env == "prod" %}
+    <script src="/dist/script.min.js"></script>
+{% else %}
+    <script src="/bower_components/lodash/lodash.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/moment/locale/ru.js"></script>
+    <script src="/js/libs/xml2json.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-locale-ru/angular-locale_ru.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/js/courses-ng/utils.js"></script>
+    <script src="/js/courses-ng/calendar.js"></script>
+    <script src="/js/courses-ng/clock.js"></script>
+    <script src="/js/courses-ng/timeline.js"></script>
+    <script src="/js/courses-ng/enroll.js"></script>
+    <script src="/js/courses-ng/app.js"></script>
+{% endif %}
 {% block js %}{% endblock %}
 </body>
 </html>

@@ -8,7 +8,8 @@
             <h2 class="enroll__course-title">{{enrollSchedule.course_name}}</h2>
             <label>Название
                 <select ng-model="enrollSchedule"
-                        ng-options="courseName.course_name for courseName in courseNames" ng-change="courseChange()"></select>
+                        ng-options="courseName.course_name for courseName in courseNames"
+                        ng-change="courseChange()"></select>
             </label>
         </div>
 
@@ -29,14 +30,11 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Телефон
-                        <input type="text" placeholder="0637078513" ng-model="student.phone"
-                               class="enroll-form__phone"
-                               name="phone" required/>
-
+                        <input type="text" ng-pattern="regexPhone" ng-model="student.phone" class="enroll-form__phone" ui-mask="+?9?9(?9?9?9)?9?9?9-?9?9?9?9" model-view-value="true" name="phone" required/>
                     </label>
 
                     <div ng-show="enrollForm.$submitted || enrollForm.phone.$touched">
-                        <div ng-show="enrollForm.phone.$error.required">
+                        <div ng-show="enrollForm.phone.$error.required || enrollForm.phone.$error.pattern">
                             <span>Введите номер телефона пожалуйста.</span>
                         </div>
                     </div>
@@ -85,7 +83,8 @@
             </div>
         </form>
         <div ng-show="enrollSuccess">
-            <h3 class="text-center">{{student.name}}, cпасибо, что записались на наш курс {{enrollSchedule.course_name}}</h3>
+            <h3 class="text-center">{{student.name}}, cпасибо, что записались на наш курс
+                {{enrollSchedule.course_name}}</h3>
 
             <p class="lead">
                 На ваш email отправлено письмо с подтверждением о регистрации.

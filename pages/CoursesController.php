@@ -30,7 +30,7 @@ class CoursesController
     public static function all()
     {
         include_once("pages/code/course.php");
-        $courses = DB::getAll('SELECT DISTINCT course.id, course.name, course.alias, course.description, course.duration, course.level, courseinfo.price, tracks.name as track FROM course
+        $courses = DB::getAll('SELECT DISTINCT course.id, course.name, course.alias, course.description, course.duration, course.level, courseinfo.price, tracks.name AS track FROM course
                                 JOIN courseinfo ON course.id = courseinfo.course_id
                                 JOIN tracks ON tracks.id = course.track
                                 WHERE courseinfo.include = 1
@@ -67,18 +67,21 @@ class CoursesController
             'how' => null,
             'course_id' => null,
             'modifier_id' => null,
-            'hash' => null
+            'hash' => null,
+            'modifier_text' => null
         );
+        $tmp = array_merge($data, $_POST);
+        $modifier_text = array_splice($tmp, -1);
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
-        DB::postOne($query, array_merge($data, $_POST));
-        MailController::registerMail(array_merge($data, $_POST));
+        DB::postOne($query, $tmp);
+        MailController::registerMail($tmp,$modifier_text);
     }
 
     public static function coursenames()
     {
         include_once("pages/code/course.php");
-        $courses = DB::getArray('SELECT course.id as course_id, course.name as course_name FROM course JOIN courseinfo ON course.id = courseinfo.course_id WHERE courseinfo.include = 1');
+        $courses = DB::getArray('SELECT course.id AS course_id, course.name AS course_name FROM course JOIN courseinfo ON course.id = courseinfo.course_id WHERE courseinfo.include = 1');
         echo json_encode($courses);
     }
 }

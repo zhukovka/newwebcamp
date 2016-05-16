@@ -148,7 +148,3 @@ ul.instructor__courselist > li > a > img + span {
 .closest__day {
     margin-bottom: 5%;
 }
-
-.track__item > img {
-    max-height: 110px;
-}
