@@ -19,7 +19,7 @@ class MailController
     private static $header = 'Content-type: text/html; charset=utf-8';
     private static $testDomain = "devtest.";
 
-    public static function registerMail($data)
+    public static function registerMail($data, $modifier_text)
     {
         $to = self::$register . "@" . self::$webcampDomain;
         $subj = "Заявка на курс";
@@ -31,7 +31,7 @@ JOIN modifiers ON modifiers.id = courseinfo.modifier
 JOIN course ON course.id = courseinfo.course_id
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > CURDATE() AND shedule.modifier = courseinfo.modifier
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
-        $info = $courseinfo[0]["course_name"] . " " . $courseinfo[0]["modifier_name"];
+        $info = $courseinfo[0]["course_name"] . " " . $modifier_text["modifier_text"];
         strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
 
         $msg = '
