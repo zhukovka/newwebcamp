@@ -36,11 +36,17 @@
 
                         <div class="track-courses">
                             <ul class="track-courses__list">
-                                {% for item in track %}
+                                {% for item in track|slice(0, 5) %}
                                     <li>
-                                        <a href="/courses/{{ item.course_alias }}" class="underline">
-                                            {{ item.course }}
-                                        </a>
+                                        {% if track|length > 5 and loop.last %}
+                                            <a href="/courses/" class="underline">
+                                                больше {{ key }} курсов
+                                            </a>
+                                        {% else %}
+                                            <a href="/courses/{{ item.course_alias }}" class="underline">
+                                                {{ item.course }}
+                                            </a>
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -65,9 +71,13 @@
                     </div>
                 </div>
                 <div class="medium-9 columns">
-                    <a href="https://www.linkedin.com/in/ivan-parasyuk-6046a880"><p class="review__name">Иван Парасюк</p></a>
+                    <a href="https://www.linkedin.com/in/ivan-parasyuk-6046a880"><p class="review__name">Иван
+                            Парасюк</p></a>
 
-                    <p class="review__content">Пошел на курсы изначально ничего не зная в этой сфере. Решил набраться ума и пошел на курс "PHP basics". Знаете у меня это хорошо получилось. Спасибо Кириллу за то, что доходчиво все объяснял и помогал. Также нельзя не отметить лояльность цены на курсы. Доволен как кот :)</p>
+                    <p class="review__content">Пошел на курсы изначально ничего не зная в этой сфере. Решил набраться
+                        ума и пошел на курс "PHP basics". Знаете у меня это хорошо получилось. Спасибо Кириллу за то,
+                        что доходчиво все объяснял и помогал. Также нельзя не отметить лояльность цены на курсы. Доволен
+                        как кот :)</p>
                 </div>
             </div>
             <div class="divider__more">

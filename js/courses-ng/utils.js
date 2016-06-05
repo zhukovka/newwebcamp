@@ -3,6 +3,13 @@
  */
 angular.module('Utils', [])
     .service('Utils', [function () {
+        this.replaceKeys = function (target, source) {
+            _.forOwn(source, function (value, key) {
+                if (target[key] !== null && source[key] !== null) {
+                    target[key] = value;
+                }
+            });
+        };
         this.getCloses = function (dates, limit) {
             var limit = limit || Infinity;
             return _.reduce(dates, function (cur, prev) {

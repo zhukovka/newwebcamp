@@ -8,7 +8,7 @@
             <h2 class="enroll__course-title">{{enrollSchedule.course_name}}</h2>
             <label>Название
                 <select ng-model="enrollSchedule"
-                        ng-options="courseName.course_name for courseName in courseNames"
+                        ng-options="courseName.course_name for courseName in courseNames track by courseName.course_name"
                         ng-change="courseChange()"></select>
             </label>
         </div>
