@@ -30,7 +30,11 @@ class DB
         $res = self::$con->query($query);
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public static function getObj($query)
+    {
+        $res = self::$con->query($query);
+        return $res->fetch(PDO::FETCH_LAZY);
+    }
     public static function fetchSchedule()
     {
         include_once(ROOT . "pages/code/schedule.php");

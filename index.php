@@ -60,9 +60,9 @@ $app->route('/aboutus', function () {
     );
 });
 
-$app->route('/courses(/@alias)', function () {
+$app->route('/courses(/@alias)', function ($alias) {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::index();
+    CoursesController::index($alias);
 });
 $app->route('/api/instructors', function () {
     require_once(ROOT . 'pages/CoursesController.php');

@@ -19,7 +19,7 @@ class ScheduleController
         echo $GLOBALS['twig']->render('Schedules/index.html.twig',
             array('active' => 'schedule',
                 'menuItem' => $menuItem,
-
+                'title'=>"Расписание курсов Webcamp"
             )
         );
     }

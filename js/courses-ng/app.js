@@ -71,14 +71,14 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 getSchedules();
             }
         });
-        $scope.$on('changeCourse', function(){
+        $scope.$on('changeCourse', function () {
             getSchedules();
         });
     }])
     .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
-        $scope.menuitem;
+        window.document.title = $scope.menuitem;
     }])
-    .controller('CourseController', ['$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', function ($rootScope, $scope, $routeParams, Course, Schedule) {
+    .controller('CourseController', ['$document', '$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', function ($document, $rootScope, $scope, $routeParams, Course, Schedule) {
         $scope.activeSchedule;
         $scope.organizerReady = false;
         $scope.courseReady = false;
@@ -111,6 +111,7 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
         };
         Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
             //$scope.course = course;
+            window.document.title = course.name;
             $rootScope.description = course.metadesc;
             $scope.courseReady = true;
             $scope.courseError = false;

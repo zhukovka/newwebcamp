@@ -11,18 +11,27 @@ require_once ROOT . 'pages/MailController.php';
  */
 class CoursesController
 {
-    public static function index()
+    public static function index($alias)
     {
 
         $index = array_search('courses', array_column($GLOBALS['menu'], 'alias'));
         $menuItem = '';
+        $description = "Курсы программирования и цены";
+        $title = "Курсы программирования Webcamp";
+        if ($alias != null) {
+            $metadata = DB::getObj("SELECT course.name, course.metadesc FROM course WHERE course.alias = '{$alias}'");
+            $description = $metadata['metadesc'];
+            $title = $metadata['name'];
+        }
         if ($index !== false) {
             $menuItem = $GLOBALS['menu'][$index];
         }
+
         echo $GLOBALS['twig']->render('Courses/index.html.twig',
             array('active' => 'courses',
                 'menuItem' => $menuItem,
-
+                'title' => $title,
+                'description' => $description
             )
         );
     }
@@ -75,7 +84,7 @@ class CoursesController
         $query = "INSERT INTO students (id, name, email, phone, comment, how, course_id, modifier_id, hash)
                   VALUES (:id, :name, :email, :phone, :comment, :how, :course_id, :modifier_id, :hash);";
         DB::postOne($query, $tmp);
-        MailController::registerMail($tmp,$modifier_text);
+        MailController::registerMail($tmp, $modifier_text);
     }
 
     public static function coursenames()
