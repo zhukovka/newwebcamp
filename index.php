@@ -14,7 +14,6 @@ try {
 }
 $loader = new Twig_Loader_Filesystem(ROOT . 'templates');
 $twig = new Twig_Environment($loader);
-$twig->addGlobal('title', 'Webcamp');
 $twig->addGlobal('menu', $menu);
 $twig->addGlobal('env', ENV);
 
@@ -34,7 +33,8 @@ $app->route('/', function () {
     echo Flight::get('twig')->render('index.html.twig',
         array('active' => 'home',
             'slides' => $slides,
-            'tracks' => $tracks)
+            'tracks' => $tracks,
+            'title'=>"Курсы программирования Webcamp")
     );
 });
 $app->route('/schedule', function () {
@@ -43,23 +43,26 @@ $app->route('/schedule', function () {
 });
 $app->route('/study', function () {
     echo Flight::get('twig')->render('Study/index.html.twig',
-        array('active' => 'study')
+        array('active' => 'study',
+            'title'=>"Обучение Webcamp")
     );
 });
 $app->route('/contacts', function () {
     echo Flight::get('twig')->render('Contact/index.html.twig',
-        array('active' => 'contacts')
+        array('active' => 'contacts',
+            'title'=>"Контакты Webcamp")
     );
 });
 $app->route('/aboutus', function () {
     echo Flight::get('twig')->render('About/index.html.twig',
-        array('active' => 'aboutus')
+        array('active' => 'aboutus',
+            'title'=>"Комманда Webcamp")
     );
 });
 
-$app->route('/courses(/@alias)', function () {
+$app->route('/courses(/@alias)', function ($alias) {
     require_once(ROOT . 'pages/CoursesController.php');
-    CoursesController::index();
+    CoursesController::index($alias);
 });
 $app->route('/api/instructors', function () {
     require_once(ROOT . 'pages/CoursesController.php');

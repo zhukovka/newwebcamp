@@ -20,130 +20,128 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             });
         $locationProvider.html5Mode(true);
     }])
-    .controller('WebcampCtrl', ['$scope', 'Course', 'Schedule', function ($scope, Course, Schedule) {
+    .controller('WebcampCtrl', ['$scope', 'Course', 'Schedule', 'Utils', '$timeout',
+        function ($scope, Course, Schedule, Utils, $timeout) {
 
-        $scope.showModal = false;
-        $scope.enroll = function (schedule) {
-            $scope.showModal = true;
-            if (schedule) {
-                $scope.enrollSchedule.course_id = schedule.course_id;
-                $scope.enrollSchedule.course_name = schedule.course_name;
-                $scope.enrollSchedule.modifier_id = schedule.modifier_id;
-                getSchedules(schedule);
-            }
-        };
-        $scope.hideModal = function () {
             $scope.showModal = false;
-            $scope.$broadcast('closeModal');
-        };
-        $scope.schedules = {};
-        $scope.course = {};
-        $scope.enrollSchedule = {
-            modifier_id: 0,
-            course_id: 0,
-            course_name: "",
-            modifier_name: "default"
-        };
-        function getSchedules(schedule) {
-            var _id = $scope.enrollSchedule.course_id;
-            return Schedule.schedule({id: _id}).$promise.then(function (schedules) {
-                if (schedules.length) {
-                    $scope.schedules = schedules;
-                    if (schedule) {
-                        $scope.enrollSchedule.modifier_id = schedule.modifier_id;
-                        $scope.enrollSchedule.modifier_name = schedule.modifier_name;
-                    } else {
-                        $scope.enrollSchedule.modifier_id = schedules[0].modifier_id;
-                        $scope.enrollSchedule.modifier_name = schedules[0].modifier_name;
+            $scope.enroll = function (schedule) {
+                $scope.showModal = true;
+                if (schedule) {
+                    $scope.enrollSchedule.course_id = schedule.course_id;
+                    $scope.enrollSchedule.course_name = schedule.course_name;
+                    $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                    getSchedules(schedule);
+                }
+            };
+            $scope.hideModal = function () {
+                $scope.showModal = false;
+                $scope.$broadcast('closeModal');
+            };
+            $scope.schedules = {};
+            $scope.course = {};
+            $scope.enrollSchedule = {
+                modifier_id: 0,
+                course_id: 0,
+                course_name: "",
+                modifier_name: "default"
+            };
+            function getSchedules(schedule) {
+                var _id = $scope.enrollSchedule.course_id;
+                return Schedule.schedule({id: _id}).$promise.then(function (schedules) {
+                    if (schedules.length) {
+                        $scope.schedules = schedules;
+                        var _schedule = schedule || schedules[0];
+                        Utils.replaceKeys($scope.enrollSchedule, _schedule);
                     }
+                });
+            }
+
+            $scope.courseChange = function () {
+                getSchedules();
+            };
+            Course.names(function (courses) {
+                if (courses.length) {
+                    $scope.courseNames = courses;
+                    Utils.replaceKeys($scope.enrollSchedule, courses[0]);
+                    getSchedules();
                 }
             });
-        }
-
-        $scope.courseChange = function () {
-            console.log("change", $scope.enrollSchedule);
-            getSchedules();
-        };
-        Course.names(function (courses) {
-            if (courses.length) {
-                $scope.courseNames = courses;
-                $scope.enrollSchedule = courses[0];
+            $scope.$on('changeCourse', function () {
                 getSchedules();
-            }
-        });
-        $scope.$on('changeCourse', function(){
-            getSchedules();
-        });
-    }])
-    .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
-        $scope.menuitem;
-    }])
-    .controller('CourseController', ['$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', function ($rootScope, $scope, $routeParams, Course, Schedule) {
-        $scope.activeSchedule;
-        $scope.organizerReady = false;
-        $scope.courseReady = false;
-        $scope.predicate = 'begin';
-        $scope.reverse = false;
-        $scope.activateSchedule = function (schedule) {
-            $scope.activeSchedule = schedule;
-            $scope.activeTab = $scope.activeSchedule.modifier_name;
-            $scope.enrollSchedule.modifier_id = $scope.activeSchedule.modifier_id;
-            $scope.getDayLesson(0);
-            $scope.$broadcast('activateSchedule');
-        };
-        $scope.dayLesson = {};
-        $scope.isActiveTab = function (tab) {
-            return tab == $scope.activeTab;
-        };
-        $scope.getLessonCount = function (schedule) {
-            return Math.ceil($scope.course.duration / schedule.durationHours);
-        };
-        $scope.getDayLesson = function (dayNum) {
-            if ($scope.activeSchedule.coursedays) {
-                var count = $scope.activeSchedule.durationHours,
-                    start = count * dayNum;
-                angular.extend($scope.dayLesson, {
-                    day: $scope.activeSchedule.coursedays[dayNum],
-                    items: $scope.course.lessons.slice(start, start + count),
-                    num: dayNum + 1
-                });
-            }
-        };
-        Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
-            //$scope.course = course;
-            $rootScope.description = course.metadesc;
-            $scope.courseReady = true;
-            $scope.courseError = false;
-            course.getLessons().then(function () {
-                angular.extend($scope.course, course);
-                Schedule.schedule({id: course.id}, function (schedules) {
-                    $scope.organizerReady = true;
-                    if (schedules) {
-
-                        //$scope.schedules
-                        var schdls = _.sortBy(schedules, function (schedule) {
-                            schedule.course_name = course.name;
-                            schedule.setCourseDays($scope.getLessonCount(schedule));
-                            schedule.lessonCount = Math.ceil(course.duration / schedule.durationHours);
-                            return schedule.begin;
-                        });
-                        $scope.schedules = schdls;
-                        if ($routeParams.active) {
-                            $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
-                        } else {
-                            $scope.closest = $scope.schedules[0];
-                        }
-                        $scope.activateSchedule($scope.closest);
-                    }
-                });
             });
-            $scope.enrollSchedule.course_id = course.id;
-            $scope.enrollSchedule.course_name = course.name;
-            $scope.$emit('changeCourse');
-        }, function (err) {
-            window.location.replace(window.location.origin + "/courses");
-        });
+            // window.WCS = $scope;
+        }])
+    .controller('MainCoursesController', ['$rootScope', '$scope', 'Course', function ($rootScope, $scope, Course) {
+        window.document.title = $scope.menuitem;
     }])
+    .controller('CourseController', ['$document', '$rootScope', '$scope', '$routeParams', 'Course', 'Schedule', 'Utils',
+        function ($document, $rootScope, $scope, $routeParams, Course, Schedule, Utils) {
+            $scope.activeSchedule;
+            $scope.organizerReady = false;
+            $scope.courseReady = false;
+            $scope.predicate = 'begin';
+            $scope.reverse = false;
+            $scope.activateSchedule = function (schedule) {
+                $scope.activeSchedule = schedule;
+                $scope.activeTab = $scope.activeSchedule.modifier_name;
+                Utils.replaceKeys($scope.enrollSchedule, $scope.activeSchedule);
+                $scope.getDayLesson(0);
+                $scope.$broadcast('activateSchedule');
+            };
+            $scope.dayLesson = {};
+            $scope.isActiveTab = function (tab) {
+                return tab == $scope.activeTab;
+            };
+            $scope.getLessonCount = function (schedule) {
+                return Math.ceil($scope.course.duration / schedule.durationHours);
+            };
+            $scope.getDayLesson = function (dayNum) {
+                if ($scope.activeSchedule.coursedays) {
+                    var count = $scope.activeSchedule.durationHours,
+                        start = count * dayNum;
+                    angular.extend($scope.dayLesson, {
+                        day: $scope.activeSchedule.coursedays[dayNum],
+                        items: $scope.course.lessons.slice(start, start + count),
+                        num: dayNum + 1
+                    });
+                }
+            };
+            Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
+                //$scope.course = course;
+                window.document.title = course.name;
+                $rootScope.description = course.metadesc;
+                $scope.courseReady = true;
+                $scope.courseError = false;
+                course.getLessons().then(function () {
+                    angular.extend($scope.course, course);
+                    Schedule.schedule({id: course.id}, function (schedules) {
+                        $scope.organizerReady = true;
+                        if (schedules) {
+
+                            //$scope.schedules
+                            var schdls = _.sortBy(schedules, function (schedule) {
+                                schedule.course_name = course.name;
+                                schedule.setCourseDays($scope.getLessonCount(schedule));
+                                schedule.lessonCount = Math.ceil(course.duration / schedule.durationHours);
+                                return schedule.begin;
+                            });
+                            $scope.schedules = schdls;
+                            if ($routeParams.active) {
+                                $scope.closest = _.find(schedules, {modifier_name: $routeParams.active});
+                            } else {
+                                $scope.closest = $scope.schedules[0];
+                            }
+                            $scope.activateSchedule($scope.closest);
+                        }
+                    });
+                });
+                $scope.enrollSchedule.course_id = course.id;
+                $scope.enrollSchedule.course_name = course.name;
+                $scope.$emit('changeCourse');
+            }, function (err) {
+                window.location.replace(window.location.origin + "/courses");
+            });
+        }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
         $scope.courses;
         $scope.coursesReady = false;
@@ -209,7 +207,6 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             $scope.closest = Utils.getCloses(schedules, 6);
             $scope.groupedSchedules = Utils.groupByMonth(schedules);
             $scope.scheduleReady = true;
-            //console.log(schedules, $scope.closest, $scope.groupedSchedules);
         });
 
 
