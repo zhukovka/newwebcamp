@@ -59,6 +59,9 @@ a.text-dark:focus {
 ul.instructor__courselist > li > a {
     padding: 5px 15px;
 }
+ul.instructor__courselist > li > a:hover{
+    color: #FFFFFF;
+}
 
 ul.instructor__courselist > li > a > img {
     max-height: 50px;
@@ -66,6 +69,9 @@ ul.instructor__courselist > li > a > img {
 
 ul.instructor__courselist > li > a > img + span {
     font-size: 12px;
+}
+.instructor__courses{
+    min-width: 110px;
 }
 
 .error {
