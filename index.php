@@ -56,7 +56,7 @@ $app->route('/contacts', function () {
 $app->route('/aboutus', function () {
     echo Flight::get('twig')->render('About/index.html.twig',
         array('active' => 'aboutus',
-            'title'=>"Комманда Webcamp")
+            'title'=>"Команда Webcamp")
     );
 });
 
