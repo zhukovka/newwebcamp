@@ -129,7 +129,8 @@ $app->route('POST /subscribe', function () {
 
 $app->route('/faq', function () {
     echo Flight::get('twig')->render('FAQ/index.html.twig',
-        array('active' => 'faq')
+        array('active' => 'faq',
+            'title'=>"Вопросы и Ответы")
     );
 });
 //$app->route('/companies', function(){
