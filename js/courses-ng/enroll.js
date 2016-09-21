@@ -20,7 +20,6 @@ angular.module('Enroll', [])
             });
             function successCallback(response) {
                 ga('send', 'event', 'Регистрация', 'Записаться');
-                goog_report_conversion();
                 if (response.data && response.data.sqlError) {
                     $scope.sqlError = true;
                 } else {
