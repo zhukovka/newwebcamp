@@ -38,7 +38,7 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
 
 
         /*recieve sms to user*/
-        $sms_result = self::userSMS($data['name'], $data['phone'], $info);
+        $sms = self::userSMS($data['name'], $data['phone'], $info);
 
 
         $msg = '
@@ -77,8 +77,12 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                                 <td>' . $data["comment"] . '</td>
                             </tr>
                             <tr>
-                                <td>Сообщение:</td>
-                                <td>' . $sms_result . '</td>
+                                <td>SMS status:</td>
+                                <td>' . $sms["status"] . '</td>
+                            </tr>
+                            <tr>
+                                <td>SMS balance:</td>
+                                <td>' . $sms["balance"] . '</td>
                             </tr>
                         </table>
                 </body>
@@ -88,11 +92,10 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
 
         $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
-        self::userMail($mail, $data['name'], $info, $start);
-        self::userSMS($data['name'], $data['phone'], $info);
+        self::userMail($mail, $data['name'], $info);
     }
 
-    public static function userMail($to, $name, $info, $start)
+    public static function userMail($to, $name, $info)
     {
         $subj = "Регистрация на курс от Webcamp.";
         $msg = '
@@ -106,12 +109,12 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
             Вы записались на курс <b>' . $info . '</b> от Webcamp.<br>
             В ближайшее время мы перезвоним Вам на указанный номер и сообщим детали.<br>
             Вы можете связаться с нами по телефонам:<br>
-            <ul>
-            <li><a class="text-dark" href="tel:+38-063-478-41-07">+38 (063) 478-41-07</a> Андрей</li>
-            <li><a class="text-dark" href="tel:+38-063-707-85-13">+38 (063) 707-85-13</a> Юлия</li>
+            <ul style="list-style:none;">
+            <li><a style="text-decoration:none;color:#797e83;" href="tel:+380502706713">+38 (050) 270-67-13</a></li>
+            <li><a style="text-decoration:none;color:#797e83;" href="tel:+380637078513">+38 (063) 707-85-13</a></li>
             </ul>
-            Скайп: webcamp.welcome<br>
-            <a href="https://www.facebook.com/webcamp.kiev"> Группа в Facebook</a>
+            или написать в скайп: <strong>webcamp.welcome</strong><br>
+            <a style="text-decoration:none;color:#797e83;" href="https://www.facebook.com/webcamp.kiev"> Группа в Facebook</a>
             </p>
             </body>
             </html>
@@ -119,16 +122,19 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
         $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$info . '@' . self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
     }
-    
-    public static function userSMS($name, $phone, $info){
+
+    public static function userSMS($name, $phone, $info)
+    {
         str_replace('/\+\(\)\s/', '', $phone);
-        $message = "Спасибо ".$name.", Вы зарегистрировались на курс ".$info." от WebCamp";
+        $message = "Спасибо " . $name . ", Вы зарегистрировались на курс " . $info . " от WebCamp";
         $sms = new SMSclient('', '', SMS_KEY);
         $id = $sms->sendSMS("WebCamp", $phone, $message);
+        sleep(30);
         $res = $sms->receiveSMS($id);
         $balance = $sms->getBalance();
+        $result = ["status" => "{$res}", "balance" => "{$balance}"];
 
-        return "Результат отправки SMS: ".$res.", текущий баланс: ".$balance;
+        return $result;
 
     }
 
