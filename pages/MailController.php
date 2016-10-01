@@ -7,6 +7,7 @@
  */
 //require_once ROOT . 'pages/ScheduleController.php';
 //require_once ROOT . 'pages/CoursesController.php';
+require_once ROOT . 'pages/smsclient.php';
 
 
 class MailController
@@ -21,6 +22,7 @@ class MailController
 
     public static function registerMail($data, $modifier_text)
     {
+
         $to = self::$register . "@" . self::$webcampDomain;
         $subj = "Заявка на курс";
         $mail = $data["email"];
@@ -33,6 +35,11 @@ LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start 
 WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
         $info = $courseinfo[0]["course_name"] . " " . $modifier_text["modifier_text"];
         strlen($courseinfo[0]["start"]) > 0 ? $start = $courseinfo[0]["start"] : $start = "Идёт набор группы";
+
+
+        /*recieve sms to user*/
+        $sms_result = self::userSMS($data['name'], $data['phone'], $info);
+
 
         $msg = '
                 <html>
@@ -69,14 +76,20 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                                 <td>Комментарий:</td>
                                 <td>' . $data["comment"] . '</td>
                             </tr>
+                            <tr>
+                                <td>Сообщение:</td>
+                                <td>' . $sms_result . '</td>
+                            </tr>
                         </table>
                 </body>
                 </html>
                 ';
 
+
         $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
         self::userMail($mail, $data['name'], $info, $start);
+        self::userSMS($data['name'], $data['phone'], $info);
     }
 
     public static function userMail($to, $name, $info, $start)
@@ -105,6 +118,18 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
 ';
         $headers = self::$header . "\r\n" . 'From: WebCamp <' . self::$info . '@' . self::$webcampDomain . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
+    }
+    
+    public static function userSMS($name, $phone, $info){
+        str_replace('/\+\(\)\s/', '', $phone);
+        $message = "Спасибо ".$name.", Вы зарегистрировались на курс ".$info." от WebCamp";
+        $sms = new SMSclient('', '', SMS_KEY);
+        $id = $sms->sendSMS("WebCamp", $phone, $message);
+        $res = $sms->receiveSMS($id);
+        $balance = $sms->getBalance();
+
+        return "Результат отправки SMS: ".$res.", текущий баланс: ".$balance;
+
     }
 
 }
