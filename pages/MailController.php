@@ -77,12 +77,8 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                                 <td>' . $data["comment"] . '</td>
                             </tr>
                             <tr>
-                                <td>SMS status:</td>
-                                <td>' . $sms["status"] . '</td>
-                            </tr>
-                            <tr>
-                                <td>SMS balance:</td>
-                                <td>' . $sms["balance"] . '</td>
+                                <td>Сообщение:</td>
+                                <td>' . $sms . '</td>
                             </tr>
                         </table>
                 </body>
@@ -129,12 +125,8 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
         $message = "Спасибо " . $name . ", Вы зарегистрировались на курс " . $info . " от WebCamp";
         $sms = new SMSclient('', '', SMS_KEY);
         $id = $sms->sendSMS("WebCamp", $phone, $message);
-        sleep(30);
         $res = $sms->receiveSMS($id);
-        $balance = $sms->getBalance();
-        $result = ["status" => "{$res}", "balance" => "{$balance}"];
-
-        return $result;
+        return $res;
 
     }
 
