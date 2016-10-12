@@ -124,7 +124,48 @@
     ga('send', 'pageview');
 
 </script>
+{# JSON-LD MetaData for Google#}
+<script type="application/ld+json">
+[
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "name": "Webcamp",
+  "alternateName": "Webcamp - курсы программирования",
+  "url": "http://www.webcamp.com.ua"
+},
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Webcamp",
+  "alternateName": "Webcamp - Курсы программирования",
+  "url": "http://www.webcamp.com.ua",
+  "logo": "http://www.webcamp.com.ua/img/icons/logo.svg",
+  "contactPoint": [
+    { "@type": "ContactPoint",
+      "telephone": "+380637078513",
+      "contactType": "customer service"
+    },
+    { "@type": "ContactPoint",
+      "telephone": "+380442356117",
+      "contactType": "customer service"
+    },
+    { "@type": "ContactPoint",
+      "telephone": "+380972555106",
+      "contactType": "customer service"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/webcamp.kiev",
+    "https://www.instagram.com/webcamp_ua/",
+    "https://www.linkedin.com/company/webcamp",
+    "https://www.youtube.com/user/webcampkiev",
+    "https://plus.google.com/+WebcampUaKyiv"
+  ]
 
+}
+]
+</script>
 {% if env == "prod" %}
     <script src="/dist/script.min.js"></script>
 {% else %}
