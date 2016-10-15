@@ -27,7 +27,7 @@ class ScheduleController
     public static function all()
     {
         include_once(ROOT . "pages/code/schedule.php");
-        $schedule = DB::getAll('SELECT shedule.start, course.id as course_id, course.name as course_name, course.alias as course_alias, modifiers.name as modifier,modifiers.id as modifier_id,
+        $schedule = DB::getAll('SELECT shedule.start, course.id as course_id, course.name as course_name, course.alias as course_alias, modifiers.name as modifier_name,modifiers.id as modifier_id,
                                           course.duration as courseDuration,
                                           courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays
                                     FROM shedule
