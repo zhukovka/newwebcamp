@@ -44,7 +44,7 @@ angular.module('Enroll', [])
                 if (form.$valid) {
                     student.course_id = $scope.enrollSchedule.course_id;
                     student.modifier_id = $scope.enrollSchedule.modifier_id;
-                    student.modifier_text = $filter('modifier')($scope.enrollSchedule.modifier_name);
+                    student.modifier_text = $filter('modifierId')($scope.enrollSchedule.modifier_id);
                     student.hash = student.course_id + "" + student.modifier_id + "" + student.phone;
                     form.$setPristine();
                     form.$setUntouched();
