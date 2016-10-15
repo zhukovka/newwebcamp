@@ -375,6 +375,18 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             return modifiersDict[input];
         };
     })
+    .filter('modifierId', function () {
+        return function (input) {
+            input = input || '';
+            var modifiersDict = {
+                '0': "Вечерний в рабочие дни",
+                '1': "Утренний в рабочие дни",
+                '2': "Выходного дня",
+                '3': "Индивидуальные"
+            };
+            return modifiersDict[input];
+        };
+    })
     .filter('onDay', function () {
         return function (input) {
             input = input || '';
