@@ -138,9 +138,23 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 $scope.enrollSchedule.course_id = course.id;
                 $scope.enrollSchedule.course_name = course.name;
                 $scope.$emit('changeCourse');
+                $scope.courseLd = {
+                    "@context": "http://schema.org",
+                    "@type": "Course",
+                    "name": "" + course.name,
+                    "description": "" + course.metadesc,
+                    "provider": {
+                        "@type": "Organization",
+                        "name": "WebCamp",
+                        "sameAs": "http://www.webcamp.com.ua/" + course.alias
+                    }
+                };
+
             }, function (err) {
                 window.location.replace(window.location.origin + "/courses");
             });
+
+
         }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
         $scope.courses;
@@ -259,6 +273,19 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             }
         };
     }])
+    // .controller('JsonLdController', ['$scope', 'Course', function($scope){
+    //     $scope.jsonLd = {
+    //         "@context": "http://schema.org",
+    //         "@type": "Course",
+    //         "name": "" + $scope.course_name,
+    //         "description": "ololo",
+    //         "provider": {
+    //             "@type": "Organization",
+    //             "name": "WebCamp",
+    //             "sameAs": "http://www.webcamp.com.ua/" + $scope.course.alias
+    //         }
+    //     }
+    // }])
     .factory('Schedule', ['$resource', 'Calendar', function ($resource, Calendar) {
         var Schedule = $resource('/api/schedule/:id', {id: '@id'}, {
             'schedule': {
@@ -587,4 +614,21 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 }
             });
         }
+    }])
+    .directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+        return {
+            restrict: 'E',
+            template: function() {
+                return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
+            },
+            scope: {
+                json: '=json'
+            },
+            link: function(scope, element, attrs) {
+                scope.onGetJson = function() {
+                    return $sce.trustAsHtml($filter('json')(scope.json));
+                }
+            },
+            replace: true
+        };
     }]);

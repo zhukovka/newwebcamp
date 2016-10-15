@@ -259,6 +259,19 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             }
         };
     }])
+    .controller('JsonLdController', ['$scope', function($scope){
+        $scope.jsonLd = {
+            "@context": "http://schema.org",
+            "@type": "Course",
+            "name": "" + $scope.course.name,
+            "description": "TEST TEST TEST",
+            "provider": {
+                "@type": "Organization",
+                "name": "WebCamp",
+                "sameAs": "http://www.webcamp.com.ua/" + $scope.course.alias
+            }
+        }
+    }])
     .factory('Schedule', ['$resource', 'Calendar', function ($resource, Calendar) {
         var Schedule = $resource('/api/schedule/:id', {id: '@id'}, {
             'schedule': {
@@ -587,4 +600,21 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 }
             });
         }
+    }])
+    .directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+        return {
+            restrict: 'E',
+            template: function() {
+                return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
+            },
+            scope: {
+                json: '=json'
+            },
+            link: function(scope, element, attrs) {
+                scope.onGetJson = function() {
+                    return $sce.trustAsHtml($filter('json')(scope.json));
+                }
+            },
+            replace: true
+        };
     }]);
