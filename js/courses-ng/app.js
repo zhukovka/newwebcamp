@@ -221,6 +221,23 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             $scope.closest = Utils.getCloses(schedules, 6);
             $scope.groupedSchedules = Utils.groupByMonth(schedules);
             $scope.scheduleReady = true;
+            $scope.closest.forEach(function (c) {
+                c.scheduleLd = {
+                    "@context": "http://schema.org",
+                    "@type": "Event",
+                    "name": "Курс " + c.course_name,
+                    "startDate": (new Date(c.begin)).toISOString(),
+                    "url" : "http://www.webcamp.com.ua/courses/" + c.course_alias,
+                    "location" : {
+                        "@type" : "Place",
+                        "sameAs" : "http://www.webcamp.com.ua",
+                        "name" : "WebCamp",
+                        "address" : "Киев, ул. Дарвина 10 офис 13"
+
+                    }
+                };
+            });
+
         });
 
 
@@ -230,6 +247,8 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
+
+
     }])
     .controller('InstructorsController', ['$scope', '$http', function ($scope, $http) {
         $scope.instructors = '';
@@ -273,19 +292,6 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             }
         };
     }])
-    // .controller('JsonLdController', ['$scope', 'Course', function($scope){
-    //     $scope.jsonLd = {
-    //         "@context": "http://schema.org",
-    //         "@type": "Course",
-    //         "name": "" + $scope.course_name,
-    //         "description": "ololo",
-    //         "provider": {
-    //             "@type": "Organization",
-    //             "name": "WebCamp",
-    //             "sameAs": "http://www.webcamp.com.ua/" + $scope.course.alias
-    //         }
-    //     }
-    // }])
     .factory('Schedule', ['$resource', 'Calendar', function ($resource, Calendar) {
         var Schedule = $resource('/api/schedule/:id', {id: '@id'}, {
             'schedule': {
@@ -615,17 +621,17 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             });
         }
     }])
-    .directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+    .directive('jsonld', ['$filter', '$sce', function ($filter, $sce) {
         return {
             restrict: 'E',
-            template: function() {
+            template: function () {
                 return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
             },
             scope: {
                 json: '=json'
             },
-            link: function(scope, element, attrs) {
-                scope.onGetJson = function() {
+            link: function (scope, element, attrs) {
+                scope.onGetJson = function () {
                     return $sce.trustAsHtml($filter('json')(scope.json));
                 }
             },

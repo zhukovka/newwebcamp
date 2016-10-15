@@ -138,9 +138,23 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 $scope.enrollSchedule.course_id = course.id;
                 $scope.enrollSchedule.course_name = course.name;
                 $scope.$emit('changeCourse');
+                $scope.courseLd = {
+                    "@context": "http://schema.org",
+                    "@type": "Course",
+                    "name": "" + course.name,
+                    "description": "" + course.metadesc,
+                    "provider": {
+                        "@type": "Organization",
+                        "name": "WebCamp",
+                        "sameAs": "http://www.webcamp.com.ua/" + course.alias
+                    }
+                };
+
             }, function (err) {
                 window.location.replace(window.location.origin + "/courses");
             });
+
+
         }])
     .controller('CoursesController', ['$scope', 'Course', function ($scope, Course) {
         $scope.courses;
@@ -207,6 +221,23 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             $scope.closest = Utils.getCloses(schedules, 6);
             $scope.groupedSchedules = Utils.groupByMonth(schedules);
             $scope.scheduleReady = true;
+            $scope.closest.forEach(function (c) {
+                c.scheduleLd = {
+                    "@context": "http://schema.org",
+                    "@type": "Event",
+                    "name": "Курс " + c.course_name,
+                    "startDate": (new Date(c.begin)).toISOString(),
+                    "url" : "http://www.webcamp.com.ua/courses/" + c.course_alias,
+                    "location" : {
+                        "@type" : "Place",
+                        "sameAs" : "http://www.webcamp.com.ua",
+                        "name" : "WebCamp",
+                        "address" : "Киев, ул. Дарвина 10 офис 13"
+
+                    }
+                };
+            });
+
         });
 
 
@@ -216,6 +247,8 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
+
+
     }])
     .controller('InstructorsController', ['$scope', '$http', function ($scope, $http) {
         $scope.instructors = '';
@@ -258,19 +291,6 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 deferred.reject('FB is no available');
             }
         };
-    }])
-    .controller('JsonLdController', ['$scope', function($scope){
-        $scope.jsonLd = {
-            "@context": "http://schema.org",
-            "@type": "Course",
-            "name": "" + $scope.course.name,
-            "description": "TEST TEST TEST",
-            "provider": {
-                "@type": "Organization",
-                "name": "WebCamp",
-                "sameAs": "http://www.webcamp.com.ua/" + $scope.course.alias
-            }
-        }
     }])
     .factory('Schedule', ['$resource', 'Calendar', function ($resource, Calendar) {
         var Schedule = $resource('/api/schedule/:id', {id: '@id'}, {
@@ -601,17 +621,17 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
             });
         }
     }])
-    .directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+    .directive('jsonld', ['$filter', '$sce', function ($filter, $sce) {
         return {
             restrict: 'E',
-            template: function() {
+            template: function () {
                 return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
             },
             scope: {
                 json: '=json'
             },
-            link: function(scope, element, attrs) {
-                scope.onGetJson = function() {
+            link: function (scope, element, attrs) {
+                scope.onGetJson = function () {
                     return $sce.trustAsHtml($filter('json')(scope.json));
                 }
             },
