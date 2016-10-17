@@ -16,6 +16,7 @@ $loader = new Twig_Loader_Filesystem(ROOT . 'templates');
 $twig = new Twig_Environment($loader);
 $twig->addGlobal('menu', $menu);
 $twig->addGlobal('env', ENV);
+$twig->addGlobal('host', HOST);
 
 $app = new Engine();
 Flight::set('twig', $twig);

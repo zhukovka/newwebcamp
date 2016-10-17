@@ -11,16 +11,16 @@
             <meta name="description" content="Тренинги и курсы программирования WebCamp"/>
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="icon" sizes="192x192" href="../img/icons/logo.svg">
-        <link rel="shortcut icon" href="/img/favicon.ico">
+        <link rel="icon" sizes="192x192" href="//{{ host }}/img/icons/logo.svg">
+        <link rel="shortcut icon" href="//{{ host }}/img/favicon.ico">
         <link href='https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,300,600&subset=latin,cyrillic'
               rel='stylesheet'
               type='text/css'>
         {% if env == "prod" %}
-            <link rel="stylesheet" href="/dist/style.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="//{{ host }}/dist/style.css" type="text/css" media="screen">
         {% else %}
-            <link rel="stylesheet" href="/css/webcamp.min.css" type="text/css" media="screen">
-            <link rel="stylesheet" href="/css/supermain.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="//{{ host }}/css/webcamp.min.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="//{{ host }}/css/supermain.css" type="text/css" media="screen">
         {% endif %}
 
 
@@ -32,8 +32,8 @@
     <div class="header__top">
         <div class="grid pos-r">
             <div class="grid__left w_m-20 w_l-30">
-                <a class="header__logo show-for-medium" href="/"><img src="/img/icons/logo.svg" alt=""/></a>
-                <a class="header__logo show-for-small-only" href="/"><img src="/img/icons/icon.svg" alt=""/></a>
+                <a class="header__logo show-for-medium" href="/"><img src="//{{ host }}/img/icons/logo.svg" alt=""/></a>
+                <a class="header__logo show-for-small-only" href="/"><img src="//{{ host }}/img/icons/icon.svg" alt=""/></a>
             </div>
             {{ include('parts/navigation.html.twig') }}
         </div>
@@ -46,29 +46,29 @@
             <div class="medium-3 small-6 columns mb-20 footer__links">
                 <p>Обучение</p>
                 <ul class="list-nostyle">
-                    <li><a href="/study#promo">Бесплатный пробный урок</a></li>
-                    <li><a href="/courses">Курсы и тренинги</a></li>
-                    <li><a href="/schedule">Расписание</a></li>
-                    {#<li><a href="/career">Карьера в IT</a></li>#}
-                    {#<li><a href="/practice">Практика</a></li>#}
+                    <li><a href="//{{ host }}/study#promo">Бесплатный пробный урок</a></li>
+                    <li><a href="//{{ host }}/courses">Курсы и тренинги</a></li>
+                    <li><a href="//{{ host }}/schedule">Расписание</a></li>
+                    {#<li><a href="//{{ host }}/career">Карьера в IT</a></li>#}
+                    {#<li><a href="//{{ host }}/practice">Практика</a></li>#}
                 </ul>
             </div>
             <div class="medium-3 small-6 columns mb-20 footer__links">
                 <p>Компаниям</p>
                 <ul class="list-nostyle">
-                    <li><a href="/aboutus#instructors">Преподаватели</a></li>
-                    <li><a href="/aboutus#reviews">Отзывы</a></li>
+                    <li><a href="//{{ host }}/aboutus#instructors">Преподаватели</a></li>
+                    <li><a href="//{{ host }}/aboutus#reviews">Отзывы</a></li>
                     <li><a href="#" rel="#sign_up_form" ng-click="enroll()">Оставить заявку</a></li>
                 </ul>
             </div>
             <div class="medium-3 small-6 columns mb-20 footer__links">
                 <p>Студентам</p>
                 <ul class="list-nostyle">
-                    <li><a href="/faq">Часто задаваемые вопросы</a></li>
-                    <li><a href="/study#worktime">Время работы</a></li>
-                    {#<li><a href="/certification">Сертификаты</a></li>#}
-                    {#<li><a href="/news">Новости</a></li>#}
-                    <li><a href="/contacts#map">Где мы</a></li>
+                    <li><a href="//{{ host }}/faq">Часто задаваемые вопросы</a></li>
+                    <li><a href="//{{ host }}/study#worktime">Время работы</a></li>
+                    {#<li><a href="//{{ host }}/certification">Сертификаты</a></li>#}
+                    {#<li><a href="//{{ host }}/news">Новости</a></li>#}
+                    <li><a href="//{{ host }}/contacts#map">Где мы</a></li>
                 </ul>
             </div>
             <div class="medium-3 small-6 columns footer__social text-right">
@@ -167,24 +167,24 @@
 </script>
 
 {% if env == "prod" %}
-    <script src="/dist/script.min.js"></script>
+    <script src="//{{ host }}/dist/script.min.js"></script>
 {% else %}
-    <script src="/bower_components/lodash/lodash.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/moment/locale/ru.js"></script>
-    <script src="/js/libs/xml2json.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-locale-ru/angular-locale_ru.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-ui-mask/dist/mask.js"></script>
-    <script src="/bower_components/angular-route/angular-route.js"></script>
-    <script src="/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/js/courses-ng/utils.js"></script>
-    <script src="/js/courses-ng/calendar.js"></script>
-    <script src="/js/courses-ng/clock.js"></script>
-    <script src="/js/courses-ng/timeline.js"></script>
-    <script src="/js/courses-ng/enroll.js"></script>
-    <script src="/js/courses-ng/app.js"></script>
+    <script src="//{{ host }}/bower_components/lodash/lodash.js"></script>
+    <script src="//{{ host }}/bower_components/moment/moment.js"></script>
+    <script src="//{{ host }}/bower_components/moment/locale/ru.js"></script>
+    <script src="//{{ host }}/js/libs/xml2json.js"></script>
+    <script src="//{{ host }}/bower_components/angular/angular.js"></script>
+    <script src="//{{ host }}/bower_components/angular-locale-ru/angular-locale_ru.js"></script>
+    <script src="//{{ host }}/bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="//{{ host }}/bower_components/angular-route/angular-route.js"></script>
+    <script src="//{{ host }}/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="//{{ host }}/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="//{{ host }}/js/courses-ng/utils.js"></script>
+    <script src="//{{ host }}/js/courses-ng/calendar.js"></script>
+    <script src="//{{ host }}/js/courses-ng/clock.js"></script>
+    <script src="//{{ host }}/js/courses-ng/timeline.js"></script>
+    <script src="//{{ host }}/js/courses-ng/enroll.js"></script>
+    <script src="//{{ host }}/js/courses-ng/app.js"></script>
 {% endif %}
 {% block js %}{% endblock %}
 </body>

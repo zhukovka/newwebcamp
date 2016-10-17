@@ -23,7 +23,7 @@
                     <ul class="list-table instructor">
                         <li class="w_m-20">
                             <div class="instructor__photo">
-                                <img src="/img/instructors/{{ instructor.alias }}.jpg" alt=""/>
+                                <img ng-src="//{{ hostName }}/img/instructors/{{ instructor.alias }}.jpg" alt=""/>
                             </div>
                         </li>
                         <li class="w_m-70 p-10">
@@ -39,7 +39,7 @@
                             <ul class="instructor__courselist">
                                 <li ng-repeat="course in instructor.courses | split:', '">
                                     <a href="/courses/{{ course }}" class="text-center text-white text-capitalize">
-                                        <img ng-src="/img/icons/course-icons_{{ course }}.svg" alt=""/>
+                                        <img ng-src="//{{ hostName }}/img/icons/course-icons_{{ course }}.svg" alt=""/>
                                         <span>{{ course| split:'_' | last }}</span>
                                     </a>
                                 </li>

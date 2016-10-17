@@ -23,6 +23,7 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
     .controller('WebcampCtrl', ['$scope', 'Course', 'Schedule', 'Utils', '$timeout',
         function ($scope, Course, Schedule, Utils, $timeout) {
 
+            $scope.hostName = window.location.hostname;
             $scope.showModal = false;
             $scope.enroll = function (schedule) {
                 $scope.showModal = true;
