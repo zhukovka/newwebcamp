@@ -21,3 +21,11 @@ pull origin/master
 push to prod  ssh://***@webcamp.ftp.ukraine.com.ua/home/webcamp/webcamp.com.ua/ab/newwebcamp.git
 
 auto-pull hook from prod to www.webcamp.com.ua
+
+
+### prerender.io
+
+config define host
+
+include .htaccess
+RequestHeader set X-Prerender-Token "ololo"
