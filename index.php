@@ -17,6 +17,7 @@ $twig = new Twig_Environment($loader);
 $twig->addGlobal('menu', $menu);
 $twig->addGlobal('env', ENV);
 $twig->addGlobal('host', HOST);
+$twig->addGlobal('fbID', FB_ID);
 
 $app = new Engine();
 Flight::set('twig', $twig);
