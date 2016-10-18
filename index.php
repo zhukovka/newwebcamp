@@ -135,13 +135,6 @@ $app->route('/faq', function () {
             'title'=>"Вопросы и Ответы")
     );
 });
-$app->route('/info', function () {
-    echo phpinfo();
-    $modules = apache_get_modules();
-    foreach ($modules as $m){
-        echo $m.'<br>';
-    }
-});
 //$app->route('/companies', function(){
 //    echo Flight::get('twig')->render('Slider/companies.html.twig',
 //        array('active' => 'companies')
