@@ -14,3 +14,4 @@ define('ENV', "dev");  //define('ENV', "prod");
 
 define("HOST", $_SERVER['HTTP_HOST']);
 
+define("FB_ID", "ididididid");

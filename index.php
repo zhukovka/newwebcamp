@@ -135,6 +135,9 @@ $app->route('/faq', function () {
             'title'=>"Вопросы и Ответы")
     );
 });
+$app->route('/info', function () {
+    echo phpinfo();
+});
 //$app->route('/companies', function(){
 //    echo Flight::get('twig')->render('Slider/companies.html.twig',
 //        array('active' => 'companies')
