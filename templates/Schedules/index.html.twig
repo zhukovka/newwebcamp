@@ -1,8 +1,10 @@
 {% extends "base.html.twig" %}
 {% block meta %}
-    {% verbatim %}
+    {#{% verbatim %}#}
     <meta name="description" content="Расписание ближайших курсов и тренингов от WebCamp. Успейте записаться на интересующий Вас курс."/>
-    {% endverbatim %}
+    <meta property="og:description" content="Расписание ближайших курсов и тренингов от WebCamp. Успейте записаться на интересующий Вас курс.">
+    <meta property="og:url" content="http://{{ host }}/schedule">
+    {#{% endverbatim %}#}
 {% endblock %}
 {% block content %}
     <div class="page">

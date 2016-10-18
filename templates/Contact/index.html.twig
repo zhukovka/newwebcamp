@@ -1,8 +1,10 @@
 {% extends "base.html.twig" %}
 {% block meta %}
-    {% verbatim %}
-    <meta name="description" content="Контакты и адрес WebCamp"/>
-    {% endverbatim %}
+    {#{% verbatim %}#}
+    <meta name="description" content="Webcamp: контактная информация, как нас найти и время работы"/>
+    <meta property="og:description" content="Webcamp: контактная информация, как нас найти и время работы">
+    <meta property="og:url" content="http://{{host}}/contacts">
+    {#{% endverbatim %}#}
 {% endblock %}
 {% block js %}
     <script type="text/javascript">

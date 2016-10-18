@@ -8,8 +8,14 @@
         <meta name="fragment" content="!">
         <title>{% block title %}{{ title }}{% endblock %}</title>
         <base href="{% block base %}{% endblock %}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ title }}">
+        <meta property="og:locale" content="ru-UA">
         {% block meta %}
             <meta name="description" content="Тренинги и курсы программирования WebCamp"/>
+            <meta property="og:description" content="Тренинги и курсы программирования WebCamp">
+            <meta property="og:url" content="http://{{ host }}">
+            <meta property="og:image" content="//{{ host }}/img/og-images/webcamp.png">
         {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="icon" sizes="192x192" href="//{{ host }}/img/icons/logo.svg">
@@ -165,6 +171,7 @@
 
 }
 ]
+
 </script>
 
 {% if env == "prod" %}

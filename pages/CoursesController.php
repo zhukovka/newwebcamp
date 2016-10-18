@@ -31,7 +31,8 @@ class CoursesController
             array('active' => 'courses',
                 'menuItem' => $menuItem,
                 'title' => $title,
-                'description' => $description
+                'description' => $description,
+                'alias' => $alias
             )
         );
     }

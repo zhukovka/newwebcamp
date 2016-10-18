@@ -3,6 +3,9 @@
 
 {% block meta %}
     <meta name="description" content="{{ description }}"/>
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:image" content="//{{ host }}/img/og-images/{{ alias }}.jpg">
+    <meta property="og:url" content="http://{{ host }}/courses/{{ alias }}">
 {% endblock %}
 {% block content %}
 

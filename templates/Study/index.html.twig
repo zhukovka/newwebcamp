@@ -1,8 +1,11 @@
 {% extends "base.html.twig" %}
 {% block meta %}
-    {% verbatim %}
+    {#{% verbatim %}#}
     <meta name="description" content="График работы, текущиее акции и скидки и аудитории WebCamp - коротко об обучении."/>
-    {% endverbatim %}
+    <meta property="og:description" content="График работы, текущиее акции и скидки и аудитории WebCamp - коротко об обучении.">
+    <meta property="og:url" content="http://{{ host }}/study">
+
+    {#{% endverbatim %}#}
 {% endblock %}
 {% block content %}
 
@@ -96,7 +99,8 @@
                             </div>
                             <div class="float-left w-60">
                                 <div class="study-graph__item--height study-graph__item--accent float-left w-30">
-                                    <p class="text-white">много <br/>много <br/><span class="icon-keyboard m-0"></span> <br/>практики
+                                    <p class="text-white">много <br/>много <br/><span class="icon-keyboard m-0"></span>
+                                        <br/>практики
                                     </p>
                                 </div>
                                 <div class="study-graph__item float-left w-40">

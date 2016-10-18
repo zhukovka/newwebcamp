@@ -35,7 +35,7 @@ $app->route('/', function () {
         array('active' => 'home',
             'slides' => $slides,
             'tracks' => $tracks,
-            'title'=>"Курсы программирования Webcamp")
+            'title'=>"Курсы программирования и тренинги Webcamp")
     );
 });
 $app->route('/schedule', function () {
@@ -45,19 +45,19 @@ $app->route('/schedule', function () {
 $app->route('/study', function () {
     echo Flight::get('twig')->render('Study/index.html.twig',
         array('active' => 'study',
-            'title'=>"Обучение Webcamp")
+            'title'=>"Webcamp: график работы, акции и скидки, фотографии и формат занятий")
     );
 });
 $app->route('/contacts', function () {
     echo Flight::get('twig')->render('Contact/index.html.twig',
         array('active' => 'contacts',
-            'title'=>"Контакты Webcamp")
+            'title'=>"Записаться на курсы Webcamp: контактная информация")
     );
 });
 $app->route('/aboutus', function () {
     echo Flight::get('twig')->render('About/index.html.twig',
         array('active' => 'aboutus',
-            'title'=>"Команда Webcamp")
+            'title'=>"Команда Webcamp: наши специалисты по обучению и разработке программ.")
     );
 });
 
