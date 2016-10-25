@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Punkor
- * Date: 02.04.2016
- * Time: 20:42
- */
-//require_once ROOT . 'pages/ScheduleController.php';
-//require_once ROOT . 'pages/CoursesController.php';
 require_once ROOT . 'pages/smsclient.php';
 
 
@@ -22,7 +14,6 @@ class MailController
 
     public static function registerMail($data, $modifier_text)
     {
-
         $to = self::$register . "@" . self::$webcampDomain;
         $subj = "Заявка на курс";
         $mail = $data["email"];
@@ -84,7 +75,6 @@ WHERE modifiers.id = '{$modifier_id}' AND course.id='{$course_id}'");
                 </body>
                 </html>
                 ';
-
 
         $headers = self::$header . "\r\n" . 'From: Абитуриент <' . $mail . '>' . "\r\n";
         mail($to, $subj, $msg, $headers);
