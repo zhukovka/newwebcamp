@@ -97,14 +97,14 @@ angular.module('Enroll', [])
 
 
 
-                    $http({
-                        method: 'POST',
-                        url: '/enroll',
-                        data: $httpParamSerializerJQLike(student),
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }).then(successCallback, errorCallback);
+                    // $http({
+                    //     method: 'POST',
+                    //     url: '/enroll',
+                    //     data: $httpParamSerializerJQLike(student),
+                    //     headers: {
+                    //         'Content-Type': 'application/x-www-form-urlencoded'
+                    //     }
+                    // }).then(successCallback, errorCallback);
 
 
                 }
