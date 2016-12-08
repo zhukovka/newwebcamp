@@ -31,6 +31,7 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                     $scope.enrollSchedule.course_id = schedule.course_id;
                     $scope.enrollSchedule.course_name = schedule.course_name;
                     $scope.enrollSchedule.modifier_id = schedule.modifier_id;
+                    $scope.enrollSchedule.course_price = schedule.course_price;
                     getSchedules(schedule);
                 }
             };
@@ -44,6 +45,7 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                 modifier_id: 0,
                 course_id: 0,
                 course_name: "",
+                course_price: 0,
                 modifier_name: "default"
             };
             function getSchedules(schedule) {

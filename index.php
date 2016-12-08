@@ -127,6 +127,13 @@ $app->route('POST /subscribe', function () {
 
 });
 
+$app->route('POST /success', function (){
+    echo 'success';
+});
+$app->route('POST /error', function (){
+    echo 'error';
+});
+
 /* new routes under construction */
 
 $app->route('/faq', function () {

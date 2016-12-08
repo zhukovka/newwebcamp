@@ -30,7 +30,8 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label>Телефон
-                        <input type="text" ng-pattern="regexPhone" ng-model="student.phone" class="enroll-form__phone" ui-mask="+?9?9(?9?9?9)?9?9?9-?9?9?9?9" model-view-value="true" name="phone" required/>
+                        <input type="text" ng-pattern="regexPhone" ng-model="student.phone" class="enroll-form__phone"
+                               ui-mask="+?9?9(?9?9?9)?9?9?9-?9?9?9?9" model-view-value="true" name="phone" required/>
                     </label>
 
                     <div ng-show="enrollForm.$submitted || enrollForm.phone.$touched">
@@ -79,6 +80,11 @@
 
                     <input type="submit" value="Записаться" ng-click="postEnroll(student, enrollForm)"
                            class="enroll-form__enroll"/>
+                    <br>
+                    <!-- Fix this fckng DYCH -->
+                    <input type="submit" class="enroll-form__enroll" value="Оплатить сейчас"
+                           ng-click="paymentEnroll(student, enrollForm)">
+
                 </div>
             </div>
         </form>
