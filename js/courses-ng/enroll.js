@@ -71,8 +71,10 @@ angular.module('Enroll', [])
 
             $scope.paymentEnroll = function (student, form) {
                 form = form || null;
+                console.log(form);
 
                 if (form.$valid) {
+                    console.log($scope.paymentData);
                     student.course_id = $scope.enrollSchedule.course_id;
                     student.modifier_id = $scope.enrollSchedule.modifier_id;
                     student.modifier_text = $filter('modifierId')($scope.enrollSchedule.modifier_id);
@@ -93,7 +95,7 @@ angular.module('Enroll', [])
                         method: 'POST',
                         url: 'https://www.portmone.com/gateway',
                         data: $httpParamSerializerJQLike($scope.paymentData)
-                    });
+                    }).then(function (){console.log("success")}, function (){console.log("error")});
 
 
 
