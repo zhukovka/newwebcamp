@@ -93,7 +93,7 @@ angular.module('Enroll', [])
 
                     $http({
                         method: 'POST',
-                        url: 'https://www.portmone.com/gateway',
+                        url: 'https://www.portmone.com/gateway/',
                         data: $httpParamSerializerJQLike($scope.paymentData)
                     }).then(function (){console.log("success")}, function (){console.log("error")});
 
