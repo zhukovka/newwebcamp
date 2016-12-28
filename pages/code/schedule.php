@@ -12,6 +12,9 @@ class Schedule {
     public $days;
     public $price;
     public $lessonCount;
+    public $discount;
+    public $discountEnd;
+
 //    public $begin;
 //    public $weekDaysNames;
 //    public $time;

@@ -19,7 +19,7 @@ class ScheduleController
         echo $GLOBALS['twig']->render('Schedules/index.html.twig',
             array('active' => 'schedule',
                 'menuItem' => $menuItem,
-                'title'=>"Расписание курсов Webcamp"
+                'title' => "Расписание курсов Webcamp"
             )
         );
     }
@@ -29,7 +29,7 @@ class ScheduleController
         include_once(ROOT . "pages/code/schedule.php");
         $schedule = DB::getAll('SELECT shedule.start, course.id as course_id, course.name as course_name, course.alias as course_alias, modifiers.name as modifier_name,modifiers.id as modifier_id,
                                           course.duration as courseDuration,
-                                          courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays
+                                          courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays, courseinfo.discount as discount, courseinfo.discount_end as discountEnd,
                                     FROM shedule
                                     INNER JOIN course
                                     ON course.id = shedule.course_id
@@ -45,7 +45,7 @@ class ScheduleController
     {
         include_once(ROOT . "pages/code/schedule.php");
 
-        $schedule = DB::getAll("SELECT shedule.start, modifiers.name as modifier_name, modifiers.id as modifier_id, modifiers.default_hour as modifier_default_hour, courseinfo.price, courseinfo.days, courseinfo.duration as durationHours FROM courseinfo
+        $schedule = DB::getAll("SELECT shedule.start, modifiers.name as modifier_name, modifiers.id as modifier_id, modifiers.default_hour as modifier_default_hour, courseinfo.price, courseinfo.days, courseinfo.discount as discount, courseinfo.discount_end as discountEnd, courseinfo.duration as durationHours FROM courseinfo
 JOIN modifiers ON modifiers.id = courseinfo.modifier
 LEFT JOIN shedule ON shedule.course_id = courseinfo.course_id AND shedule.start > DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND shedule.modifier = courseinfo.modifier
 WHERE courseinfo.course_id = {$courseId}", 'Schedule');

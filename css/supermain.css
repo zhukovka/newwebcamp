@@ -154,3 +154,7 @@ ul.instructor__courselist > li > a > img + span {
 .closest__day {
     margin-bottom: 5%;
 }
+
+.discount{
+    text-decoration: line-through;
+}

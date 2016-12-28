@@ -63,7 +63,9 @@
                             | {{closest.lessonCount }}
                             уроков</p>
 
-                        <p class="">{{ closest.price }} грн</p>
+
+                        <p><span ng-class="{'discount':closest.discount}">{{ closest.price }} грн</span> <strong
+                                ng-if="hasDiscount(closest)">{{ closest.price * closest.discount}} грн до {{closest.discountEnd | date:'d MMMM yyyy'}}</strong></p>
 
                         <ul class="list-table">
                             <li><a href="#" class="btn--warning" ng-click="enroll()">Записаться</a></li>
@@ -153,7 +155,8 @@
 
                         <p class="lessons__price">
                             Стоимость курса:
-                            <span class="text--warning" ng-if="schedule.modifier_name !== 'express'"><strong>{{schedule.price}}</strong>  грн</span>
+                            <span class="text--warning" ng-if="schedule.modifier_name !== 'express'"><span ng-class="{'discount':hasDiscount(schedule)}">{{ schedule.price }} грн</span> <strong
+                                    ng-if="hasDiscount(schedule)">{{ +schedule.price * +schedule.discount}} грн до {{schedule.discountEnd | date:'d MMMM yyyy'}}</strong> </span>
                             <span class="text--warning" ng-if="schedule.modifier_name === 'express'"><strong>{{(schedule.price / course.duration) | number : 0}}</strong> грн за час занятий</span>
                         </p>
 

@@ -107,6 +107,9 @@ angular.module('Courses', ['ui.mask', 'ngSanitize', 'ngResource', 'ngRoute', 'Ut
                     });
                 }
             };
+            $scope.hasDiscount = function (course) {
+              return course.discount && moment().isBefore(course.discountEnd);
+            };
             Course.get({alias: $routeParams.alias}).$promise.then(function (course) {
                 //$scope.course = course;
                 window.document.title = course.name;
