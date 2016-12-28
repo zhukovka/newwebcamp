@@ -28,8 +28,7 @@ class ScheduleController
     {
         include_once(ROOT . "pages/code/schedule.php");
         $schedule = DB::getAll('SELECT shedule.start, course.id as course_id, course.name as course_name, course.alias as course_alias, modifiers.name as modifier_name,modifiers.id as modifier_id,
-                                          course.duration as courseDuration,
-                                          courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays, courseinfo.discount as discount, courseinfo.discount_end as discountEnd,
+                                          course.duration as courseDuration, courseinfo.price, courseinfo.duration as durationHours, courseinfo.days as weekDays, courseinfo.discount as discount, courseinfo.discount_end as discountEnd
                                     FROM shedule
                                     INNER JOIN course
                                     ON course.id = shedule.course_id
