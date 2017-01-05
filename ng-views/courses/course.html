@@ -64,7 +64,7 @@
                             уроков</p>
 
 
-                        <p><span ng-class="{'discount':closest.discount}">{{ closest.price }} грн</span> <strong
+                        <p><span ng-class="{'discount':hasDiscount(closest)}">{{ closest.price }} грн</span> <strong
                                 ng-if="hasDiscount(closest)">{{ closest.price * closest.discount}} грн до {{closest.discountEnd | date:'d MMMM yyyy'}}</strong></p>
 
                         <ul class="list-table">
